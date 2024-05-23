@@ -5,7 +5,7 @@
    <g id="lines" fill="none" stroke-width="4">
     <g id="ew" stroke="#009645">
      <path d="m1227 658v16q0 20 20 20h84"/>
-     <path d="m1284 523-25 25 q-14.14 14.14-14.14 34.14 v57 q0 20 -20 20 h-239 q-20 0 -34.14 14.14 l-177 177 q-14.14 14.14-34.14 14.14 h-15 q-20 0 -34.14 -14.14 l-21-21 q-14.14-14.14-14.14-34.14 q0-20-14.14-34.14 l-232.4-232.4 q-14.14-14.14-34.14-14.14 h-280.6 q-20 0-20 -20 v-146"/>
+     <path d="m1245 523 v116 q0 20 -20 20 h-239 q-20 0 -34.14 14.14 l-177 177 q-14.14 14.14-34.14 14.14 h-15 q-20 0 -34.14 -14.14 l-21-21 q-14.14-14.14-14.14-34.14 q0-20-14.14-34.14 l-232.4-232.4 q-14.14-14.14-34.14-14.14 h-280.6 q-20 0-20 -20 v-146"/>
     </g>
     <g id="ns" stroke="#d42e12">
      <path d="m286 514v-427q0-20 20-20h460q20 0 20 20v344 q0 20-14.14 34.14 l-104 104 q-14.14 14.14 0 28.28 l162 162 q14.14 14.14 0 28.28 l-67.7 67.7 q-14.14 14.14 0 28.28 l72 72"/>
@@ -37,7 +37,7 @@
     <a xlink:href= "#ew" fill="#ffffff">
       <g id="stns_ew" stroke="#009645">
         <circle id="cg2" data-value="65" cx="1334" cy="694" r="3"/>
-        <circle id="ew1" data-value="42" cx="1283" cy="524.5" r="3"/>
+        <circle id="ew1" data-value="42" cx="1245" cy="524.5" r="3"/>
         <circle id="ew3" data-value="40" cx="1245" cy="634" r="3"/>
         <circle id="ew5" data-value="38" cx="1186" cy="659" r="3"/>
         <circle id="ew6" data-value="37" cx="1126" cy="659" r="3"/>
@@ -255,7 +255,7 @@
      <text id="lbcg1" x="1255" y="707" font-size="12">Expo</text>
      <text id="lbcg2a" x="1310" y="707" font-size="12">Changi</text>
      <text id="lbcg2b" x="1312" y="719" font-size="12">Airport</text>
-     <text id="lbew1" x="1289" y="522" font-size="12">Pasir Ris</text>
+     <text id="lbew1" x="1222" y="518" font-size="12">Pasir Ris</text>
      <text id="lbew2" x="1250" y="594" font-size="12">Tampines</text>
      <text id="lbew3" x="1209" y="637" font-size="12">Simei</text>
      <text id="lbew5" x="1171" y="672" font-size="12">Bedok</text>
