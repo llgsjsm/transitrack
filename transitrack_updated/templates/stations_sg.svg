@@ -5,7 +5,7 @@
    <g id="lines" fill="none" stroke-width="4">
     <g id="ew" stroke="#009645">
      <path d="m1227 658v16q0 20 20 20h84"/>
-     <path d="m1284 523-25 25 q-14.14 14.14-14.14 34.14 v57 q0 20 -20 20 h-239 q-20 0 -34.14 14.14 l-177 177 q-14.14 14.14-34.14 14.14 h-15 q-20 0 -34.14 -14.14 l-21-21 q-14.14-14.14-14.14-34.14 q0-20-14.14-34.14 l-232.4-232.4 q-14.14-14.14-34.14-14.14 h-280.6 q-20 0-20 20 v146"/>
+     <path d="m1284 523-25 25 q-14.14 14.14-14.14 34.14 v57 q0 20 -20 20 h-239 q-20 0 -34.14 14.14 l-177 177 q-14.14 14.14-34.14 14.14 h-15 q-20 0 -34.14 -14.14 l-21-21 q-14.14-14.14-14.14-34.14 q0-20-14.14-34.14 l-232.4-232.4 q-14.14-14.14-34.14-14.14 h-280.6 q-20 0-20 -20 v-146"/>
     </g>
     <g id="ns" stroke="#d42e12">
      <path d="m286 514v-427q0-20 20-20h460q20 0 20 20v344 q0 20-14.14 34.14 l-104 104 q-14.14 14.14 0 28.28 l162 162 q14.14 14.14 0 28.28 l-67.7 67.7 q-14.14 14.14 0 28.28 l72 72"/>
@@ -55,12 +55,12 @@
         <circle id="ew25" data-value="25" cx="247" cy="514" r="3"/>
         <circle id="ew26" data-value="26" cx="202" cy="514" r="3"/>
         <circle id="ew27" data-value="27" cx="155" cy="514" r="3"/>
-        <circle id="ew28" data-value="66" cx="75" cy="540" r="3"/>
-        <circle id="ew29" data-value="67" cx="75" cy="568" r="3"/>
-        <circle id="ew30" data-value="69" cx="75" cy="596" r="3"/>
-        <circle id="ew31" data-value="70" cx="75" cy="624" r="3"/>
-        <circle id="ew32" data-value="71" cx="75" cy="652" r="3"/>
-        <circle id="ew33" data-value="72" cx="75" cy="680" r="3"/>
+        <circle id="ew28" data-value="66" cx="75" cy="500" r="3"/>
+        <circle id="ew29" data-value="67" cx="75" cy="470" r="3"/>
+        <circle id="ew30" data-value="69" cx="75" cy="440" r="3"/>
+        <circle id="ew31" data-value="70" cx="75" cy="410" r="3"/>
+        <circle id="ew32" data-value="71" cx="75" cy="380" r="3"/>
+        <circle id="ew33" data-value="72" cx="75" cy="350" r="3"/>
       </g>
     </a>
     <a xlink:href= "#ns" fill="#ffffff">
@@ -277,15 +277,15 @@
      <text id="lbew25b" x="226" y="539" font-size="12">Garden</text>
      <text id="lbew26" x="178" y="508" font-size="12">Lakeside</text>
      <text id="lbew27" x="100" y="508" font-size="12">Boon Lay</text>
-     <text id="lbew28" x="25" y="544" font-size="12">Pioneer</text>
-     <text id="lbew29a" x="47" y="568" font-size="12">Joo </text>
-     <text id="lbew29b" x="39" y="580" font-size="12">Koon </text>
-     <text id="lbew30" x="15" y="600" font-size="12">Gul Circle</text>
-     <text id="lbew31a" x="41" y="620" font-size="12">Tuas</text>
-     <text id="lbew31b" x="19" y="632" font-size="12">Crescent</text>
-     <text id="lbew32a" x="10" y="652" font-size="12">Tuas West</text>
-     <text id="lbew32a" x="39" y="664" font-size="12">Road</text>
-     <text id="lbew33" x="15" y="684" font-size="12">Tuas Link</text>
+     <text id="lbew28" x="25" y="500" font-size="12">Pioneer</text>
+     <text id="lbew29a" x="47" y="464" font-size="12">Joo </text>
+     <text id="lbew29b" x="39" y="476" font-size="12">Koon </text>
+     <text id="lbew30" x="15" y="440" font-size="12">Gul Circle</text>
+     <text id="lbew31a" x="41" y="404" font-size="12">Tuas</text>
+     <text id="lbew31b" x="19" y="416" font-size="12">Crescent</text>
+     <text id="lbew32a" x="10" y="372" font-size="12">Tuas West</text>
+     <text id="lbew32a" x="39" y="384" font-size="12">Road</text>
+     <text id="lbew33" x="15" y="350" font-size="12">Tuas Link</text>
     </g>
     <g id="lbns" fill="#000000">
      <text id="lbns2a" x="292" y="411" font-size="12">Bukit</text>
