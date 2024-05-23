@@ -24,13 +24,13 @@
     <g id="teex" stroke="#784008">
      <path d="m496 34 l147.8 147.8 q14.14 14.14 14.14 34.14 v562 q0 20 14.14 34.14 l87 87 q14.14 14.14 34.14 14.14 h120"/>
     </g>
-    <g id="lrt" stroke="#999999">
+    <!-- <g id="lrt" stroke="#999999">
      <path d="m284.4 225.6h207 q10 0 17.07-7.07 l19.2-19.2 q7.07-7.07 17.07-7.07 h10 q10 0 10 10 v46.6 q0 10-10 10 h-10 q-10 0-17.07-7.07 l-19.2-19.2 q-7.07-7.07-17.07-7.07"/>
      <path d="m1081 306 l-7.76-7.76 q-7.07-7.07-7.07-17.07 v-20 q0-10-7.07-17.07 l-19-19 q-7.07-7.07-14.14 0 l-26 26 q-7.07 7.07 0 14.14 l 19 19 q 7.07 7.07 17.07 7.07 h 20 q 10 0 17.07 7.07"/>
      <path d="m1081 306 l 7.76 7.76 q 7.07 7.07 7.07 17.07 v 20 q0 10 7.07 17.07 l 19 19 q 7.07 7.07 14.14 0 l 26-26 q 7.07-7.07 0-14.14 l-19-19 q-7.07-7.07-17.07-7.07 h-20 q-10 0-17.07-7.07"/>
      <path d="m1176 209.5 l-7.76-7.76 q-7.07-7.07-7.07-17.07 v-20 q0-10-7.07-17.07 l-19-19 q-7.07-7.07-14.14 0 l-26 26 q-7.07 7.07 0 14.14 l 19 19 q 7.07 7.07 17.07 7.07 h 20 q 10 0 17.07 7.07"/>
      <path d="m1177 209.5 l 7.76 7.76 q 7.07 7.07 7.07 17.07 v 20 q0 10 7.07 17.07 l 19 19 q 7.07 7.07 14.14 0 l 26-26 q 7.07-7.07 0-14.14 l-19-19 q-7.07-7.07-17.07-7.07 h-20 q-10 0-17.07-7.07"/>
-    </g>
+    </g> -->
    </g>
 
   <g id="stns_icons" fill="#ffffff" stroke-width="2">
@@ -193,13 +193,13 @@
         <circle id="ne17/ptc" data-value="101" cx="1177" cy="209.5" r="5.7"/>
         <circle id="ns4/bp1" data-value="30" cx="286" cy="225.5" r="5.7"/>
         <circle id="ns21/dt11" data-value="7" cx="705" cy="532" r="5.7"/>
-        <circle id="ns21/dt11" data-value="7" cx="720" cy="547" r="5.7"/>
+        <!-- <circle id="ns21/dt11" data-value="7" cx="720" cy="547" r="5.7"/> -->
         <circle id="bp6/dt1" data-value="54" cx="479" cy="225.5" r="5.7"/>
-        <circle id="bp6/dt1" data-value="54" cx="479" cy="242" r="5.7"/>
+        <!-- <circle id="bp6/dt1" data-value="54" cx="479" cy="242" r="5.7"/> -->
         <circle id="ns9/te2" data-value="45" cx="529" cy="67" r="5.7"/>
       </g>
     </a>
-    <a xlink:href= "#bplrt" fill="#ffffff">
+    <!-- <a xlink:href= "#bplrt" fill="#ffffff">
       <g id="stns_bplrt" stroke="#999999" stroke-width="1.7">
         <circle id="bp2" data-value="50" cx="321" cy="226" r="2.6"/>
         <circle id="bp3" data-value="51" cx="356" cy="226" r="2.6"/>
@@ -248,7 +248,7 @@
         <circle id="pw6" data-value="143" cx="1115.5" cy="190" r="2.6"/>
         <circle id="pw7" data-value="143" cx="1141" cy="194.5" r="2.6"/>
       </g>
-    </a>
+    </a> -->
   </g>
   <g id="stns_labels" font-family="Arial" line-height="100%">
     <g id="lbew" fill="#000000">
@@ -458,7 +458,7 @@
      <text id="lbdt1a" x="465" y="204" font-size="12">Bukit</text>
      <text id="lbdt1b" x="456" y="215" font-size="12">Panjang</text>
     </g>
-    <g id="lbbpl" fill="#000000">
+    <!-- <g id="lbbpl" fill="#000000">
      <text id="lbbp2a" x="307" y="211" font-size="10">South</text>
      <text id="lbbp2b" x="309" y="221" font-size="10">View</text>
      <text id="lbbp3a" x="345" y="239" font-size="10">Keat</text>
@@ -474,6 +474,7 @@
      <text id="lbbp12" x="525" y="186" font-size="10">Jelapang</text>
      <text id="lbbp13" x="525" y="215" font-size="10">Senja</text>
     </g>
+    
     <g id="lbskl" fill="#000000">
      <text id="lbse1" x="1096" y="315" font-size="10">Compassvale</text>
      <text id="lbse2" x="1155" y="335" font-size="10">Rumbia</text>
@@ -499,7 +500,6 @@
      <text id="lbpe6" x="1243" y="229" font-size="10">Oasis</text>
      <text id="lbpe7" x="1198" y="219" font-size="10">Damai</text>
      <text id="lbpw1" x="1166" y="177" font-size="10">Sam Kee</text>
-     <!-- to open in 2024 -->
      <text id="lbpw2" x="1162" y="150" font-size="10">Teck Lee</text>
      <text id="lbpw3" x="1145" y="131" font-size="10">Punggol Point</text>
      <text id="lbpw4" x="1056" y="142" font-size="10">Samudera</text>
@@ -507,7 +507,7 @@
      <text id="lbpw6" x="1075" y="198" font-size="10">Sumang</text>
      <text id="lbpw7a" x="1131" y="182" font-size="10">Soo</text>
      <text id="lbpw7b" x="1130" y="191" font-size="10">Teck</text>
-    </g>
+    </g> -->
   </g>
 
 </svg>
