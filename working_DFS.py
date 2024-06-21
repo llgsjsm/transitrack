@@ -1,6 +1,5 @@
 import json
 
-
 #default code to make graph for algorithm
 with open("route.json", "r") as file:
     data = json.load(file)
