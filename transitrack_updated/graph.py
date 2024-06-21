@@ -1,6 +1,5 @@
 import json
 
-
 def load_graph(file_name):
     with open(file_name) as f:
         data = json.load(f)
@@ -50,4 +49,3 @@ def shortest_path(graph, start, end, path=[]):
                 if not shortest or len(new_path) < len(shortest):
                     shortest = new_path
     return shortest
-
