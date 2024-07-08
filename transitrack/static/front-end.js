@@ -1,53 +1,56 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
+    fetchLiveData();
     const tooltip = document.getElementById('tooltip-textbox');
     const svgContainer = document.getElementById('svg-container');
+    let circles = [];
+
     const svgDoc = svgContainer ? svgContainer.querySelector('svg') : null;
-  
+
     if (svgDoc) {
-        const circles = svgDoc.querySelectorAll('circle');
-  
-        circles.forEach(function(circle) {
-            circle.addEventListener('mouseover', function(event) {
+        circles = svgDoc.querySelectorAll('circle');
+
+        circles.forEach(function (circle) {
+            circle.addEventListener('mouseover', function (event) {
                 const name = circle.getAttribute('data-name') || 'Data need to show here';
-                tooltip.innerHTML = name;
+                document.getElementById('textbox-station-name').textContent = name;
                 tooltip.style.display = 'block';
             });
-  
-            circle.addEventListener('mousemove', function(event) {
+
+            circle.addEventListener('mousemove', function (event) {
                 tooltip.style.left = event.pageX + 'px';
                 tooltip.style.top = event.pageY + 'px';
             });
-  
-            circle.addEventListener('mouseout', function() {
+
+            circle.addEventListener('mouseout', function () {
                 tooltip.style.display = 'none';
             });
         });
     } else {
         console.error("SVG document not found!");
     }
-    
-    //aaron
+
     const fromBox = document.getElementById('fromBox');
     const toBox = document.getElementById('toBox');
-    fromBox.addEventListener('input', function() {
+
+    fromBox.addEventListener('input', function () {
         performSearch(fromBox.value, 'from');
     });
 
-    toBox.addEventListener('input', function() {
+    toBox.addEventListener('input', function () {
         performSearch(toBox.value, 'to');
     });
 
     const submitButton = document.getElementById('submitButton');
     if (submitButton) {
-        submitButton.addEventListener('click', function(event) {
+        submitButton.addEventListener('click', function (event) {
             event.preventDefault();
-  
-            const fromBox = document.getElementById('fromBox').value.trim().toLowerCase();
-            const toBox = document.getElementById('toBox').value.trim().toLowerCase();
+
+            const fromBoxValue = document.getElementById('fromBox').value.trim().toLowerCase();
+            const toBoxValue = document.getElementById('toBox').value.trim().toLowerCase();
             const algorithm = document.getElementById('select_box').value.trim().toLowerCase();
-  
-            if (fromBox && toBox && algorithm) {
-                fetch(`/api/${algorithm}/?start=${fromBox}&end=${toBox}`)
+
+            if (fromBoxValue && toBoxValue && algorithm) {
+                fetch(`/api/${algorithm}/?start=${fromBoxValue}&end=${toBoxValue}`)
                     .then(response => {
                         if (!response.ok) {
                             return response.json().then(data => { throw new Error(data.error); });
@@ -56,7 +59,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     })
                     .then(data => {
                         if (data.route !== 'null') {
-                            //markPath(data.route);
+                            resetPath();
+                            markPath(data.route);
                             alert('Route found: ' + data.route.join(' -> ') + '. Total duration: ' + data.duration + ' minutes.');
                         } else {
                             alert('No route found.');
@@ -73,7 +77,7 @@ document.addEventListener('DOMContentLoaded', function() {
     } else {
         console.error("Submit button not found!");
     }
-    //aaron
+
     function performSearch(query, type) {
         if (query.length === 0) {
             return;
@@ -94,7 +98,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.error('Error:', error);
             });
     }
-    //aaron
+
     function updateDatalist(id, options) {
         let datalist = document.getElementById(id);
         if (!datalist) {
@@ -109,17 +113,44 @@ document.addEventListener('DOMContentLoaded', function() {
             datalist.appendChild(optionElement);
         });
     }
-  
+
     function markPath(route) {
+        if (!circles.length) {
+            console.error("No circles found!");
+            return;
+        }
+
+        // Highlight the path
         circles.forEach(circle => {
             const stationName = circle.getAttribute('data-name');
             if (stationName && route.includes(stationName)) {
-                circle.setAttribute('fill', 'green'); // Example of highlighting the path by changing fill color
-            } else {
-                circle.style.opacity = '';
-                circle.style.fill = ''; // Resetting fill color and opacity
+                circle.setAttribute('fill', 'black'); // Example of highlighting the path by changing fill color
             }
         });
     }
-  });
-  
+
+    function resetPath() {
+        // Reset all circles to no fill
+        circles.forEach(circle => {
+            circle.setAttribute('fill', '');
+        });
+    }
+
+    function fetchLiveData() {
+        fetch('/api/liveCrowdDensity?TrainLine=NSL') // Adjust TrainLine parameter as needed
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log(data); // Log the fetched data to console
+                // Handle data as needed (e.g., update UI, process data)
+            })
+            .catch(error => {
+                console.error('Error fetching live data:', error);
+            });
+    }
+});
+

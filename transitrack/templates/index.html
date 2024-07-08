@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,7 +8,9 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  
 </head>
+
 <body>
   <header>
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
@@ -28,13 +31,16 @@
 
   <div class="container">
     <div class="py-5 text-center">
-      <br/><h2>TransiTrack</h2>
+      <br />
+      <h2>TransiTrack</h2>
       <form class="form-inline mt-2 mt-md-0">
-        <input class="form-control mr-sm-4" type="text" placeholder="From" aria-label="Search" id="fromBox" autocomplete="off">
+        <input class="form-control mr-sm-4" type="text" placeholder="From" aria-label="Search" id="fromBox"
+          autocomplete="off">
         <datalist id="from-datalist"></datalist>
         <input class="form-control mr-sm-4" type="text" placeholder="To" aria-label="Search" id="toBox">
         <datalist id="to-datalist"></datalist>
-        <select name="algorithm_select" class="form-control mr-sm-4" id="select_box" aria-label="Default select example">
+        <select name="algorithm_select" class="form-control mr-sm-4" id="select_box"
+          aria-label="Default select example">
           <option selected>Select an algorithm</option>
           <option value="dfs">DFS</option>
           <option value="astar">A Star</option>
@@ -44,8 +50,27 @@
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="submitButton">Find Route!</button>
       </form>
     </div>
-    <div id="tooltip-textbox" class="tooltip-textbox"></div>
-
+    <div id="tooltip-textbox" class="tooltip-textbox">
+      <div class="container-sm">
+        <div class="container-sm">
+        <p class="h5" id="textbox-station-name">station name</p>
+        <br>
+        <p class="h6">live crowd</p>
+          <div class="progress">
+            <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%"> crowded
+            </div>
+        </div>
+      </div>
+      <br>
+      <div class="container-sm">
+        <p class="h6">forcast crowd</p>
+        <div class="progress">
+          <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%"> crowded
+          </div>
+      </div>
+      </div>
+      </div>
+    </div>
     <!-- Add an ID to the containing div or object -->
     <div id="svg-container">
       {% include 'stations_sg.svg' %}
@@ -54,5 +79,7 @@
 
   <!-- Ensure the correct path to your JavaScript file -->
   <script src="{{ url_for('static', filename='front-end.js') }}"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </body>
+
 </html>

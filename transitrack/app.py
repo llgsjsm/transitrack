@@ -1,7 +1,10 @@
 from flask import Flask, request, render_template, jsonify
 from graph import load_graph, dfs, build_distance_map, heuristic, a_star, reconstruct_path, dijkstras, sequential_search, load_graph2, bfs
+import requests
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
 stations = load_graph('static/route.json')
 djik1, djik2 = load_graph2('static/route.json')
@@ -105,6 +108,20 @@ def api_search():
         results = sequential_search(stations, query)
         return jsonify({'results': results}), 200
     except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/api/liveCrowdDensity', methods=['GET'])
+def get_train_data():
+    try:
+        train_line = request.args.get('TrainLine', 'NSL')  # Default to 'NorthSouth' if not provided
+        headers = {
+            'AccountKey': '4BhTJAVIRV6BqNDaBwtOlA==',
+            'accept': 'application/json'
+        }
+        response = requests.get(f'http://datamall2.mytransport.sg/ltaodataservice/PCDRealTime?TrainLine={train_line}', headers=headers)
+        response.raise_for_status()  # Raise an error for bad status codes
+        return jsonify(response.json())
+    except requests.exceptions.RequestException as e:
         return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
