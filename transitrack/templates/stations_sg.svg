@@ -22,7 +22,7 @@
      <path d="m698 760q-14.14 -14.14 0 -28.28 l10-10 q14.14-14.14 28.28-14.14 h61 q20 0 34.14 -14.14 l79-79 q14.14-14.14 34.14-14.14 h321.5 q20 0 20 20 v69"/>
     </g>
     <g id="teex" stroke="#784008">
-     <path d="m496 34 l147.8 147.8 q14.14 14.14 14.14 34.14 v562 q0 20 14.14 34.14 l87 87 q14.14 14.14 34.14 14.14 h120"/>
+     <path d="m496 34 l147.8 147.8 q14.14 14.14 14.14 34.14 v562 q0 20 14.14 34.14 l87 87 q14.14 14.14 34.14 14.14 h134 q20 0 34.14 -14.14"/>
     </g>
     <!-- <g id="lrt" stroke="#999999">
      <path d="m284.4 225.6h207 q10 0 17.07-7.07 l19.2-19.2 q7.07-7.07 17.07-7.07 h10 q10 0 10 10 v46.6 q0 10-10 10 h-10 q-10 0-17.07-7.07 l-19.2-19.2 q-7.07-7.07-17.07-7.07"/>
@@ -161,6 +161,7 @@
           <circle id="te18" data-name="maxwell" cx="687" cy="826.4" r="3"/>
           <circle id="te19" data-name="shenton way" cx="741.7" cy="881" r="3"/>
           <circle id="te22" data-name="gardens by the bay" cx="911" cy="913" r="3"/>
+          <circle id="te23" data-name="tanjong rhu" cx="958" cy="903" r="3"/>
       </g>
     </a>
     <a xlink:href= "#ints" fill="#ffffff">
@@ -416,6 +417,8 @@
       <text id="lbte19b" x="716" y="902" font-size="12">Way</text>
       <text id="lbte22a" x="889" y="928" font-size="12">Gardens</text>
       <text id="lbte22b" x="883" y="940" font-size="12">by the Bay</text>
+      <text id="lbte23a" x="965" y="911" font-size="12">Tanjong</text>
+      <text id="lbte23b" x="965" y="923" font-size="12">Rhu</text>
     </g>
 
 
