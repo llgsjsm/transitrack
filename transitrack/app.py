@@ -6,8 +6,8 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 
-stations = load_graph('static/route.json')
-djik1, djik2 = load_graph2('static/route.json')
+stations = load_graph('C:/Users/Admin/Documents/GitHub/transitrack/transitrack/static/route.json')
+djik1, djik2 = load_graph2('C:/Users/Admin/Documents/GitHub/transitrack/transitrack/static/route.json')
 distance_map = build_distance_map(stations)  # Build distance map once
 
 @app.route('/')
@@ -115,7 +115,7 @@ def get_train_data():
     try:
         train_line = request.args.get('TrainLine', 'NSL')  # Default to 'NorthSouth' if not provided
         headers = {
-            'AccountKey': '4BhTJAVIRV6BqNDaBwtOlA==',
+            'AccountKey': 'YOUR API KEY',
             'accept': 'application/json'
         }
         response = requests.get(f'http://datamall2.mytransport.sg/ltaodataservice/PCDRealTime?TrainLine={train_line}', headers=headers)
