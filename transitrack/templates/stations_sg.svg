@@ -22,7 +22,7 @@
      <path d="m698 760q-14.14 -14.14 0 -28.28 l10-10 q14.14-14.14 28.28-14.14 h61 q20 0 34.14 -14.14 l79-79 q14.14-14.14 34.14-14.14 h321.5 q20 0 20 20 v69"/>
     </g>
     <g id="teex" stroke="#784008">
-     <path d="m496 34 l147.8 147.8 q14.14 14.14 14.14 34.14 v562 q0 20 14.14 34.14 l87 87 q14.14 14.14 34.14 14.14 h134 q20 0 34.14 -14.14"/>
+     <path d="m496 34 l147.8 147.8 q14.14 14.14 14.14 34.14 v562 q0 20 14.14 34.14 l87 87 q14.14 14.14 34.14 14.14 h134 q20 0 34.14 -14.14 l99 -99 q14.14 -14.14 28.28 -14.14 h100"/>
     </g>
     <!-- <g id="lrt" stroke="#999999">
      <path d="m284.4 225.6h207 q10 0 17.07-7.07 l19.2-19.2 q7.07-7.07 17.07-7.07 h10 q10 0 10 10 v46.6 q0 10-10 10 h-10 q-10 0-17.07-7.07 l-19.2-19.2 q-7.07-7.07-17.07-7.07"/>
@@ -162,6 +162,12 @@
           <circle id="te19" data-name="shenton way" cx="741.7" cy="881" r="3"/>
           <circle id="te22" data-name="gardens by the bay" cx="911" cy="913" r="3"/>
           <circle id="te23" data-name="tanjong rhu" cx="958" cy="903" r="3"/>
+          <circle id="te24" data-name="katong park" cx="988" cy="873" r="3"/>
+          <circle id="te25" data-name="tanjong katong" cx="1024" cy="837" r="3"/>
+          <circle id="te26" data-name="marine parade" cx="1056" cy="805" r="3"/>
+          <circle id="te27" data-name="marine terrace" cx="1104" cy="786" r="3"/>
+          <circle id="te28" data-name="siglap" cx="1148" cy="786" r="3"/>
+          <circle id="te29" data-name="bayshore" cx="1192" cy="786" r="3"/>
       </g>
     </a>
     <a xlink:href= "#ints" fill="#ffffff">
@@ -419,6 +425,15 @@
       <text id="lbte22b" x="883" y="940" font-size="12">by the Bay</text>
       <text id="lbte23a" x="965" y="911" font-size="12">Tanjong</text>
       <text id="lbte23b" x="965" y="923" font-size="12">Rhu</text>
+      <text id="lbte24" x="995" y="882" font-size="12">Katong Park</text>
+      <text id="lbte25a" x="1030" y="846" font-size="12">Tanjong</text>
+      <text id="lbte25b" x="1030" y="858" font-size="12">Katong</text>
+      <text id="lbte26a" x="1062" y="813" font-size="12">Marine</text>
+      <text id="lbte26b" x="1062" y="825" font-size="12">Parade</text>
+      <text id="lbte27a" x="1086" y="766" font-size="12">Marine</text>
+      <text id="lbte27b" x="1084" y="778" font-size="12">Terrace</text>
+      <text id="lbte28" x="1132" y="802" font-size="12">Siglap</text>
+      <text id="lbte29" x="1168" y="778" font-size="12">Bayshore</text>
     </g>
 
 
