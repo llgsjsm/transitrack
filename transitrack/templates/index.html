@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SMRT Interactive Map (unofficial)</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+  <header>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+      <a class="navbar-brand" href="{{ url_for('index') }}">TransiTrack</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+        aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="{{ url_for('index') }}">Home <span class="sr-only">(current)</span></a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <div class="container">
+    <div class="py-5 text-center">
+      <br/><h2>TransiTrack</h2>
+      <form class="form-inline mt-2 mt-md-0">
+        <input class="form-control mr-sm-4" type="text" placeholder="From" aria-label="Search" id="fromBox" autocomplete="off">
+        <datalist id="from-datalist"></datalist>
+        <input class="form-control mr-sm-4" type="text" placeholder="To" aria-label="Search" id="toBox">
+        <datalist id="to-datalist"></datalist>
+        <select name="algorithm_select" class="form-control mr-sm-4" id="select_box" aria-label="Default select example">
+          <option selected>Select an algorithm</option>
+          <option value="dfs">DFS</option>
+          <option value="astar">A Star</option>
+          <option value="djikstras">Djikstras</option>
+          <option value="bfs">BFS</option>
+        </select>
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="submitButton">Find Route!</button>
+      </form>
+    </div>
+    <div id="tooltip-textbox" class="tooltip-textbox"></div>
+
+    <!-- Add an ID to the containing div or object -->
+    <div id="svg-container">
+      {% include 'stations_sg.svg' %}
+    </div>
+  </div>
+
+  <!-- Ensure the correct path to your JavaScript file -->
+  <script src="{{ url_for('static', filename='front-end.js') }}"></script>
+</body>
+</html>

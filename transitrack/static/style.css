@@ -1,0 +1,30 @@
+.tooltip-textbox {
+  position: absolute;
+  display: none;
+  background-color: #dddddd;
+  color: #666666;
+  padding: 1em;
+  border-radius: 10px;
+  border: 2px solid transparent;
+  outline: none;
+  font-family: "Heebo", sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.4;
+  width: 200px;
+  height: 100px;
+  transition: all 0.2s;
+  pointer-events: none;  /* Prevents the tooltip from interfering with mouse events */
+}
+
+.tooltip-textbox:hover {
+  cursor: pointer;
+  background-color: #eeeeee;
+}
+
+.tooltip-textbox:focus {
+  cursor: text;
+  color: #333333;
+  background-color: white;
+  border-color: #333333;
+}

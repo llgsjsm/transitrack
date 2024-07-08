@@ -1,0 +1,1096 @@
+{
+  "routes": [
+    {
+      "from": "Dhoby Ghaut",
+      "to": "Bras Basah",
+      "line": "Circle Line",
+      "distance": 0.6,
+      "duration": 2
+    },
+    {
+      "from": "Bras Basah",
+      "to": "Esplanade",
+      "line": "Circle Line",
+      "distance": 0.7,
+      "duration": 3
+    },
+    {
+      "from": "Esplanade",
+      "to": "Promenade",
+      "line": "Circle Line",
+      "distance": 0.8,
+      "duration": 3
+    },
+    {
+      "from": "Promenade",
+      "to": "Bayfront",
+      "line": "Circle Line",
+      "distance": 1.3,
+      "duration": 3
+    },
+    {
+      "from": "Bayfront",
+      "to": "Marina Bay",
+      "line": "Circle Line",
+      "distance": 0.8,
+      "duration": 3
+    },
+    {
+      "from": "Promenade",
+      "to": "Nicoll Highway",
+      "line": "Circle Line",
+      "distance": 0.8,
+      "duration": 2
+    },
+    {
+      "from": "Nicoll Highway",
+      "to": "Stadium",
+      "line": "Circle Line",
+      "distance": 1.5,
+      "duration": 3
+    },
+    {
+      "from": "Stadium",
+      "to": "Mountbatten",
+      "line": "Circle Line",
+      "distance": 0.9,
+      "duration": 2
+    },
+    {
+      "from": "Mountbatten",
+      "to": "Dakota",
+      "line": "Circle Line",
+      "distance": 0.7,
+      "duration": 2
+    },
+    {
+      "from": "Dakota",
+      "to": "Paya Lebar",
+      "line": "Circle Line",
+      "distance": 1.2,
+      "duration": 3
+    },
+    {
+      "from": "Paya Lebar",
+      "to": "MacPherson",
+      "line": "Circle Line",
+      "distance": 1.1,
+      "duration": 3
+    },
+    {
+      "from": "MacPherson",
+      "to": "Tai Seng",
+      "line": "Circle Line",
+      "distance": 1.0,
+      "duration": 3
+    },
+    {
+      "from": "Tai Seng",
+      "to": "Bartley",
+      "line": "Circle Line",
+      "distance": 1.3,
+      "duration": 3
+    },
+    {
+      "from": "Bartley",
+      "to": "Serangoon",
+      "line": "Circle Line",
+      "distance": 1.3,
+      "duration": 3
+    },
+    {
+      "from": "Serangoon",
+      "to": "Lorong Chuan",
+      "line": "Circle Line",
+      "distance": 0.9,
+      "duration": 2
+    },
+    {
+      "from": "Lorong Chuan",
+      "to": "Bishan",
+      "line": "Circle Line",
+      "distance": 1.7,
+      "duration": 4
+    },
+    {
+      "from": "Bishan",
+      "to": "Marymount",
+      "line": "Circle Line",
+      "distance": 1.6,
+      "duration": 3
+    },
+    {
+      "from": "Marymount",
+      "to": "Caldecott",
+      "line": "Circle Line",
+      "distance": 1.2,
+      "duration": 3
+    },
+    {
+      "from": "Caldecott",
+      "to": "Botanic Gardens",
+      "line": "Circle Line",
+      "distance": 3.9,
+      "duration": 6
+    },
+    {
+      "from": "Botanic Gardens",
+      "to": "Farrer Road",
+      "line": "Circle Line",
+      "distance": 1.0,
+      "duration": 3
+    },
+    {
+      "from": "Farrer Road",
+      "to": "Holland Village",
+      "line": "Circle Line",
+      "distance": 1.4,
+      "duration": 3
+    },
+    {
+      "from": "Holland Village",
+      "to": "Buona Vista",
+      "line": "Circle Line",
+      "distance": 0.9,
+      "duration": 3
+    },
+    {
+      "from": "Buona Vista",
+      "to": "one-north",
+      "line": "Circle Line",
+      "distance": 0.8,
+      "duration": 2
+    },
+    {
+      "from": "one-north",
+      "to": "Kent Ridge",
+      "line": "Circle Line",
+      "distance": 0.8,
+      "duration": 2
+    },
+    {
+      "from": "Kent Ridge",
+      "to": "Haw Par Villa",
+      "line": "Circle Line",
+      "distance": 1.4,
+      "duration": 3
+    },
+    {
+      "from": "Haw Par Villa",
+      "to": "Pasir Panjang",
+      "line": "Circle Line",
+      "distance": 1.3,
+      "duration": 3
+    },
+    {
+      "from": "Pasir Panjang",
+      "to": "Labrador Park",
+      "line": "Circle Line",
+      "distance": 1.4,
+      "duration": 3
+    },
+    {
+      "from": "Labrador Park",
+      "to": "Telok Blangah",
+      "line": "Circle Line",
+      "distance": 0.8,
+      "duration": 2
+    },
+    {
+      "from": "Telok Blangah",
+      "to": "HarbourFront",
+      "line": "Circle Line",
+      "distance": 1.5,
+      "duration": 4
+    },
+    {
+      "from": "Bukit Panjang",
+      "to": "Cashew",
+      "line": "Downtown Line",
+      "distance": 1.2,
+      "duration": 2
+    },
+    {
+      "from": "Cashew",
+      "to": "Hillview",
+      "line": "Downtown Line",
+      "distance": 0.9,
+      "duration": 2
+    },
+    {
+      "from": "Hillview",
+      "to": "Beauty World",
+      "line": "Downtown Line",
+      "distance": 2.6,
+      "duration": 3
+    },
+    {
+      "from": "Beauty World",
+      "to": "King Albert Park",
+      "line": "Downtown Line",
+      "distance": 1.2,
+      "duration": 2
+    },
+    {
+      "from": "King Albert Park",
+      "to": "Sixth Avenue",
+      "line": "Downtown Line",
+      "distance": 1.6,
+      "duration": 2
+    },
+    {
+      "from": "Sixth Avenue",
+      "to": "Tan Kah Kee",
+      "line": "Downtown Line",
+      "distance": 1.3,
+      "duration": 2
+    },
+    {
+      "from": "Tan Kah Kee",
+      "to": "Botanic Gardens",
+      "line": "Downtown Line",
+      "distance": 1.1,
+      "duration": 2
+    },
+    {
+      "from": "Botanic Gardens",
+      "to": "Stevens",
+      "line": "Downtown Line",
+      "distance": 1.1,
+      "duration": 2
+    },
+    {
+      "from": "Stevens",
+      "to": "Newton",
+      "line": "Downtown Line",
+      "distance": 1.6,
+      "duration": 2
+    },
+    {
+      "from": "Newton",
+      "to": "Little India",
+      "line": "Downtown Line",
+      "distance": 1.4,
+      "duration": 3
+    },
+    {
+      "from": "Little India",
+      "to": "Rochor",
+      "line": "Downtown Line",
+      "distance": 0.5,
+      "duration": 1
+    },
+    {
+      "from": "Rochor",
+      "to": "Bugis",
+      "line": "Downtown Line",
+      "distance": 0.8,
+      "duration": 2
+    },
+    {
+      "from": "Bugis",
+      "to": "Promenade",
+      "line": "Downtown Line",
+      "distance": 0.9,
+      "duration": 2
+    },
+    {
+      "from": "Promenade",
+      "to": "Bayfront",
+      "line": "Downtown Line",
+      "distance": 1.3,
+      "duration": 2
+    },
+    {
+      "from": "Bayfront",
+      "to": "Downtown",
+      "line": "Downtown Line",
+      "distance": 0.9,
+      "duration": 2
+    },
+    {
+      "from": "Downtown",
+      "to": "Telok Ayer",
+      "line": "Downtown Line",
+      "distance": 0.6,
+      "duration": 1
+    },
+    {
+      "from": "Telok Ayer",
+      "to": "Chinatown",
+      "line": "Downtown Line",
+      "distance": 0.6,
+      "duration": 2
+    },
+    {
+      "from": "Chinatown",
+      "to": "Fort Canning",
+      "line": "Downtown Line",
+      "distance": 1.0,
+      "duration": 2
+    },
+    {
+      "from": "Fort Canning",
+      "to": "Bencoolen",
+      "line": "Downtown Line",
+      "distance": 1.0,
+      "duration": 2
+    },
+    {
+      "from": "Bencoolen",
+      "to": "Jalan Besar",
+      "line": "Downtown Line",
+      "distance": 0.9,
+      "duration": 1
+    },
+    {
+      "from": "Jalan Besar",
+      "to": "Bendemeer",
+      "line": "Downtown Line",
+      "distance": 1.3,
+      "duration": 2
+    },
+    {
+      "from": "Bendemeer",
+      "to": "Geylang Bahru",
+      "line": "Downtown Line",
+      "distance": 1.4,
+      "duration": 2
+    },
+    {
+      "from": "Geylang Bahru",
+      "to": "Mattar",
+      "line": "Downtown Line",
+      "distance": 1.5,
+      "duration": 2
+    },
+    {
+      "from": "Mattar",
+      "to": "MacPherson",
+      "line": "Downtown Line",
+      "distance": 0.8,
+      "duration": 2
+    },
+    {
+      "from": "MacPherson",
+      "to": "Ubi",
+      "line": "Downtown Line",
+      "distance": 1.1,
+      "duration": 2
+    },
+    {
+      "from": "Ubi",
+      "to": "Kaki Bukit",
+      "line": "Downtown Line",
+      "distance": 1.2,
+      "duration": 2
+    },
+    {
+      "from": "Kaki Bukit",
+      "to": "Bedok North",
+      "line": "Downtown Line",
+      "distance": 1.1,
+      "duration": 2
+    },
+    {
+      "from": "Bedok North",
+      "to": "Bedok Reservoir",
+      "line": "Downtown Line",
+      "distance": 1.8,
+      "duration": 2
+    },
+    {
+      "from": "Bedok Reservoir",
+      "to": "Tampines West",
+      "line": "Downtown Line",
+      "distance": 1.7,
+      "duration": 3
+    },
+    {
+      "from": "Tampines West",
+      "to": "Tampines",
+      "line": "Downtown Line",
+      "distance": 1.3,
+      "duration": 2
+    },
+    {
+      "from": "Tampines",
+      "to": "Tampines East",
+      "line": "Downtown Line",
+      "distance": 1.4,
+      "duration": 2
+    },
+    {
+      "from": "Tampines East",
+      "to": "Upper Changi",
+      "line": "Downtown Line",
+      "distance": 2.6,
+      "duration": 3
+    },
+    {
+      "from": "Upper Changi",
+      "to": "Expo",
+      "line": "Downtown Line",
+      "distance": 0.9,
+      "duration": 2
+    },
+    {
+      "from": "Pasir Ris",
+      "to": "Tampines",
+      "line": "East West Line",
+      "distance": 2.4,
+      "duration": 3
+    },
+    {
+      "from": "Tampines",
+      "to": "Simei",
+      "line": "East West Line",
+      "distance": 1.4,
+      "duration": 4
+    },
+    {
+      "from": "Simei",
+      "to": "Tanah Merah",
+      "line": "East West Line",
+      "distance": 2.5,
+      "duration": 4
+    },
+    {
+      "from": "Tanah Merah",
+      "to": "Bedok",
+      "line": "East West Line",
+      "distance": 1.9,
+      "duration": 3
+    },
+    {
+      "from": "Bedok",
+      "to": "Kembangan",
+      "line": "East West Line",
+      "distance": 2,
+      "duration": 4
+    },
+    {
+      "from": "Kembangan",
+      "to": "Eunos",
+      "line": "East West Line",
+      "distance": 1.1,
+      "duration": 4
+    },
+    {
+      "from": "Eunos",
+      "to": "Paya Lebar",
+      "line": "East West Line",
+      "distance": 1.1,
+      "duration": 3
+    },
+    {
+      "from": "Paya Lebar",
+      "to": "Aljunied",
+      "line": "East West Line",
+      "distance": 1.2,
+      "duration": 3
+    },
+    {
+      "from": "Aljunied",
+      "to": "Kallang",
+      "line": "East West Line",
+      "distance": 1.4,
+      "duration": 4
+    },
+    {
+      "from": "Kallang",
+      "to": "Lavender",
+      "line": "East West Line",
+      "distance": 1.1,
+      "duration": 3
+    },
+    {
+      "from": "Lavender",
+      "to": "Bugis",
+      "line": "East West Line",
+      "distance": 1.1,
+      "duration": 2
+    },
+    {
+      "from": "Bugis",
+      "to": "City Hall",
+      "line": "East West Line",
+      "distance": 1,
+      "duration": 3
+    },
+    {
+      "from": "City Hall",
+      "to": "Raffles Place",
+      "line": "East West Line",
+      "distance": 1,
+      "duration": 3
+    },
+    {
+      "from": "Raffles Place",
+      "to": "Tanjong Pagar",
+      "line": "East West Line",
+      "distance": 1.2,
+      "duration": 4
+    },
+    {
+      "from": "Tanjong Pagar",
+      "to": "Outram Park",
+      "line": "East West Line",
+      "distance": 1,
+      "duration": 3
+    },
+    {
+      "from": "Outram Park",
+      "to": "Tiong Bahru",
+      "line": "East West Line",
+      "distance": 1.5,
+      "duration": 3
+    },
+    {
+      "from": "Tiong Bahru",
+      "to": "Redhill",
+      "line": "East West Line",
+      "distance": 1.2,
+      "duration": 3
+    },
+    {
+      "from": "Redhill",
+      "to": "Queenstown",
+      "line": "East West Line",
+      "distance": 1.4,
+      "duration": 4
+    },
+    {
+      "from": "Queenstown",
+      "to": "Commonwealth",
+      "line": "East West Line",
+      "distance": 1.2,
+      "duration": 3
+    },
+    {
+      "from": "Commonwealth",
+      "to": "Buona Vista",
+      "line": "East West Line",
+      "distance": 1.1,
+      "duration": 3
+    },
+    {
+      "from": "Buona Vista",
+      "to": "Dover",
+      "line": "East West Line",
+      "distance": 1.4,
+      "duration": 3
+    },
+    {
+      "from": "Dover",
+      "to": "Clementi",
+      "line": "East West Line",
+      "distance": 1.7,
+      "duration": 5
+    },
+    {
+      "from": "Clementi",
+      "to": "Jurong East",
+      "line": "East West Line",
+      "distance": 3.5,
+      "duration": 5
+    },
+    {
+      "from": "Jurong East",
+      "to": "Chinese Garden",
+      "line": "East West Line",
+      "distance": 1.5,
+      "duration": 4
+    },
+    {
+      "from": "Chinese Garden",
+      "to": "Lakeside",
+      "line": "East West Line",
+      "distance": 1.4,
+      "duration": 3
+    },
+    {
+      "from": "Lakeside",
+      "to": "Boon Lay",
+      "line": "East West Line",
+      "distance": 1.8,
+      "duration": 3
+    },
+    {
+      "from": "Boon Lay",
+      "to": "Pioneer",
+      "line": "East West Line",
+      "distance": 0.9,
+      "duration": 4
+    },
+    {
+      "from": "Pioneer",
+      "to": "Joo Koon",
+      "line": "East West Line",
+      "distance": 2.6,
+      "duration": 4
+    },
+    {
+      "from": "Joo Koon",
+      "to": "Gul Circle",
+      "line": "East West Line",
+      "distance": 2.3,
+      "duration": 3
+    },
+    {
+      "from": "Gul Circle",
+      "to": "Tuas Crescent",
+      "line": "East West Line",
+      "distance": 1.7,
+      "duration": 3
+    },
+    {
+      "from": "Tuas Crescent",
+      "to": "Tuas West Road",
+      "line": "East West Line",
+      "distance": 1.4,
+      "duration": 3
+    },
+    {
+      "from": "Tuas West Road",
+      "to": "Tuas Link",
+      "line": "East West Line",
+      "distance": 1.3,
+      "duration": 2
+    },
+    {
+      "from": "Tanah Merah",
+      "to": "Expo",
+      "line": "East West Line",
+      "distance": 1.9,
+      "duration": 3
+    },
+    {
+      "from": "Expo",
+      "to": "Changi Airport",
+      "line": "East West Line",
+      "distance": 4.5,
+      "duration": 6
+    },
+    {
+      "from": "HarbourFront",
+      "to": "Outram Park",
+      "line": "North East Line",
+      "distance": 2.6,
+      "duration": 4
+    },
+    {
+      "from": "Outram Park",
+      "to": "Chinatown",
+      "line": "North East Line",
+      "distance": 0.7,
+      "duration": 1
+    },
+    {
+      "from": "Chinatown",
+      "to": "Clarke Quay",
+      "line": "North East Line",
+      "distance": 0.6,
+      "duration": 2
+    },
+    {
+      "from": "Clarke Quay",
+      "to": "Dhoby Ghaut",
+      "line": "North East Line",
+      "distance": 1.4,
+      "duration": 3
+    },
+    {
+      "from": "Dhoby Ghaut",
+      "to": "Little India",
+      "line": "North East Line",
+      "distance": 1,
+      "duration": 1
+    },
+    {
+      "from": "Little India",
+      "to": "Farrer Park",
+      "line": "North East Line",
+      "distance": 0.8,
+      "duration": 1
+    },
+    {
+      "from": "Farrer Park",
+      "to": "Boon Keng",
+      "line": "North East Line",
+      "distance": 1.2,
+      "duration": 2
+    },
+    {
+      "from": "Boon Keng",
+      "to": "Potong Pasir",
+      "line": "North East Line",
+      "distance": 1.6,
+      "duration": 3
+    },
+    {
+      "from": "Potong Pasir",
+      "to": "Woodleigh",
+      "line": "North East Line",
+      "distance": 0.9,
+      "duration": 1
+    },
+    {
+      "from": "Woodleigh",
+      "to": "Serangoon",
+      "line": "North East Line",
+      "distance": 1.2,
+      "duration": 2
+    },
+    {
+      "from": "Serangoon",
+      "to": "Kovan",
+      "line": "North East Line",
+      "distance": 1.7,
+      "duration": 3
+    },
+    {
+      "from": "Kovan",
+      "to": "Hougang",
+      "line": "North East Line",
+      "distance": 1.5,
+      "duration": 2
+    },
+    {
+      "from": "Hougang",
+      "to": "Buangkok",
+      "line": "North East Line",
+      "distance": 1.3,
+      "duration": 2
+    },
+    {
+      "from": "Buangkok",
+      "to": "Sengkang",
+      "line": "North East Line",
+      "distance": 1.1,
+      "duration": 2
+    },
+    {
+      "from": "Sengkang",
+      "to": "Punggol",
+      "line": "North East Line",
+      "distance": 1.7,
+      "duration": 3
+    },
+    {
+      "from": "Jurong East",
+      "to": "Bukit Batok",
+      "line": "North South Line",
+      "distance": 2.1,
+      "duration": 4
+    },
+    {
+      "from": "Bukit Batok",
+      "to": "Bukit Gombak",
+      "line": "North South Line",
+      "distance": 1.2,
+      "duration": 3
+    },
+    {
+      "from": "Bukit Gombak",
+      "to": "Choa Chu Kang",
+      "line": "North South Line",
+      "distance": 3.3,
+      "duration": 5
+    },
+    {
+      "from": "Choa Chu Kang",
+      "to": "Yew Tee",
+      "line": "North South Line",
+      "distance": 1.4,
+      "duration": 3
+    },
+    {
+      "from": "Yew Tee",
+      "to": "Kranji",
+      "line": "North South Line",
+      "distance": 4.1,
+      "duration": 5
+    },
+    {
+      "from": "Kranji",
+      "to": "Marsiling",
+      "line": "North South Line",
+      "distance": 1.7,
+      "duration": 3
+    },
+    {
+      "from": "Marsiling",
+      "to": "Woodlands",
+      "line": "North South Line",
+      "distance": 1.5,
+      "duration": 5
+    },
+    {
+      "from": "Woodlands",
+      "to": "Admiralty",
+      "line": "North South Line",
+      "distance": 1.7,
+      "duration": 5
+    },
+    {
+      "from": "Admiralty",
+      "to": "Sembawang",
+      "line": "North South Line",
+      "distance": 2.4,
+      "duration": 4
+    },
+    {
+      "from": "Sembawang",
+      "to": "Canberra",
+      "line": "North South Line",
+      "distance": 1.5,
+      "duration": 4
+    },
+    {
+      "from": "Canberra",
+      "to": "Yishun",
+      "line": "North South Line",
+      "distance": 1.7,
+      "duration": 3
+    },
+    {
+      "from": "Yishun",
+      "to": "Khatib",
+      "line": "North South Line",
+      "distance": 1.4,
+      "duration": 3
+    },
+    {
+      "from": "Khatib",
+      "to": "Yio Chu Kang",
+      "line": "North South Line",
+      "distance": 4.9,
+      "duration": 6
+    },
+    {
+      "from": "Yio Chu Kang",
+      "to": "Ang Mo Kio",
+      "line": "North South Line",
+      "distance": 1.5,
+      "duration": 3
+    },
+    {
+      "from": "Ang Mo Kio",
+      "to": "Bishan",
+      "line": "North South Line",
+      "distance": 2.4,
+      "duration": 4
+    },
+    {
+      "from": "Bishan",
+      "to": "Braddell",
+      "line": "North South Line",
+      "distance": 1.2,
+      "duration": 2
+    },
+    {
+      "from": "Braddell",
+      "to": "Toa Payoh",
+      "line": "North South Line",
+      "distance": 0.9,
+      "duration": 2
+    },
+    {
+      "from": "Toa Payoh",
+      "to": "Novena",
+      "line": "North South Line",
+      "distance": 1.5,
+      "duration": 3
+    },
+    {
+      "from": "Novena",
+      "to": "Newton",
+      "line": "North South Line",
+      "distance": 1.2,
+      "duration": 2
+    },
+    {
+      "from": "Newton",
+      "to": "Orchard",
+      "line": "North South Line",
+      "distance": 1.2,
+      "duration": 3
+    },
+    {
+      "from": "Orchard",
+      "to": "Somerset",
+      "line": "North South Line",
+      "distance": 1,
+      "duration": 2
+    },
+    {
+      "from": "Somerset",
+      "to": "Dhoby Ghaut",
+      "line": "North South Line",
+      "distance": 0.8,
+      "duration": 2
+    },
+    {
+      "from": "Dhoby Ghaut",
+      "to": "City Hall",
+      "line": "North South Line",
+      "distance": 1,
+      "duration": 2
+    },
+    {
+      "from": "City Hall",
+      "to": "Raffles Place",
+      "line": "North South Line",
+      "distance": 1,
+      "duration": 3
+    },
+    {
+      "from": "Raffles Place",
+      "to": "Marina Bay",
+      "line": "North South Line",
+      "distance": 1,
+      "duration": 2
+    },
+    {
+      "from": "Marina Bay",
+      "to": "Marina South Pier",
+      "line": "North South Line",
+      "distance": 1.4,
+      "duration": 2
+    },
+    {
+      "from": "Woodlands North",
+      "to": "Woodlands",
+      "line": "Thomson East Coast Line",
+      "distance": 1.4,
+      "duration": 3
+    },
+    {
+      "from": "Woodlands",
+      "to": "Woodlands South",
+      "line": "Thomson East Coast Line",
+      "distance": 1.4,
+      "duration": 3
+    },
+    {
+      "from": "Woodlands South",
+      "to": "Springleaf",
+      "line": "Thomson East Coast Line",
+      "distance": 4.4,
+      "duration": 5
+    },
+    {
+      "from": "Springleaf",
+      "to": "Lentor",
+      "line": "Thomson East Coast Line",
+      "distance": 2.6,
+      "duration": 4
+    },
+    {
+      "from": "Lentor",
+      "to": "Mayflower",
+      "line": "Thomson East Coast Line",
+      "distance": 1.7,
+      "duration": 3
+    },
+    {
+      "from": "Mayflower",
+      "to": "Bright Hill",
+      "line": "Thomson East Coast Line",
+      "distance": 1.1,
+      "duration": 3
+    },
+    {
+      "from": "Bright Hill",
+      "to": "Upper Thomson",
+      "line": "Thomson East Coast Line",
+      "distance": 1.4,
+      "duration": 3
+    },
+    {
+      "from": "Upper Thomson",
+      "to": "Caldecott",
+      "line": "Thomson East Coast Line",
+      "distance": 2.2,
+      "duration": 4
+    },
+    {
+      "from": "Caldecott",
+      "to": "Stevens",
+      "line": "Thomson East Coast Line",
+      "distance": 3,
+      "duration": 5
+    },
+    {
+      "from": "Stevens",
+      "to": "Napier",
+      "line": "Thomson East Coast Line",
+      "distance": 1.7,
+      "duration": 3
+    },
+    {
+      "from": "Napier",
+      "to": "Orchard Boulevard",
+      "line": "Thomson East Coast Line",
+      "distance": 0.9,
+      "duration": 2
+    },
+    {
+      "from": "Orchard Boulevard",
+      "to": "Orchard",
+      "line": "Thomson East Coast Line",
+      "distance": 1,
+      "duration": 3
+    },
+    {
+      "from": "Orchard",
+      "to": "Great World",
+      "line": "Thomson East Coast Line",
+      "distance": 1,
+      "duration": 3
+    },
+    {
+      "from": "Great World",
+      "to": "Havelock",
+      "line": "Thomson East Coast Line",
+      "distance": 0.7,
+      "duration": 2
+    },
+    {
+      "from": "Havelock",
+      "to": "Outram Park",
+      "line": "Thomson East Coast Line",
+      "distance": 1,
+      "duration": 3
+    },
+    {
+      "from": "Outram Park",
+      "to": "Maxwell",
+      "line": "Thomson East Coast Line",
+      "distance": 0.6,
+      "duration": 2
+    },
+    {
+      "from": "Maxwell",
+      "to": "Shenton Way",
+      "line": "Thomson East Coast Line",
+      "distance": 0.8,
+      "duration": 2
+    },
+    {
+      "from": "Shenton Way",
+      "to": "Marina Bay",
+      "line": "Thomson East Coast Line",
+      "distance": 0.7,
+      "duration": 2
+    },
+    {
+      "from": "Marina Bay",
+      "to": "Gardens by the Bay",
+      "line": "Thomson East Coast Line",
+      "distance": 1.7,
+      "duration": 3
+    }
+  ]
+}
