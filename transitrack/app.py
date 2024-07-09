@@ -6,10 +6,10 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 
-stations = load_graph('C:/Users/Admin/Documents/GitHub/transitrack/transitrack/static/route.json')
-djik1, djik2 = load_graph2('C:/Users/Admin/Documents/GitHub/transitrack/transitrack/static/route.json')
+stations = load_graph('static/route.json')
+djik1, djik2 = load_graph2('static/route.json')
 distance_map = build_distance_map(stations)  # Build distance map once
-
+    
 @app.route('/')
 def index():
     return render_template('index.html')

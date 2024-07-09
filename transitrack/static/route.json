@@ -1091,6 +1091,62 @@
       "line": "Thomson East Coast Line",
       "distance": 1.7,
       "duration": 3
+    },
+    {
+      "from": "Gardens by the Bay",
+      "to": "Founder's Memorial",
+      "line": "Thomson East Coast Line",
+      "distance": 0,
+      "duration": 0
+    },
+    {
+      "from": "Founder's Memorial",
+      "to": "Tanjong Rhu",
+      "line": "Thomson East Coast Line",
+      "distance": 0,
+      "duration": 0
+    },
+    {
+      "from": "Tanjong Rhu",
+      "to": "Katong Park",
+      "line": "Thomson East Coast Line",
+      "distance": 0,
+      "duration": 0
+    },
+    {
+      "from": "Katong Park",
+      "to": "Tanjong Katong",
+      "line": "Thomson East Coast Line",
+      "distance": 0,
+      "duration": 0
+    },
+    {
+      "from": "Tanjong Katong",
+      "to": "Marine Parade",
+      "line": "Thomson East Coast Line",
+      "distance": 0,
+      "duration": 0
+    },
+    {
+      "from": "Marine Parade",
+      "to": "Marine Terrace",
+      "line": "Thomson East Coast Line",
+      "distance": 0,
+      "duration": 0
+    },
+    {
+      "from": "Marine Terrace",
+      "to": "Siglap",
+      "line": "Thomson East Coast Line",
+      "distance": 0,
+      "duration": 0
+    },
+    {
+      "from": "Siglap",
+      "to": "Bayshore",
+      "line": "Thomson East Coast Line",
+      "distance": 0,
+      "duration": 0
     }
   ]
 }
