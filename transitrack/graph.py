@@ -27,13 +27,60 @@ def load_graph(file_name):
 #Sequential Search Algorithm (aaron)
 def sequential_search(stations, query):
     results = []
-    # logging.debug(f'Starting sequential search for query: {query}')
+    #logging.debug(f"Starting sequential search for '{query}'")
     for station in stations:
-        # logging.debug(f'Checking station: {station}')
         if station.startswith(query):
             results.append(station)
-            # logging.debug(f'Found match: {station}')
-    # logging.debug(f'Search results: {results}')
+            #logging.debug(f"Sequential search found: {station}")
+            
+    #logging.debug(f"Sequential search results: {results}")
+    return results
+#Binary Search Algorithm (aaron)
+def sort_station(stations):
+    return sorted(stations, key=lambda x: x.lower())
+
+def binary_search(stations, query):
+    sorted_stations = sort_station(stations)
+    low = 0
+    high = len(sorted_stations) - 1
+    results = []
+
+    #logging.debug(f"Starting binary search for '{query}'")
+
+    while low <= high:
+        mid = (low + high) // 2
+        current_station = sorted_stations[mid]
+        #logging.debug(f"Binary search checking mid index {mid}: {current_station}")
+
+        if current_station.startswith(query):
+            # Add the matching station
+            results.append(current_station)
+            #logging.debug(f"Binary search found: {current_station}")
+
+            # Search for other matches to the left
+            left = mid - 1
+            while left >= 0 and sorted_stations[left].startswith(query):
+                results.append(sorted_stations[left])
+                #logging.debug(f"Binary search found to the left: {sorted_stations[left]}")
+                left -= 1
+
+            # Search for other matches to the right
+            right = mid + 1
+            while right < len(sorted_stations) and sorted_stations[right].startswith(query):
+                results.append(sorted_stations[right])
+                #logging.debug(f"Binary search found to the right: {sorted_stations[right]}")
+                right += 1
+
+            # All matches found, no need to continue binary search
+            break
+        elif query < current_station:
+            high = mid - 1
+            #logging.debug(f"Binary search moving left: low={low}, high={high}")
+        else:
+            low = mid + 1
+            #logging.debug(f"Binary search moving right: low={low}, high={high}")
+
+    #logging.debug(f"Binary search results: {results}")
     return results
 
 #A* algorithm

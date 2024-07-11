@@ -1,5 +1,5 @@
 from flask import Flask, request, render_template, jsonify
-from graph import load_graph, dfs, build_distance_map, a_star, dijkstras, sequential_search, bfs, bellman_ford
+from graph import load_graph, dfs, build_distance_map, a_star, dijkstras, sequential_search, bfs, bellman_ford, binary_search
 import requests
 from flask_cors import CORS
 
@@ -120,12 +120,22 @@ def api_bellmanford():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-#aaron
 @app.route('/api/search/')
 def api_search():
     try:
         query = request.args.get('query', '').strip().lower()
         results = sequential_search(stations, query)
+        return jsonify({'results': results}), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/api/binarysearch/')
+def api_binary_search():
+    try:
+        query = request.args.get('query', '').strip().lower()
+        if not query:
+            raise ValueError("Query is empty")
+        results = binary_search(stations, query)
         return jsonify({'results': results}), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 500

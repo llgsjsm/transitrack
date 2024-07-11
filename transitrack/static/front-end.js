@@ -82,10 +82,18 @@ document.addEventListener('DOMContentLoaded', function () {
         if (query.length === 0) {
             return;
         }
-
-        fetch(`/api/search/?query=${query}`)
-            .then(response => response.json())
+    
+        let endpoint = type === 'from' ? '/api/search' : '/api/binarysearch';
+    
+        fetch(`${endpoint}?query=${encodeURIComponent(query)}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
             .then(data => {
+                console.log(`Received ${type} search results:`, data.results);
                 if (type === 'from') {
                     fromBox.setAttribute('list', 'from-datalist');
                     updateDatalist('from-datalist', data.results);
@@ -98,19 +106,15 @@ document.addEventListener('DOMContentLoaded', function () {
                 console.error('Error:', error);
             });
     }
-
-    function updateDatalist(id, options) {
-        let datalist = document.getElementById(id);
-        if (!datalist) {
-            datalist = document.createElement('datalist');
-            datalist.id = id;
-            document.body.appendChild(datalist);
-        }
-        datalist.innerHTML = '';
-        options.forEach(option => {
-            const optionElement = document.createElement('option');
-            optionElement.value = option;
-            datalist.appendChild(optionElement);
+    
+    function updateDatalist(datalistId, items) {
+        const datalist = document.getElementById(datalistId);
+        datalist.innerHTML = ''; // Clear any existing options
+    
+        items.forEach(item => {
+            const option = document.createElement('option');
+            option.value = item;
+            datalist.appendChild(option);
         });
     }
 
