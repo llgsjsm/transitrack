@@ -2,11 +2,7 @@ import json
 import heapq
 from collections import deque
 
-#import logging
-
-# Set up logging (aaron)
-# logging.basicConfig(level=logging.DEBUG, format='%(message)s')
-
+# Helper function to load the graph from a JSON file
 def load_graph(file_name):
     with open(file_name) as f:
         data = json.load(f)
@@ -24,7 +20,7 @@ def load_graph(file_name):
         graph[to_station].append({"to": from_station, "distance": edge["distance"], "duration": edge["duration"]})
     return graph
 
-#Sequential Search Algorithm (aaron)
+#Sequential Search Algorithm: AARON
 def sequential_search(stations, query):
     results = []
     #logging.debug(f"Starting sequential search for '{query}'")
@@ -35,10 +31,12 @@ def sequential_search(stations, query):
             
     #logging.debug(f"Sequential search results: {results}")
     return results
-#Binary Search Algorithm (aaron)
+
+#Binary Search Algorithm: AARON
 def sort_station(stations):
     return sorted(stations, key=lambda x: x.lower())
 
+#Binary Search Algorithm: AARON
 def binary_search(stations, query):
     sorted_stations = sort_station(stations)
     low = 0
@@ -83,7 +81,7 @@ def binary_search(stations, query):
     #logging.debug(f"Binary search results: {results}")
     return results
 
-#A* algorithm
+#Helper function to build distance map for A* Algorithm: JAKE
 def build_distance_map(graph):
     distance_map = {}
     for from_station, neighbors in graph.items():
@@ -98,6 +96,7 @@ def build_distance_map(graph):
             distance_map[to_station][from_station] = distance  # Assuming bidirectional
     return distance_map
 
+# Heuristic function for A* Algorithm: JAKE
 def heuristic(current, goal, distance_map):
     if current == goal:
         return 0
@@ -106,6 +105,7 @@ def heuristic(current, goal, distance_map):
     
     return min(distance_map[current].values())
 
+# A* Algorithm: JAKE
 def a_star(graph, start, end, distance_map):
     open_list = []
     heapq.heappush(open_list, (0, start))
@@ -134,6 +134,7 @@ def a_star(graph, start, end, distance_map):
 
     return [], float('inf')  # Return an empty array if there's no path
 
+# Helper function for A* Algorithm & Dijkstra's Algorithm: JAKE & HAZEL
 def reconstruct_path(came_from, current):
     total_path = [current]
     while current in came_from:
@@ -141,6 +142,7 @@ def reconstruct_path(came_from, current):
         total_path.insert(0, current)
     return total_path
 
+# Breadth-First Search Algorithm: RAUL
 def bfs(graph, start, end):
     # initialise the queue with the starting point and a path containing only the start
     queue = deque([(start, [start], [], 0, 0)])  # (current_station, path, lines, total_distance, total_duration)
@@ -173,8 +175,7 @@ def bfs(graph, start, end):
     # return empty lists and zeros if there is no path between the start and end
     return [], [], 0, 0
 
-
-#dijkstras algorithm
+# Djikstras algorithm: HAZEL
 def dijkstras(graph, start, end):
     open_list = []
     heapq.heappush(open_list, (0, start))  # Priority queue with (distance, node)
@@ -201,6 +202,7 @@ def dijkstras(graph, start, end):
 
     return [], float('inf')  # Return an empty path and infinite distance if no path is found
 
+# Bellman-Ford Algorithm: RAUL
 def bellman_ford(graph, start, end):
     # step 1: initialise distances from start to all other stations as infinity and the predecessor of each station as None
     distance = {station: float('inf') for station in graph}
@@ -255,7 +257,7 @@ def bellman_ford(graph, start, end):
     # return the final path, lines, total distance, and total duration
     return path, total_distance, total_duration
 
-#DFS Algorithm
+# Depth-First Search Algorithm: XEN
 def dfs(graph, start, end):
     path = []
     journey = set()
@@ -286,3 +288,82 @@ def dfs(graph, start, end):
         return path, total_duration
     else:
         return None, float('inf')
+
+# Floyd-Warshall Algorithm: JAKE (tbc)
+def floyd(duration_matrix, line_matrix):
+    """
+    Floyd-Warshall algorithm to find shortest paths between all pairs of stations.
+    """
+    n = len(duration_matrix)
+    dist = [row[:] for row in duration_matrix]
+    next_node = [[None] * n for _ in range(n)]
+    
+    for i in range(n):
+        for j in range(n):
+            if duration_matrix[i][j] != float('inf'):
+                next_node[i][j] = j
+    
+    for k in range(n):
+        for i in range(n):
+            for j in range(n):
+                if dist[i][j] > dist[i][k] + dist[k][j]:
+                    dist[i][j] = dist[i][k] + dist[k][j]
+                    next_node[i][j] = next_node[i][k]
+    
+    return dist, next_node
+
+# Helper function for Floyd-Warshall Algorithm: JAKE (tbc)
+def reconstruct_path(start, end, next_node, line_matrix, station_index, stations):
+    """
+    Reconstruct the path using the next_node matrix and line changes.
+    """
+    path = []
+    lines = []
+    if next_node[station_index[start]][station_index[end]] is None:
+        return path, lines
+    
+    current = station_index[start]
+    while current != station_index[end]:
+        path.append(stations[current])
+        next_station = next_node[current][station_index[end]]
+        lines.append(line_matrix[current][next_station])
+        current = next_station
+    
+    path.append(end)
+    return path, lines
+
+# Helper function to build distance matrix for Floyd-Warshall Algorithm: JAKE (tbc)
+def build_distance_matrix(routes):
+    """
+    Build a duration matrix and a line matrix from the given routes.
+    The duration matrix is a 2D list where each element represents the travel time between two stations.
+    The line matrix is a 2D list where each element represents the line between two stations.
+    """
+    stations = set()
+    for route in routes:
+        stations.add(route['from'])
+        stations.add(route['to'])
+    
+    stations = list(stations)
+    station_index = {station: idx for idx, station in enumerate(stations)}
+    
+    n = len(stations)
+    duration_matrix = [[float('inf')] * n for _ in range(n)]
+    line_matrix = [[None] * n for _ in range(n)]
+    
+    for i in range(n):
+        duration_matrix[i][i] = 0  # Duration to self is zero
+        line_matrix[i][i] = None   # No line needed for the same station
+    
+    for route in routes:
+        from_idx = station_index[route['from']]
+        to_idx = station_index[route['to']]
+        duration = route['duration']
+        line = route['line']
+        
+        duration_matrix[from_idx][to_idx] = duration
+        duration_matrix[to_idx][from_idx] = duration  # Assuming bidirectional
+        line_matrix[from_idx][to_idx] = line
+        line_matrix[to_idx][from_idx] = line  # Assuming bidirectional
+    
+    return duration_matrix, line_matrix, station_index, stations

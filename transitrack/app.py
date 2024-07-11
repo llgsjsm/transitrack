@@ -98,6 +98,16 @@ def api_bfs():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
+@app.route('/api/floyd/')
+def api_floyd():
+    try:
+        req = request.args
+        start = req.get('start').strip().lower()
+        end = req.get('end').strip().lower()
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
 @app.route('/api/bellmanford/')
 def api_bellmanford():
     try:
