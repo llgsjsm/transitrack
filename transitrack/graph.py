@@ -154,6 +154,59 @@ def dijkstras(graph, start, end):
 
     return [], float('inf')  # Return an empty path and infinite distance if no path is found
 
+def bellman_ford(graph, start, end):
+    # step 1: initialise distances from start to all other stations as infinity and the predecessor of each station as None
+    distance = {station: float('inf') for station in graph}
+    predecessor = {station: None for station in graph}
+    distance[start] = 0
+
+    # step 2: relax all edges n - 1 times (n = number of vertices)
+    for _ in range(len(graph) - 1):
+        for station in graph:
+            for edge in graph[station]:  # Iterate through the list of edges
+                neighbor = edge["to"]
+                weight = edge["distance"]
+                duration = edge["duration"]
+                if distance[station] + weight < distance[neighbor]:
+                    distance[neighbor] = distance[station] + weight
+                    predecessor[neighbor] = (station, weight, duration)
+
+    # step 3: check for negative-weight cycles
+    for station in graph:
+        for edge in graph[station]:  # Iterate through the list of edges
+            neighbor = edge["to"]
+            weight = edge["distance"]
+            duration = edge["duration"]
+            if distance[station] + weight < distance[neighbor]:
+                print("Graph contains a negative-weight cycle")
+                return None, None
+
+    # if the end station is not reachable from the start station, return None
+    if distance[end] == float('inf'):
+        return None, None
+
+    # construct the shortest path from start to end
+    path = []
+    total_distance = 0
+    total_duration = 0
+    current_station = end
+
+    # trace the path from end to start using the predecessor dictionary
+    while current_station is not None:
+        path.append(current_station)  # add the current station to the path
+        if predecessor[current_station] is not None:
+            # retrieve the predecessor station, line, weight, and duration
+            prev_station, weight, duration = predecessor[current_station]
+            total_distance += weight  # add the distance to the total distance
+            total_duration += duration  # add the duration to the total duration
+        # move to the predecessor station
+        current_station = predecessor[current_station][0] if predecessor[current_station] is not None else None
+
+    # reverse the path and lines to get the correct order from start to end
+    path.reverse()
+
+    # return the final path, lines, total distance, and total duration
+    return path, total_distance, total_duration
 
 #DFS Algorithm
 def dfs(graph, start, end):

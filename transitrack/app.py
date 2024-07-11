@@ -1,5 +1,5 @@
 from flask import Flask, request, render_template, jsonify
-from graph import load_graph, dfs, build_distance_map, a_star, dijkstras, sequential_search, bfs
+from graph import load_graph, dfs, build_distance_map, a_star, dijkstras, sequential_search, bfs, bellman_ford
 import requests
 from flask_cors import CORS
 
@@ -83,14 +83,35 @@ def api_bfs():
         start = req.get('start').strip().lower()
         end = req.get('end').strip().lower()
 
-        bfs1 = load_graph('static/route.json')
         # Check if the start and end stations exist in the graph
         if start not in stations:
             return jsonify({'error': f'Start station {start} not found in the graph.'}), 400
         if end not in stations:
             return jsonify({'error': f'End station {end} not found in the graph.'}), 400
 
-        path, lines, total_distance, total_duration = bfs(bfs1, start, end)
+        path, lines, total_distance, total_duration = bfs(stations, start, end)
+        
+        if not path:
+            return jsonify({'route': 'null'}), 400
+        else:
+            return jsonify({'route': path, 'duration': total_duration}), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/api/bellmanford/')
+def api_bellmanford():
+    try:
+        req = request.args
+        start = req.get('start').strip().lower()
+        end = req.get('end').strip().lower()
+
+        # Check if the start and end stations exist in the graph
+        if start not in stations:
+            return jsonify({'error': f'Start station {start} not found in the graph.'}), 400
+        if end not in stations:
+            return jsonify({'error': f'End station {end} not found in the graph.'}), 400
+
+        path, total_distance, total_duration = bellman_ford(stations, start, end)
         
         if not path:
             return jsonify({'route': 'null'}), 400
