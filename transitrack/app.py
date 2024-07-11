@@ -1,5 +1,5 @@
 from flask import Flask, request, render_template, jsonify
-from graph import load_graph, dfs, build_distance_map, heuristic, a_star, reconstruct_path, dijkstras, sequential_search, load_graph2, bfs
+from graph import load_graph, dfs, build_distance_map, a_star, dijkstras, sequential_search, bfs
 import requests
 from flask_cors import CORS
 
@@ -7,7 +7,6 @@ app = Flask(__name__)
 CORS(app)
 
 stations = load_graph('static/route.json')
-djik1, djik2 = load_graph2('static/route.json')
 distance_map = build_distance_map(stations)  # Build distance map once
     
 @app.route('/')
@@ -69,11 +68,11 @@ def api_djikstras():
         if end not in stations:
             return jsonify({'error': f'End station {end} not found in the graph.'}), 400
 
-        shortest_path, path, lines = dijkstras(djik1, start, end, djik2)
+        path, total_duration = dijkstras(stations, start, end)
         if not path:
             return jsonify({'route': 'null'}), 400
         else:
-            return jsonify({'route': path, 'duration': shortest_path}), 200
+            return jsonify({'route': path, 'duration': total_duration}), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
@@ -84,7 +83,7 @@ def api_bfs():
         start = req.get('start').strip().lower()
         end = req.get('end').strip().lower()
 
-        bfs1, bfs2 = load_graph2('static/route.json')
+        bfs1 = load_graph('static/route.json')
         # Check if the start and end stations exist in the graph
         if start not in stations:
             return jsonify({'error': f'Start station {start} not found in the graph.'}), 400

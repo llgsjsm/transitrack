@@ -24,49 +24,6 @@ def load_graph(file_name):
         graph[to_station].append({"to": from_station, "distance": edge["distance"], "duration": edge["duration"]})
     return graph
 
-def load_graph2(file_name):
-    with open(file_name) as f:
-        data = json.load(f)
-
-    graph = {}
-    all_nodes = set()
-    
-    for item in data['routes']:
-        all_nodes.add(item['from'].strip().lower())
-        all_nodes.add(item['to'].strip().lower())
-    
-    for node in all_nodes:
-        graph[node] = {}
-    
-    for item in data['routes']:
-        graph[item['from'].strip().lower()][item['to'].strip().lower()] = (item['duration'], item['line'])
-        graph[item['to'].strip().lower()][item['from'].strip().lower()] = (item['duration'], item['line'])
-    
-    return graph, all_nodes
-
-# def load_graph3(filename):
-#     # load data from json file
-#     with open(filename) as f:
-#         data = json.load(f)
-
-#     # transform data into graph, with edges and nodes for the calculations
-#     graph = {}
-#     all_nodes = set()
-#     for item in data['routes']:
-#         all_nodes.add(item['from'].strip().lower())
-#         all_nodes.add(item['to'].strip().lower())
-
-#     for node in all_nodes:
-#         graph[node] = {}
-
-#     # This part is different than load_graph2
-#     for item in data['routes']:
-#         graph[item['from'].strip().lower()][item['to'].strip().lower()] = (item['duration'], item['line'])
-#         graph[item['to'].strip().lower()][item['from'].strip().lower()] = (item['duration'], item['line'])
-
-#     # returns dictionary representing mrt network
-#     return graph
-
 #Sequential Search Algorithm (aaron)
 def sequential_search(stations, query):
     results = []
@@ -138,27 +95,6 @@ def reconstruct_path(came_from, current):
     return total_path
 
 def bfs(graph, start, end):
-    queue = deque([(start, [start], [], 0)])  # (current_station, path, lines, total_duration)
-    visited = set()
-
-    while queue:
-        current_station, path, lines, total_duration = queue.popleft()
-
-        if current_station == end:
-            return path, lines, total_duration # Assuming the fourth value is still needed for some reason
-
-        visited.add(current_station)
-
-        for neighbor, (duration, line) in graph[current_station].items():
-            if neighbor not in visited and neighbor not in (node for node, _, _, _ in queue):
-                new_path = path + [neighbor]
-                new_lines = lines + [line] if line not in lines else lines  # Avoid duplicating lines
-                new_total_duration = total_duration + duration
-                queue.append((neighbor, new_path, new_lines, new_total_duration))
-
-    return [], [], 0, 0
-
-def bfs2(graph, start, end):
     # initialise the queue with the starting point and a path containing only the start
     queue = deque([(start, [start], [], 0, 0)])  # (current_station, path, lines, total_distance, total_duration)
     visited = set()
@@ -175,74 +111,48 @@ def bfs2(graph, start, end):
         visited.add(current_station)
 
         # explore all neighbors of the current station
-        for neighbor, (distance, duration, line) in graph[current_station].items():
+        for neighbor_info in graph[current_station]:
+            neighbor = neighbor_info["to"]
+            distance = neighbor_info["distance"]
+            duration = neighbor_info["duration"]
+            
             if neighbor not in visited and neighbor not in (node for node, _, _, _, _ in queue):
-                # append the neighbor to the path and line to lines
+                 # append the neighbor to the path
                 new_path = path + [neighbor]
-                new_lines = lines + [line]
                 new_total_distance = total_distance + distance
                 new_total_duration = total_duration + duration
-                queue.append((neighbor, new_path, new_lines, new_total_distance, new_total_duration))
+                queue.append((neighbor, new_path, lines, new_total_distance, new_total_duration))
 
     # return empty lists and zeros if there is no path between the start and end
     return [], [], 0, 0
 
+
 #dijkstras algorithm
-def dijkstras(graph, starting_vertex, end_vertex, all_nodes):
+def dijkstras(graph, start, end):
+    open_list = []
+    heapq.heappush(open_list, (0, start))  # Priority queue with (distance, node)
+    came_from = {}  # To reconstruct the path
+    g_score = {node: float('inf') for node in graph}  # Distance from start to node
+    g_score[start] = 0  # Distance from start to itself is 0
 
-    # 1. Initialise distances and previous_nodes dictionaries
-    # distances are set to infinity for all nodes except the STARTING node, (since they have their own 'cost' [which is the disntance in this case])
-    distances = {vertex: float('infinity') for vertex in all_nodes}
-    distances[starting_vertex] = 0
+    while open_list:
+        current_distance, current_node = heapq.heappop(open_list)
 
-    # previous_nodes & previous_lines are set to None for all nodes
-    # previous_nodes will store the previous node in the shortest path
-    # previous_lines will store the MRT line
-    previous_nodes = {vertex: None for vertex in all_nodes}
-    previous_lines = {vertex: None for vertex in all_nodes}
+        if current_node == end:
+            return reconstruct_path(came_from, current_node), g_score[end]
 
-    # 2. Implementation of Djikstra's algorithm
-    # Starting will be init as 0
-    pq = [(0, starting_vertex)]
-    
-    # While pq is not empty, (dist, current_vertex) = heapq.heappop(pq)
-    # continues until there are no more vertices to visit, line 29 takes the smallest in each iteration
-    while pq:
-        (dist, current_vertex) = heapq.heappop(pq)
+        for neighbor in graph[current_node]:
+            neighbor_node = neighbor["to"]
+            weight = neighbor["duration"]
+            tentative_g_score = g_score[current_node] + weight
 
-        # checks if the current vertex is the end vertex (reached destination)
-        # path and lines are reversed, since it is constructed from end to start. We want to print from start
-        if current_vertex == end_vertex:
-            path = []
-            lines = []
-            while current_vertex is not None:
-                path.append(current_vertex)
-                if previous_lines[current_vertex] is not None:
-                    lines.append(previous_lines[current_vertex])
-                current_vertex = previous_nodes[current_vertex]
-            path = path[::-1]  # Reverse the path
-            lines = lines[::-1]  # Reverse the lines
-            return distances[end_vertex], path, lines
+            if tentative_g_score < g_score[neighbor_node]:
+                came_from[neighbor_node] = current_node
+                g_score[neighbor_node] = tentative_g_score
+                if neighbor_node not in [i[1] for i in open_list]:
+                    heapq.heappush(open_list, (g_score[neighbor_node], neighbor_node))
 
-        # checks if distance is greater than the current vertex
-        if dist > distances[current_vertex]:
-            continue
-
-        # !!! core Djikstra's - for each neighbor of the current vertex, calculate the new distance !!!
-        # checks if the neighbor cost is less than the current cost, if so, update the distance
-        for neighbor, (weight, line) in graph[current_vertex].items():
-            old_distance = distances[neighbor]
-            new_distance = dist + weight
-
-            # if the new distance is less than the old distance, update the distance
-            # update the previous node and line too
-            if new_distance < old_distance:
-                distances[neighbor] = new_distance
-                previous_nodes[neighbor] = current_vertex
-                previous_lines[neighbor] = line
-                heapq.heappush(pq, (new_distance, neighbor))
-
-    return distances[end_vertex], [], []
+    return [], float('inf')  # Return an empty path and infinite distance if no path is found
 
 
 #DFS Algorithm
