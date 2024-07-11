@@ -13,6 +13,7 @@ distance_map = build_distance_map(stations)  # Build distance map once
 def index():
     return render_template('index.html')
 
+# xen is gay
 @app.route('/api/dfs/')
 def api_dfs():
     try:
