@@ -24,13 +24,13 @@
     <g id="teex" stroke="#784008">
      <path d="m496 34 l147.8 147.8 q14.14 14.14 14.14 34.14 v562 q0 20 14.14 34.14 l87 87 q14.14 14.14 34.14 14.14 h134 q20 0 34.14 -14.14 l99 -99 q14.14 -14.14 28.28 -14.14 h100"/>
     </g>
-    <!-- <g id="lrt" stroke="#999999">
+    <g id="lrt" stroke="#999999">
      <path d="m284.4 225.6h207 q10 0 17.07-7.07 l19.2-19.2 q7.07-7.07 17.07-7.07 h10 q10 0 10 10 v46.6 q0 10-10 10 h-10 q-10 0-17.07-7.07 l-19.2-19.2 q-7.07-7.07-17.07-7.07"/>
      <path d="m1081 306 l-7.76-7.76 q-7.07-7.07-7.07-17.07 v-20 q0-10-7.07-17.07 l-19-19 q-7.07-7.07-14.14 0 l-26 26 q-7.07 7.07 0 14.14 l 19 19 q 7.07 7.07 17.07 7.07 h 20 q 10 0 17.07 7.07"/>
      <path d="m1081 306 l 7.76 7.76 q 7.07 7.07 7.07 17.07 v 20 q0 10 7.07 17.07 l 19 19 q 7.07 7.07 14.14 0 l 26-26 q 7.07-7.07 0-14.14 l-19-19 q-7.07-7.07-17.07-7.07 h-20 q-10 0-17.07-7.07"/>
      <path d="m1176 209.5 l-7.76-7.76 q-7.07-7.07-7.07-17.07 v-20 q0-10-7.07-17.07 l-19-19 q-7.07-7.07-14.14 0 l-26 26 q-7.07 7.07 0 14.14 l 19 19 q 7.07 7.07 17.07 7.07 h 20 q 10 0 17.07 7.07"/>
      <path d="m1177 209.5 l 7.76 7.76 q 7.07 7.07 7.07 17.07 v 20 q0 10 7.07 17.07 l 19 19 q 7.07 7.07 14.14 0 l 26-26 q 7.07-7.07 0-14.14 l-19-19 q-7.07-7.07-17.07-7.07 h-20 q-10 0-17.07-7.07"/>
-    </g> -->
+    </g> 
     <g id="stns_icons" fill="#ffffff" stroke-width="2">
       <a xlink:href= "#ew" fill="#ffffff">
         <g id="stns_ew" stroke="#009645">
@@ -211,56 +211,56 @@
         <circle id="ns9/te2" data-name="woodlands" data-value="45" cx="529" cy="67" r="5.7"/>
       </g>
     </a>
-    <!-- <a xlink:href= "#bplrt" fill="#ffffff">
+    <a xlink:href= "#bplrt" fill="#ffffff">
       <g id="stns_bplrt" stroke="#999999" stroke-width="1.7">
-        <circle id="bp2" data-value="50" cx="321" cy="226" r="2.6"/>
-        <circle id="bp3" data-value="51" cx="356" cy="226" r="2.6"/>
-        <circle id="bp4" data-value="52" cx="391" cy="226" r="2.6"/>
-        <circle id="bp5" data-value="53" cx="426" cy="226" r="2.6"/>
-        <circle id="bp7" data-value="55" cx="521" cy="245" r="2.6"/>
-        <circle id="bp8" data-value="56" cx="546" cy="259" r="2.6"/>
-        <circle id="bp9" data-value="57" cx="565" cy="248" r="2.6"/>
-        <circle id="bp10" data-value="58" cx="565" cy="226" r="2.6"/>
-        <circle id="bp11" data-value="59" cx="565" cy="204" r="2.6"/>
-        <circle id="bp12" data-value="60" cx="546" cy="192" r="2.6"/>
-        <circle id="bp13" data-value="61" cx="521" cy="206" r="2.6"/>
+        <circle id="bp2" data-name="south view" data-value="BP2" cx="321" cy="226" r="2.6"/>
+        <circle id="bp3" data-name="keat hong" data-value="BP3" cx="356" cy="226" r="2.6"/>
+        <circle id="bp4" data-name="teck whye" data-value="BP4" cx="391" cy="226" r="2.6"/>
+        <circle id="bp5" data-name="phoenix" data-value="BP5" cx="426" cy="226" r="2.6"/>
+        <circle id="bp7" data-name="petir" data-value="BP7" cx="521" cy="245" r="2.6"/>
+        <circle id="bp8" data-name="pending" data-value="BP8" cx="546" cy="259" r="2.6"/>
+        <circle id="bp9" data-name="bangkit" data-value="BP9" cx="565" cy="248" r="2.6"/>
+        <circle id="bp10" data-name="fajar" data-value="BP10" cx="565" cy="226" r="2.6"/>
+        <circle id="bp11" data-name="segar" data-value="BP11" cx="565" cy="204" r="2.6"/>
+        <circle id="bp12" data-name="jelapang" data-value="BP12" cx="546" cy="192" r="2.6"/>
+        <circle id="bp13" data-name="senja" data-value="BP13" cx="521" cy="206" r="2.6"/>
       </g>
     </a>
     <a xlink:href= "#sklrt" fill="#ffffff">
       <g id="stns_sklrt" stroke="#999999" stroke-width="1.7">
-        <circle id="se1" data-value="117" cx="1127" cy="321" r="2.6"/>
-        <circle id="se2" data-value="118" cx="1154" cy="339" r="2.6"/>
-        <circle id="se3" data-value="119" cx="1151" cy="372" r="2.6"/>
-        <circle id="se4" data-value="120" cx="1113" cy="377.3" r="2.6"/>
-        <circle id="se5" data-value="121" cx="1095.5" cy="348.5" r="2.6"/>
-        <circle id="sw1" data-value="122" cx="1066.5" cy="273.5" r="2.6"/>
-        <circle id="sw2" data-value="123" cx="1061.4" cy="247" r="2.6"/>
-        <circle id="sw3" data-value="124" cx="1044" cy="229" r="2.6"/>
-        <circle id="sw4" data-value="125" cx="1022" cy="229" r="2.6"/>
-        <circle id="sw5" data-value="126" cx="1002" cy="249" r="2.6"/>
-        <circle id="sw6" data-value="127" cx="1003.5" cy="269.5" r="2.6"/>
-        <circle id="sw7" data-value="128" cx="1018.7" cy="284.5" r="2.6"/>
-        <circle id="sw8" data-value="129" cx="1047" cy="291.5" r="2.6"/>
+        <circle id="se1" data-name="compassvale" data-value="SE1" cx="1127" cy="321" r="2.6"/>
+        <circle id="se2" data-name="rumbia" data-value="SE2" cx="1154" cy="339" r="2.6"/>
+        <circle id="se3" data-name="bakau" data-value="SE3" cx="1151" cy="372" r="2.6"/>
+        <circle id="se4" data-name="kangkar" data-value="SE4" cx="1113" cy="377.3" r="2.6"/>
+        <circle id="se5" data-name="ranggung" data-value="SE5" cx="1095.5" cy="348.5" r="2.6"/>
+        <circle id="sw1" data-name="cheng lim" data-value="SW1" cx="1066.5" cy="273.5" r="2.6"/>
+        <circle id="sw2" data-name="farmway" data-value="SW2" cx="1061.4" cy="247" r="2.6"/>
+        <circle id="sw3" data-name="kupang" data-value="SW3" cx="1044" cy="229" r="2.6"/>
+        <circle id="sw4" data-name="thanggam" data-value="SW4" cx="1022" cy="229" r="2.6"/>
+        <circle id="sw5" data-name="fernvale" data-value="SW5" cx="1002" cy="249" r="2.6"/>
+        <circle id="sw6" data-name="layar" data-value="SW6" cx="1003.5" cy="269.5" r="2.6"/>
+        <circle id="sw7" data-name="tongkang" data-value="SW7" cx="1018.7" cy="284.5" r="2.6"/>
+        <circle id="sw8" data-name="renjong" data-value="SW8" cx="1047" cy="291.5" r="2.6"/>
       </g>
     </a>
     <a xlink:href= "#pglrt" fill="#ffffff">
       <g id="stns_pglrt" stroke="#999999" stroke-width="1.7">
-        <circle id="pe1" data-value="130" cx="1191.7" cy="247.3" r="2.6"/>
-        <circle id="pe2" data-value="131" cx="1198" cy="270" r="2.6"/>
-        <circle id="pe3" data-value="132" cx="1215" cy="287" r="2.6"/>
-        <circle id="pe4" data-value="133" cx="1245" cy="277.7" r="2.6"/>
-        <circle id="pe5" data-value="134" cx="1254" cy="246.5" r="2.6"/>
-        <circle id="pe6" data-value="135" cx="1238" cy="230.5" r="2.6"/>
-        <circle id="pe7" data-value="136" cx="1214" cy="224" r="2.6"/>
-        <circle id="pw1" data-value="137" cx="1161" cy="177" r="2.6"/>
-        <circle id="pw2" data-value="138" cx="1156" cy="150" r="2.6"/>
-        <circle id="pw3" data-value="139" cx="1139" cy="132" r="2.6"/>
-        <circle id="pw4" data-value="140" cx="1106" cy="144" r="2.6"/>
-        <circle id="pw5" data-value="141" cx="1098.5" cy="173" r="2.6"/>
-        <circle id="pw6" data-value="143" cx="1115.5" cy="190" r="2.6"/>
-        <circle id="pw7" data-value="143" cx="1141" cy="194.5" r="2.6"/>
+        <circle id="pe1" data-name="cove" data-value="PE1" cx="1191.7" cy="247.3" r="2.6"/>
+        <circle id="pe2" data-name="meridian" data-value="PE2" cx="1198" cy="270" r="2.6"/>
+        <circle id="pe3" data-name="coral edge" data-value="PE3" cx="1215" cy="287" r="2.6"/>
+        <circle id="pe4" data-name="riviera" data-value="PE4" cx="1245" cy="277.7" r="2.6"/>
+        <circle id="pe5" data-name="kadaloor" data-value="PE5" cx="1254" cy="246.5" r="2.6"/>
+        <circle id="pe6" data-name="oasis" data-value="PE6" cx="1238" cy="230.5" r="2.6"/>
+        <circle id="pe7" data-name="damai" data-value="PE7" cx="1214" cy="224" r="2.6"/>
+        <circle id="pw1" data-name="sam kee" data-value="PW1" cx="1161" cy="177" r="2.6"/>
+        <!-- <circle id="pw2" data-name="teck lee" data-value="PW2" cx="1156" cy="150" r="2.6"/> # Not in service -->
+        <circle id="pw3" data-name="punggol point" data-value="PW3" cx="1139" cy="132" r="2.6"/>
+        <circle id="pw4" data-name="samudera" data-value="PW4" cx="1106" cy="144" r="2.6"/>
+        <circle id="pw5" data-name="nibong" data-value="PW5" cx="1098.5" cy="173" r="2.6"/>
+        <circle id="pw6" data-name="sumang" data-value="PW6" cx="1115.5" cy="190" r="2.6"/>
+        <circle id="pw7" data-name="soo teck" data-value="PW7" cx="1141" cy="194.5" r="2.6"/>
       </g>
-    </a> -->
+    </a> 
   </g>
   <g id="stns_labels" font-family="Arial" line-height="100%">
     <g id="lbew" fill="#000000">
@@ -481,7 +481,7 @@
      <text id="lbdt1a" x="465" y="204" font-size="12">Bukit</text>
      <text id="lbdt1b" x="456" y="215" font-size="12">Panjang</text>
     </g>
-    <!-- <g id="lbbpl" fill="#000000">
+    <g id="lbbpl" fill="#000000">
      <text id="lbbp2a" x="307" y="211" font-size="10">South</text>
      <text id="lbbp2b" x="309" y="221" font-size="10">View</text>
      <text id="lbbp3a" x="345" y="239" font-size="10">Keat</text>
@@ -496,7 +496,7 @@
      <text id="lbbp11" x="569" y="207" font-size="10">Segar</text>
      <text id="lbbp12" x="525" y="186" font-size="10">Jelapang</text>
      <text id="lbbp13" x="525" y="215" font-size="10">Senja</text>
-    </g>
+    </g> 
     
     <g id="lbskl" fill="#000000">
      <text id="lbse1" x="1096" y="315" font-size="10">Compassvale</text>
@@ -523,14 +523,14 @@
      <text id="lbpe6" x="1243" y="229" font-size="10">Oasis</text>
      <text id="lbpe7" x="1198" y="219" font-size="10">Damai</text>
      <text id="lbpw1" x="1166" y="177" font-size="10">Sam Kee</text>
-     <text id="lbpw2" x="1162" y="150" font-size="10">Teck Lee</text>
+     <!-- <text id="lbpw2" x="1162" y="150" font-size="10">Teck Lee</text> # Not in service --> 
      <text id="lbpw3" x="1145" y="131" font-size="10">Punggol Point</text>
      <text id="lbpw4" x="1056" y="142" font-size="10">Samudera</text>
      <text id="lbpw5" x="1063" y="181" font-size="10">Nibong</text>
      <text id="lbpw6" x="1075" y="198" font-size="10">Sumang</text>
      <text id="lbpw7a" x="1131" y="182" font-size="10">Soo</text>
      <text id="lbpw7b" x="1130" y="191" font-size="10">Teck</text>
-    </g> -->
+    </g>
   </g>
 
 </svg>
