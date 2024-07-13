@@ -58,16 +58,58 @@ document.addEventListener('DOMContentLoaded', function () {
                         return response.json();
                     })
                     .then(data => {
+                        alert(JSON.stringify(data))
                         if (data.route !== 'null') {
                             resetPath();
                             markPath(data.route);
-                            alert('Route found: ' + data.route.join(' -> ') + '. Total duration: ' + data.duration + ' minutes.');
+                            
+                            // clear
+                            const resultsElement = document.getElementById('results');
+                            resultsElement.innerHTML = '';
+                        
+                            // table
+                            const table = document.createElement('table');
+                            table.style.width = '100%'; // Set table width
+                            table.setAttribute('border', '1');
+                        
+                            const thead = document.createElement('thead');
+                            const headerRow = document.createElement('tr');
+                            const stationHeader = document.createElement('th');
+                            stationHeader.textContent = 'Station';
+                            stationHeader.colSpan = 2; // Make the header span two columns
+                            headerRow.appendChild(stationHeader);
+                            thead.appendChild(headerRow);
+                            table.appendChild(thead);
+                        
+                            const tbody = document.createElement('tbody');
+                            data.route.forEach(station => {
+                                const row = document.createElement('tr');
+                                const stationCell = document.createElement('td');
+                                stationCell.textContent = station; // Assuming station is just the name here
+                                stationCell.colSpan = 2; // Make the station cells span two columns
+                                row.appendChild(stationCell);
+                                tbody.appendChild(row);
+                            });
+                        
+                            // appending
+                            const totalDurationRow = document.createElement('tr');
+                            const totalDurationCell = document.createElement('td');
+                            totalDurationCell.textContent = 'Total Duration';
+                            const durationCell = document.createElement('td');
+                            durationCell.textContent = data.duration + ' minutes';
+                            totalDurationRow.appendChild(totalDurationCell);
+                            totalDurationRow.appendChild(durationCell);
+                            tbody.appendChild(totalDurationRow);
+                        
+                            table.appendChild(tbody);
+                            resultsElement.appendChild(table);
                         } else {
-                            alert('No route found.');
-                        }
+                            document.getElementById('results').innerHTML += '<div>No route found.</div>';
+                        }                            
                     })
                     .catch(error => {
-                        alert('Error: ' + error.message);
+                        document.getElementById('results').innerHTML = '';
+                        document.getElementById('results').innerHTML = 'Error: ' + error.message;
                         console.error('Error:', error);
                     });
             } else {
