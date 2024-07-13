@@ -1147,6 +1147,307 @@
       "line": "Thomson East Coast Line",
       "distance": 0,
       "duration": 0
+    },
+    {
+      "from": "Choa Chu Kang",
+      "to": "South View",
+      "line": "Bukit Panjang LRT",
+      "distance": 0.6,
+      "duration": 3
+    },
+    {
+      "from": "South View",
+      "to": "Keat Hong",
+      "line": "Bukit Panjang LRT",
+      "distance": 0.5,
+      "duration": 1
+    },
+    {
+      "from": "Keat Hong",
+      "to": "Teck Whye",
+      "line": "Bukit Panjang LRT",
+      "distance": 0.6,
+      "duration": 2
+    },
+    {
+      "from": "Teck Whye",
+      "to": "Phoenix",
+      "line": "Bukit Panjang LRT",
+      "distance": 0.5,
+      "duration": 2
+    },
+    {
+      "from": "Phoenix",
+      "to": "Bukit Panjang",
+      "line": "Bukit Panjang LRT",
+      "distance": 0.7,
+      "duration": 2
+    },
+    {
+      "from": "Bukit Panjang",
+      "to": "Petir",
+      "line": "Bukit Panjang LRT",
+      "distance": 0.4,
+      "duration": 2
+    },
+    {
+      "from": "Petir",
+      "to": "Pending",
+      "line": "Bukit Panjang LRT",
+      "distance": 0.6,
+      "duration": 2
+    },
+    {
+      "from": "Pending",
+      "to": "Bangkit",
+      "line": "Bukit Panjang LRT",
+      "distance": 0.5,
+      "duration": 1
+    },
+    {
+      "from": "Bangkit",
+      "to": "Fajar",
+      "line": "Bukit Panjang LRT",
+      "distance": 0.9,
+      "duration": 3
+    },
+    {
+      "from": "Fajar",
+      "to": "Segar",
+      "line": "Bukit Panjang LRT",
+      "distance": 0.5,
+      "duration": 2
+    },
+    {
+      "from": "Segar",
+      "to": "Jelapang",
+      "line": "Bukit Panjang LRT",
+      "distance": 0.7,
+      "duration": 2
+    },
+    {
+      "from": "Jelapang",
+      "to": "Senja",
+      "line": "Bukit Panjang LRT",
+      "distance": 0.6,
+      "duration": 2
+    },
+    {
+      "from": "Senja",
+      "to": "Bukit Panjang",
+      "line": "Bukit Panjang LRT",
+      "distance": 0.6,
+      "duration": 2
+    },
+    {
+      "from": "SengKang",
+      "to": "Renjong",
+      "line": "Sengkang LRT",
+      "distance": 0.9,
+      "duration": 3
+    },
+    {
+      "from": "Renjong",
+      "to": "TongKang",
+      "line": "Sengkang LRT",
+      "distance": 0.6,
+      "duration": 1
+    },
+    {
+      "from": "TongKang",
+      "to": "Layar",
+      "line": "Sengkang LRT",
+      "distance": 0.7,
+      "duration": 1
+    },
+    {
+      "from": "Layar",
+      "to": "Fernvale",
+      "line": "Sengkang LRT",
+      "distance": 0.5,
+      "duration": 1
+    },
+    {
+      "from": "Fernvale",
+      "to": "Thanggam",
+      "line": "Sengkang LRT",
+      "distance": 0.6,
+      "duration": 1
+    },
+    {
+      "from": "Thanggam",
+      "to": "Kupang",
+      "line": "Sengkang LRT",
+      "distance": 0.7,
+      "duration": 1
+    },
+    {
+      "from": "Kupang",
+      "to": "Farmway",
+      "line": "Sengkang LRT",
+      "distance": 0.9,
+      "duration": 1
+    },
+    {
+      "from": "Farmway",
+      "to": "Cheng Lim",
+      "line": "Sengkang LRT",
+      "distance": 0.5,
+      "duration": 1
+    },
+    {
+      "from": "Cheng Lim",
+      "to": "SengKang",
+      "line": "Sengkang LRT",
+      "distance": 0.8,
+      "duration": 2
+    },
+    {
+      "from": "SengKang",
+      "to": "Compassvale",
+      "line": "Sengkang LRT",
+      "distance": 0.8,
+      "duration": 2
+    },
+    {
+      "from": "Compassvale",
+      "to": "Rumbia",
+      "line": "Sengkang LRT",
+      "distance": 0.7,
+      "duration": 1
+    },
+    {
+      "from": "Rumbia",
+      "to": "Bakau",
+      "line": "Sengkang LRT",
+      "distance": 0.5,
+      "duration": 1
+    },
+    {
+      "from": "Bakau",
+      "to": "Kangkar",
+      "line": "Sengkang LRT",
+      "distance": 0.6,
+      "duration": 1
+    },
+    {
+      "from": "Kangkar",
+      "to": "Ranggung",
+      "line": "Sengkang LRT",
+      "distance": 0.8,
+      "duration": 2
+    },
+    {
+      "from": "Ranggung",
+      "to": "SengKang",
+      "line": "Sengkang LRT",
+      "distance": 1,
+      "duration": 3
+    },
+    {
+      "from": "Punggol",
+      "to": "Soo Teck",
+      "line": "Punggol LRT",
+      "distance": 1,
+      "duration": 3
+    },
+    {
+      "from": "Soo Teck",
+      "to": "Sumang",
+      "line": "Punggol LRT",
+      "distance": 0.4,
+      "duration": 1
+    },
+    {
+      "from": "Sumang",
+      "to": "Nibong",
+      "line": "Punggol LRT",
+      "distance": 0.4,
+      "duration": 1
+    },
+    {
+      "from": "Nibong",
+      "to": "Samudera",
+      "line": "Punggol LRT",
+      "distance": 0.5,
+      "duration": 1
+    },
+    {
+      "from": "Samudera",
+      "to": "Punggol Point",
+      "line": "Punggol LRT",
+      "distance": 0.6,
+      "duration": 1
+    },
+    {
+      "from": "Punggol Point",
+      "to": "Sam Kee",
+      "line": "Punggol LRT",
+      "distance": 1,
+      "duration": 2
+    },
+    {
+      "from": "Sam Kee",
+      "to": "Punggol",
+      "line": "Punggol LRT",
+      "distance": 0.6,
+      "duration": 2
+    },
+    {
+      "from": "Punggol",
+      "to": "Damai",
+      "line": "Punggol LRT",
+      "distance": 0.9,
+      "duration": 2
+    },
+    {
+      "from": "Damai",
+      "to": "Oasis",
+      "line": "Punggol LRT",
+      "distance": 0.6,
+      "duration": 1
+    },
+    {
+      "from": "Oasis",
+      "to": "Kadaloor",
+      "line": "Punggol LRT",
+      "distance": 0.5,
+      "duration": 1
+    },
+    {
+      "from": "Kadaloor",
+      "to": "Riviera",
+      "line": "Punggol LRT",
+      "distance": 0.7,
+      "duration": 1
+    },
+    {
+      "from": "Riviera",
+      "to": "Coral Edge",
+      "line": "Punggol LRT",
+      "distance": 0.5,
+      "duration": 1
+    },
+    {
+      "from": "Coral Edge",
+      "to": "Meridian",
+      "line": "Punggol LRT",
+      "distance": 0.5,
+      "duration": 1
+    },
+    {
+      "from": "Meridian",
+      "to": "Cove",
+      "line": "Punggol LRT",
+      "distance": 0.4,
+      "duration": 1
+    },
+    {
+      "from": "Cove",
+      "to": "Punggol",
+      "line": "Punggol LRT",
+      "distance": 1,
+      "duration": 3
     }
   ]
 }
