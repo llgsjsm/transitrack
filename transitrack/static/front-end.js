@@ -85,9 +85,26 @@ document.addEventListener('DOMContentLoaded', function () {
                             data.route.forEach(station => {
                                 const row = document.createElement('tr');
                                 const stationCell = document.createElement('td');
-                                stationCell.textContent = station; // Assuming station is just the name here
-                                stationCell.colSpan = 2; // Make the station cells span two columns
+                                stationCell.colSpan = 2; // Span across two columns if needed
+                            
+                                // Create a text node for the station name to add before the image
+                                const stationText = document.createTextNode(station + " "); // Adding a space for separation
+                                stationCell.appendChild(stationText);
+                            
+                                // Image element
+                                const stationImage = document.createElement('img');
+                                stationImage.src = 'path/to/your/image.png'; // Set the source of your image here
+                                stationImage.style.width = '50px'; // Adjust size as needed
+                                stationImage.style.height = 'auto';
+                                stationImage.style.marginLeft = '10px'; // Add some space between the text and the image
+                            
+                                // Append the image to the same cell as the station name
+                                stationCell.appendChild(stationImage);
+                            
+                                // Append the cell to the row
                                 row.appendChild(stationCell);
+                            
+                                // Append the row to the tbody
                                 tbody.appendChild(row);
                             });
                         

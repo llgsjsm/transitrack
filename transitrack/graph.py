@@ -260,6 +260,7 @@ def bellman_ford(graph, start, end):
 # Depth-First Search Algorithm: XEN
 def dfs(graph, start, end):
     path = []
+    lines = []  # To store the line information
     journey = set()
     found = False
     total_duration = 0
@@ -277,11 +278,14 @@ def dfs(graph, start, end):
         for next_station in graph[node]:
             if next_station["to"] not in journey:
                 path.append(node)
+                lines.append(next_station["line"])  # Append the line information
                 dfs(next_station["to"], current_duration + next_station["duration"])
                 if found:
                     return
                 path.pop()
+                lines.pop()  # Remove the line information if backtracking
         journey.remove(node)
+    
     dfs(start, 0)
     if found:
         path.append(end)  # Append the end station to the path
