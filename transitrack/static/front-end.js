@@ -1,24 +1,103 @@
 document.addEventListener('DOMContentLoaded', function () {
-    fetchLiveData();
+    fetchLiveCrowdData();
     const tooltip = document.getElementById('tooltip-textbox');
     const svgContainer = document.getElementById('svg-container');
     let circles = [];
+    const combinedData = [];
 
     const svgDoc = svgContainer ? svgContainer.querySelector('svg') : null;
 
     if (svgDoc) {
         circles = svgDoc.querySelectorAll('circle');
-
         circles.forEach(function (circle) {
+
             circle.addEventListener('mouseover', function (event) {
+                tooltip.querySelectorAll('.container-sm').forEach(function (node) {
+                    node.remove();
+                });
                 const name = circle.getAttribute('data-name') || 'Data need to show here';
                 document.getElementById('textbox-station-name').textContent = name;
                 tooltip.style.display = 'block';
+                const nodeDataValue = circle.getAttribute('data-value').split(',');
+                const newHeight = 100 + nodeDataValue.length * 100;
+                let className, width;
+                tooltip.style.height = `${newHeight}px`;
+
+                nodeDataValue.forEach(value => {
+
+                    const crowdLevelValue = getCrowdDensityLevel(value);
+                    stationlineCode = filterCharacter(value);
+                    console.log(stationlineCode);
+                    if (crowdLevelValue == 'l') {
+                        className = 'bg-success';
+                        width = '33%';
+                    }
+                    else if (crowdLevelValue == 'm') {
+                        className = 'bg-warning';
+                        width = '66%';
+                    }
+                    else if (crowdLevelValue == 'h') {
+                        className = 'bg-danger';
+                        width = '100%';
+                    }
+
+
+                    const LiveCrowdDiv = document.createElement('div');
+                    LiveCrowdDiv.classList.add('container-sm');
+
+                    const stationLineLogo = document.createElement('img');
+                    stationlineName = stationLine(stationlineCode);
+                    console.log('station line name:', stationlineName);
+                    stationLineLogo.src = `static/assets/${stationlineName}.png`;
+                    stationLineLogo.alt = stationlineName;
+
+                    const liveCrowdLbl = document.createElement('p');
+                    liveCrowdLbl.classList.add('p');
+                    liveCrowdLbl.textContent = 'crowd level: ';
+
+                    const progressBarContainer = document.createElement('div');
+                    progressBarContainer.classList.add('progress');
+
+                    const progressBar = document.createElement('div');
+                    progressBar.classList.add('progress-bar');
+                    progressBar.id = 'liveCrowdLevelValue';
+                    progressBar.classList.add(className);
+                    progressBar.style.width = width;
+                    const breakLine = document.createElement('br');
+
+                    progressBarContainer.appendChild(progressBar);
+                    progressBarContainer.appendChild(breakLine);
+
+                    LiveCrowdDiv.appendChild(document.createElement('br'));
+                    LiveCrowdDiv.appendChild(stationLineLogo);
+                    LiveCrowdDiv.appendChild(liveCrowdLbl);
+                    LiveCrowdDiv.appendChild(progressBarContainer);
+
+                    tooltip.appendChild(LiveCrowdDiv);
+                })
+
             });
 
             circle.addEventListener('mousemove', function (event) {
-                tooltip.style.left = event.pageX + 'px';
-                tooltip.style.top = event.pageY + 'px';
+                const tooltipWidth = tooltip.offsetWidth;
+                const tooltipHeight = tooltip.offsetHeight;
+                const pageX = event.pageX;
+                const pageY = event.pageY;
+                const containerRect = svgContainer.getBoundingClientRect();
+
+                let tooltipX = pageX;
+                let tooltipY = pageY;
+
+                if (pageX + tooltipWidth > containerRect.right) {
+                    tooltipX = pageX - tooltipWidth;
+                }
+
+                if (pageY + tooltipHeight > containerRect.bottom) {
+                    tooltipY = pageY - tooltipHeight;
+                }
+
+                tooltip.style.left = tooltipX + 'px';
+                tooltip.style.top = tooltipY + 'px';
             });
 
             circle.addEventListener('mouseout', function () {
@@ -199,21 +278,88 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    function fetchLiveData() {
-        fetch('/api/liveCrowdDensity?TrainLine=NSL') // Adjust TrainLine parameter as needed
-            .then(response => {
+    async function fetchLiveCrowdData() {
+        const MRTLines = ['NSL', 'CCL', 'CEL', 'CGL', 'DTL', 'EWL', 'NEL', 'BPL', 'SLRT', 'PLRT'];
+
+        for (const line of MRTLines) {
+            try {
+                const response = await fetch(`/api/liveCrowdDensity?TrainLine=${line}`);
                 if (!response.ok) {
-                    throw new Error('Network response was not ok');
+                    throw new Error(`Failed to collect ${line}`);
                 }
-                return response.json();
-            })
-            .then(data => {
-                console.log(data); // Log the fetched data to console
-                // Handle data as needed (e.g., update UI, process data)
-            })
-            .catch(error => {
-                console.error('Error fetching live data:', error);
-            });
+                const data = await response.json();
+                // Ensure data.value is an array before using the spread operator
+                if (data && Array.isArray(data.value)) {
+                    combinedData.push(...data.value); // Combine data into the main array
+                } else {
+                    console.error(`Data for ${line} is not in expected format`, data);
+                }
+            } catch (error) {
+                console.error('Error fetching live crowd data:', error);
+            }
+        }
+
+        console.log(combinedData); // Log the combined data to console
+        
     }
+
+    function getCrowdDensityLevel(MRTcode) {
+        const stationData = combinedData.find(content => content.Station === MRTcode);
+        console.log('MRTcode:', MRTcode);
+        console.log('Station Data:', stationData);
+        console.log(stationData);
+        return stationData ? stationData.CrowdLevel : 'station not found';
+    }
+
+    function filterCharacter(stationCode) {
+        return stationCode.replace(/[^a-zA-Z]/g, '');
+    }
+
+    function stationLine(initial) {
+        if (initial == 'TE') 
+        {
+            return "Thomson–East Coast Line";
+        }
+        else if (initial == "NS") 
+        {
+            return "North-South Line";
+        }
+        else if (initial == "EW") 
+        {
+            return "East-West Line";
+        }
+        else if (initial == "CC") 
+        {
+            return "Circle Line";
+        }
+        else if (initial == "DT") 
+        {
+            return "Downtown Line";
+        }
+        else if (initial == "NE") 
+        {
+            return "North-East line";
+        }
+        else if (initial == "CG") 
+        {
+            return "Changi Airport Line";
+        }
+        else if (initial == "PE" || initial == "PW" || initial == "PTC" )
+        {
+            return "Punggol LRT";
+        }
+        else if (initial == "SE" || initial == "SW" || initial == "STC" )
+        {
+            return "Sengkang LRT";
+        }
+        else if (initial == "BP")
+        {
+            return "Bukit Panjang LRT";
+        }
+    }
+
+    setInterval(function () {
+        location.reload();
+    }, 1800000);
 });
 
