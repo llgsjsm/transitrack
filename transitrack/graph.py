@@ -322,11 +322,8 @@ def dfs(graph, start, end):
     else:
         return None, float('inf')
 
-# Floyd-Warshall Algorithm: JAKE (tbc)
+# Floyd-Warshall Algorithm: JAKE 
 def floyd(duration_matrix, line_matrix):
-    """
-    Floyd-Warshall algorithm to find shortest paths between all pairs of stations.
-    """
     n = len(duration_matrix)
     dist = [row[:] for row in duration_matrix]
     next_node = [[None] * n for _ in range(n)]
@@ -345,27 +342,24 @@ def floyd(duration_matrix, line_matrix):
     
     return dist, next_node
 
-# Helper function for Floyd-Warshall Algorithm: JAKE (tbc)
-# def reconstruct_path2(start, end, next_node, line_matrix, station_index, stations):
-#     """
-#     Reconstruct the path using the next_node matrix and line changes.
-#     """
-#     path = []
-#     lines = []
-#     if next_node[station_index[start]][station_index[end]] is None:
-#         return path, lines
+# Helper function for Floyd-Warshall Algorithm: JAKE
+def reconstruct_path2(start, end, next_node, line_matrix, station_index, stations):
+    path = []
+    lines = []
+    if next_node[station_index[start]][station_index[end]] is None:
+        return path, lines
     
-#     current = station_index[start]
-#     while current != station_index[end]:
-#         path.append(stations[current])
-#         next_station = next_node[current][station_index[end]]
-#         lines.append(line_matrix[current][next_station])
-#         current = next_station
+    current = station_index[start]
+    while current != station_index[end]:
+        path.append(stations[current])
+        next_station = next_node[current][station_index[end]]
+        lines.append(line_matrix[current][next_station])
+        current = next_station
     
-#     path.append(end)
-#     return path, lines
+    path.append(end)
+    return path, lines
 
-# Bidirectional A* Algorithm: RAUL
+# Bidirectional A* Algorithm: JAKE & RAUL
 def bidirectional_astar(graph, start, end, distance_map):
     forward_open_list = []
     backward_open_list = []
@@ -429,11 +423,6 @@ def bidirectional_astar(graph, start, end, distance_map):
 
 # Helper function to build distance matrix for Floyd-Warshall Algorithm: JAKE (tbc)
 def build_distance_matrix(routes):
-    """
-    Build a duration matrix and a line matrix from the given routes.
-    The duration matrix is a 2D list where each element represents the travel time between two stations.
-    The line matrix is a 2D list where each element represents the line between two stations.
-    """
     stations = set()
     for route in routes:
         stations.add(route['from'])

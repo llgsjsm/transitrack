@@ -1,7 +1,8 @@
 from flask import Flask, request, render_template, jsonify
-from graph import load_graph, load_graph2, dfs, build_distance_map, a_star, dijkstras, sequential_search, bfs, bellman_ford, binary_search, bidirectional_bfs, bidirectional_astar
+from graph import load_graph, load_graph2, dfs, build_distance_map, a_star, dijkstras, sequential_search, bfs, bellman_ford, binary_search, bidirectional_bfs, bidirectional_astar, build_distance_matrix, floyd, reconstruct_path2
 import requests
 from flask_cors import CORS
+import time
 
 app = Flask(__name__)
 CORS(app)
@@ -68,7 +69,7 @@ def api_bidirectional_a_star():
         if end not in stations:
             return jsonify({'error': f'End station {end} not found in the graph.'}), 400
 
-        path, total_duration = a_star(stations, start, end, distance_map)
+        path, total_duration = bidirectional_astar(stations, start, end, distance_map)
         
         if not path:
             return jsonify({'route': 'null'}), 400
@@ -148,6 +149,44 @@ def api_floyd():
         req = request.args
         start = req.get('start').strip().lower()
         end = req.get('end').strip().lower()
+
+        if start not in detailed_graph:
+            return jsonify({'error': f'Start station {start} not found in the graph.'}), 400
+        if end not in detailed_graph:
+            return jsonify({'error': f'End station {end} not found in the graph.'}), 400
+        
+        routes = []
+        for from_station, connections in detailed_graph.items():
+            for to_station, (distance, duration, line) in connections.items():
+                routes.append({
+                    'from': from_station,
+                    'to': to_station,
+                    'distance': distance,
+                    'duration': duration,
+                    'line': line
+                })
+        
+        # Build the distance and line matrices for Floyd-Warshall
+        duration_matrix, line_matrix, station_index, stations = build_distance_matrix(routes)
+
+        # Measure the execution time of the Floyd-Warshall algorithm
+        start_time = time.time()
+        shortest_paths, next_node = floyd(duration_matrix, line_matrix)
+        end_time = time.time()
+
+        # Reconstruct the path
+        path, lines = reconstruct_path2(start, end, next_node, line_matrix, station_index, stations)
+        total_duration = shortest_paths[station_index[start]][station_index[end]]
+
+        if not path:
+            return jsonify({'route': 'null'}), 400
+        else:
+            response = {
+                'route': path,
+                'duration': total_duration,
+                'execution_time': end_time - start_time
+            }
+            return jsonify(response), 200
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
