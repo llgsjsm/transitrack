@@ -20,6 +20,38 @@ def load_graph(file_name):
         graph[to_station].append({"to": from_station, "distance": edge["distance"], "duration": edge["duration"]})
     return graph
 
+# Helper function for load_graph2
+def load_graph2(file_name):
+    with open(file_name) as f:
+        data = json.load(f)
+    
+    graph = {}
+    detailed_graph = {}
+    for edge in data["routes"]:
+        from_station = edge["from"].strip().lower()
+        to_station = edge["to"].strip().lower()
+        distance = edge["distance"]
+        duration = edge["duration"]
+        line = edge["line"]
+        
+        if from_station not in graph:
+            graph[from_station] = []
+        if to_station not in graph:
+            graph[to_station] = []
+        
+        if from_station not in detailed_graph:
+            detailed_graph[from_station] = {}
+        if to_station not in detailed_graph:
+            detailed_graph[to_station] = {}
+        
+        graph[from_station].append({"to": to_station, "distance": distance, "duration": duration})
+        graph[to_station].append({"to": from_station, "distance": distance, "duration": duration})
+        
+        detailed_graph[from_station][to_station] = (distance, duration, line)
+        detailed_graph[to_station][from_station] = (distance, duration, line)
+    
+    return graph, detailed_graph
+
 #Sequential Search Algorithm: AARON
 def sequential_search(stations, query):
     results = []

@@ -1,5 +1,5 @@
 from flask import Flask, request, render_template, jsonify
-from graph import load_graph, dfs, build_distance_map, a_star, dijkstras, sequential_search, bfs, bellman_ford, binary_search
+from graph import load_graph, load_graph2, dfs, build_distance_map, a_star, dijkstras, sequential_search, bfs, bellman_ford, binary_search, bidirectional_bfs, bidirectional_astar
 import requests
 from flask_cors import CORS
 
@@ -7,6 +7,7 @@ app = Flask(__name__)
 CORS(app)
 
 stations = load_graph('static/route.json')
+stations2, detailed_graph = load_graph2('static/route.json')
 distance_map = build_distance_map(stations)  # Build distance map once
     
 @app.route('/')
@@ -116,6 +117,28 @@ def api_bfs():
             return jsonify({'route': 'null'}), 400
         else:
             return jsonify({'route': path, 'duration': total_duration}), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+    
+@app.route('/api/bidirectional_bfs/')
+def api_bidirectional_bfs():
+    try:
+        req = request.args
+        start = req.get('start').strip().lower()
+        end = req.get('end').strip().lower()
+
+        # Check if the start and end stations exist in the graph
+        if start not in detailed_graph:
+            return jsonify({'error': f'Start station {start} not found in the graph.'}), 400
+        if end not in detailed_graph:
+            return jsonify({'error': f'End station {end} not found in the graph.'}), 400
+
+        path, lines, total_distance, total_duration = bidirectional_bfs(detailed_graph, start, end)
+
+        if not path:
+            return jsonify({'route': 'null'}), 400
+        else:
+            return jsonify({'route': path, 'lines': lines, 'distance': total_distance, 'duration': total_duration}), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
