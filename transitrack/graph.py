@@ -359,7 +359,7 @@ def reconstruct_path2(start, end, next_node, line_matrix, station_index, station
     path.append(end)
     return path, lines
 
-# Bidirectional A* Algorithm: JAKE & RAUL
+# Bidirectional A* Algorithm: JAKE
 def bidirectional_astar(graph, start, end, distance_map):
     forward_open_list = []
     backward_open_list = []
@@ -380,36 +380,40 @@ def bidirectional_astar(graph, start, end, distance_map):
 
     while forward_open_list and backward_open_list:
         # Forward search
-        current_forward = heapq.heappop(forward_open_list)[1]
-        if current_forward in backward_came_from:
-            meeting_point = current_forward
-            break
+        if forward_open_list:
+            current_forward = heapq.heappop(forward_open_list)[1]
+            if current_forward in backward_came_from:
+                meeting_point = current_forward
+                break
 
-        for neighbor in graph[current_forward]:
-            weight, line = graph[current_forward][neighbor]
-            tentative_g_score = forward_g_score[current_forward] + weight
-            if tentative_g_score < forward_g_score[neighbor]:
-                forward_came_from[neighbor] = current_forward
-                forward_g_score[neighbor] = tentative_g_score
-                forward_f_score[neighbor] = forward_g_score[neighbor] + heuristic(neighbor, end, distance_map)
-                if neighbor not in [i[1] for i in forward_open_list]:
-                    heapq.heappush(forward_open_list, (forward_f_score[neighbor], neighbor))
+            for neighbor in graph[current_forward]:
+                neighbor_node = neighbor["to"]
+                weight = neighbor["duration"]
+                tentative_g_score = forward_g_score[current_forward] + weight
+                if tentative_g_score < forward_g_score[neighbor_node]:
+                    forward_came_from[neighbor_node] = current_forward
+                    forward_g_score[neighbor_node] = tentative_g_score
+                    forward_f_score[neighbor_node] = forward_g_score[neighbor_node] + heuristic(neighbor_node, end, distance_map)
+                    if neighbor_node not in [i[1] for i in forward_open_list]:
+                        heapq.heappush(forward_open_list, (forward_f_score[neighbor_node], neighbor_node))
 
         # Backward search
-        current_backward = heapq.heappop(backward_open_list)[1]
-        if current_backward in forward_came_from:
-            meeting_point = current_backward
-            break
+        if backward_open_list:
+            current_backward = heapq.heappop(backward_open_list)[1]
+            if current_backward in forward_came_from:
+                meeting_point = current_backward
+                break
 
-        for neighbor in graph[current_backward]:
-            weight, line = graph[current_backward][neighbor]
-            tentative_g_score = backward_g_score[current_backward] + weight
-            if tentative_g_score < backward_g_score[neighbor]:
-                backward_came_from[neighbor] = current_backward
-                backward_g_score[neighbor] = tentative_g_score
-                backward_f_score[neighbor] = backward_g_score[neighbor] + heuristic(neighbor, start, distance_map)
-                if neighbor not in [i[1] for i in backward_open_list]:
-                    heapq.heappush(backward_open_list, (backward_f_score[neighbor], neighbor))
+            for neighbor in graph[current_backward]:
+                neighbor_node = neighbor["to"]
+                weight = neighbor["duration"]
+                tentative_g_score = backward_g_score[current_backward] + weight
+                if tentative_g_score < backward_g_score[neighbor_node]:
+                    backward_came_from[neighbor_node] = current_backward
+                    backward_g_score[neighbor_node] = tentative_g_score
+                    backward_f_score[neighbor_node] = backward_g_score[neighbor_node] + heuristic(neighbor_node, start, distance_map)
+                    if neighbor_node not in [i[1] for i in backward_open_list]:
+                        heapq.heappush(backward_open_list, (backward_f_score[neighbor_node], neighbor_node))
 
     if meeting_point is None:
         return [], float('inf')  # No path found
@@ -421,7 +425,7 @@ def bidirectional_astar(graph, start, end, distance_map):
 
     return total_path, total_duration
 
-# Helper function to build distance matrix for Floyd-Warshall Algorithm: JAKE (tbc)
+# Helper function to build distance matrix for Floyd-Warshall Algorithm: JAKE 
 def build_distance_matrix(routes):
     stations = set()
     for route in routes:
