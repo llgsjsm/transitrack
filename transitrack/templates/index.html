@@ -31,13 +31,13 @@
 
   <div class="container">
     <div class="py-5 text-center">
-      <br />
+    </br>
       <h2>TransiTrack</h2>
-      <form class="form-inline mt-2 mt-md-0">
+      <form class="form-inline mt-2 mt-md-0 justify-content-center">
         <input class="form-control mr-sm-4" type="text" placeholder="From" aria-label="Search" id="fromBox"
           autocomplete="off">
         <datalist id="from-datalist"></datalist>
-        <input class="form-control mr-sm-4" type="text" placeholder="To" aria-label="Search" id="toBox">
+        <input class="form-control mr-sm-4" type="text" placeholder="To" aria-label="Search" id="toBox" autocomplete="off"> 
         <datalist id="to-datalist"></datalist>
         <select name="algorithm_select" class="form-control mr-sm-4" id="select_box"
           aria-label="Default select example">
@@ -58,6 +58,36 @@
     <div id="results-container">
       <div id="results"></div>
     </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col results-container" style="overflow: auto; height:300px">
+          <p> Route Start</p>
+          <ul>
+            <li>
+              <span>2 min</span>
+              <div>Toa payoh</div>
+            </li>
+            <li>
+              <span>5 min</span>
+              <div>Bradell</div>
+            </li>
+            <li>
+              <span>8 min</span>
+              <div>Bishan</div>
+            </li>
+          </ul>
+          <p> Route end</p>
+        </div>
+
+        <div class ="col">
+          <h1>content here</h1>
+        </div>
+      </div>
+    </div>
+    
+
+
     <div id="tooltip-textbox" class="tooltip-textbox">
       <div style="border-radius: 25px; background-color: black;">
       <p class="h5" style="text-align: center; font-family: fantasy; color:white" id="textbox-station-name">station name</p>
