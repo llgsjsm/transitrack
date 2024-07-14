@@ -260,7 +260,6 @@ def bellman_ford(graph, start, end):
 # Depth-First Search Algorithm: XEN
 def dfs(graph, start, end):
     path = []
-    lines = []  # To store the line information
     journey = set()
     found = False
     total_duration = 0
@@ -278,12 +277,10 @@ def dfs(graph, start, end):
         for next_station in graph[node]:
             if next_station["to"] not in journey:
                 path.append(node)
-                lines.append(next_station["line"])  # Append the line information
                 dfs(next_station["to"], current_duration + next_station["duration"])
                 if found:
                     return
                 path.pop()
-                lines.pop()  # Remove the line information if backtracking
         journey.remove(node)
     
     dfs(start, 0)
@@ -336,6 +333,68 @@ def floyd(duration_matrix, line_matrix):
 #     path.append(end)
 #     return path, lines
 
+# Bidirectional A* Algorithm: RAUL
+def bidirectional_astar(graph, start, end, distance_map):
+    forward_open_list = []
+    backward_open_list = []
+    heapq.heappush(forward_open_list, (0, start))
+    heapq.heappush(backward_open_list, (0, end))
+    forward_came_from = {}
+    backward_came_from = {}
+    forward_g_score = {node: float('inf') for node in graph}
+    backward_g_score = {node: float('inf') for node in graph}
+    forward_g_score[start] = 0
+    backward_g_score[end] = 0
+    forward_f_score = {node: float('inf') for node in graph}
+    backward_f_score = {node: float('inf') for node in graph}
+    forward_f_score[start] = heuristic(start, end, distance_map)
+    backward_f_score[end] = heuristic(end, start, distance_map)
+
+    meeting_point = None
+
+    while forward_open_list and backward_open_list:
+        # Forward search
+        current_forward = heapq.heappop(forward_open_list)[1]
+        if current_forward in backward_came_from:
+            meeting_point = current_forward
+            break
+
+        for neighbor in graph[current_forward]:
+            weight, line = graph[current_forward][neighbor]
+            tentative_g_score = forward_g_score[current_forward] + weight
+            if tentative_g_score < forward_g_score[neighbor]:
+                forward_came_from[neighbor] = current_forward
+                forward_g_score[neighbor] = tentative_g_score
+                forward_f_score[neighbor] = forward_g_score[neighbor] + heuristic(neighbor, end, distance_map)
+                if neighbor not in [i[1] for i in forward_open_list]:
+                    heapq.heappush(forward_open_list, (forward_f_score[neighbor], neighbor))
+
+        # Backward search
+        current_backward = heapq.heappop(backward_open_list)[1]
+        if current_backward in forward_came_from:
+            meeting_point = current_backward
+            break
+
+        for neighbor in graph[current_backward]:
+            weight, line = graph[current_backward][neighbor]
+            tentative_g_score = backward_g_score[current_backward] + weight
+            if tentative_g_score < backward_g_score[neighbor]:
+                backward_came_from[neighbor] = current_backward
+                backward_g_score[neighbor] = tentative_g_score
+                backward_f_score[neighbor] = backward_g_score[neighbor] + heuristic(neighbor, start, distance_map)
+                if neighbor not in [i[1] for i in backward_open_list]:
+                    heapq.heappush(backward_open_list, (backward_f_score[neighbor], neighbor))
+
+    if meeting_point is None:
+        return [], float('inf')  # No path found
+
+    forward_path = reconstruct_path(forward_came_from, meeting_point)
+    backward_path = reconstruct_path(backward_came_from, meeting_point)
+    total_path = forward_path + backward_path[::-1][1:]
+    total_duration = forward_g_score[meeting_point] + backward_g_score[meeting_point]
+
+    return total_path, total_duration
+
 # Helper function to build distance matrix for Floyd-Warshall Algorithm: JAKE (tbc)
 def build_distance_matrix(routes):
     """
@@ -371,3 +430,55 @@ def build_distance_matrix(routes):
         line_matrix[to_idx][from_idx] = line  # Assuming bidirectional
     
     return duration_matrix, line_matrix, station_index, stations
+
+# Bidirectional Breadth-First Search Algorithm: RAUL
+def bidirectional_bfs(graph, start, end):
+    if start == end:
+        return [start], [], 0, 0
+
+    forward_queue = deque([(start, [start], [], 0, 0)])
+    backward_queue = deque([(end, [end], [], 0, 0)])
+
+    forward_visited = {start: (start, [start], [], 0, 0)}
+    backward_visited = {end: (end, [end], [], 0, 0)}
+
+    while forward_queue and backward_queue:
+        if forward_queue:
+            current_station, path, lines, total_distance, total_duration = forward_queue.popleft()
+            for neighbor, (distance, duration, line) in graph[current_station].items():
+                if neighbor not in forward_visited:
+                    new_path = path + [neighbor]
+                    new_lines = lines + [line]
+                    new_total_distance = total_distance + distance
+                    new_total_duration = total_duration + duration
+                    forward_visited[neighbor] = (neighbor, new_path, new_lines, new_total_distance, new_total_duration)
+                    forward_queue.append((neighbor, new_path, new_lines, new_total_distance, new_total_duration))
+                    if neighbor in backward_visited:
+                        return combine_paths(forward_visited[neighbor], backward_visited[neighbor])
+
+        if backward_queue:
+            current_station, path, lines, total_distance, total_duration = backward_queue.popleft()
+            for neighbor, (distance, duration, line) in graph[current_station].items():
+                if neighbor not in backward_visited:
+                    new_path = path + [neighbor]
+                    new_lines = lines + [line]
+                    new_total_distance = total_distance + distance
+                    new_total_duration = total_duration + duration
+                    backward_visited[neighbor] = (neighbor, new_path, new_lines, new_total_distance, new_total_duration)
+                    backward_queue.append((neighbor, new_path, new_lines, new_total_distance, new_total_duration))
+                    if neighbor in forward_visited:
+                        return combine_paths(forward_visited[neighbor], backward_visited[neighbor])
+
+    return [], [], 0, 0
+
+# Helper function to combine paths from bidirectional BFS: RAUL
+def combine_paths(forward, backward):
+    _, forward_path, forward_lines, forward_distance, forward_duration = forward
+    _, backward_path, backward_lines, backward_distance, backward_duration = backward
+    
+    combined_path = forward_path + backward_path[::-1][1:]
+    combined_lines = forward_lines + backward_lines[::-1]
+    combined_distance = forward_distance + backward_distance
+    combined_duration = forward_duration + backward_duration
+    
+    return combined_path, combined_lines, combined_distance, combined_duration

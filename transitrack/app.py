@@ -55,6 +55,27 @@ def api_astar():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
+@app.route('/api/bidirectional_astar/')
+def api_bidirectional_a_star():
+    try:
+        req = request.args
+        start = req.get('start').strip().lower()
+        end = req.get('end').strip().lower()
+
+        if start not in stations:
+            return jsonify({'error': f'Start station {start} not found in the graph.'}), 400
+        if end not in stations:
+            return jsonify({'error': f'End station {end} not found in the graph.'}), 400
+
+        path, total_duration = a_star(stations, start, end, distance_map)
+        
+        if not path:
+            return jsonify({'route': 'null'}), 400
+        else:
+            return jsonify({'route': path, 'duration': total_duration}), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
 @app.route('/api/djikstras/')
 def api_djikstras():
     try:
