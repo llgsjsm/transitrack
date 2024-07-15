@@ -314,10 +314,8 @@ def dfs(graph, start, end):
                     return
                 path.pop()
         journey.remove(node)
-    
     dfs(start, 0)
     if found:
-        path.append(end)  # Append the end station to the path
         return path, total_duration
     else:
         return None, float('inf')

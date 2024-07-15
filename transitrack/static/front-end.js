@@ -1,9 +1,12 @@
 document.addEventListener('DOMContentLoaded', function () {
-    fetchLiveCrowdData();
+    //fetchLiveCrowdData();
+    fetchRouteInfo();
     const tooltip = document.getElementById('tooltip-textbox');
     const svgContainer = document.getElementById('svg-container');
     let circles = [];
     const combinedData = [];
+    const routeData = [];
+    console.log(routeData);
 
     const svgDoc = svgContainer ? svgContainer.querySelector('svg') : null;
 
@@ -137,75 +140,76 @@ document.addEventListener('DOMContentLoaded', function () {
                         return response.json();
                     })
                     .then(data => {
-                        alert(JSON.stringify(data))
                         if (data.route !== 'null') {
                             resetPath();
                             markPath(data.route);
-                            
+
                             // clear
-                            const resultsElement = document.getElementById('results');
+                            const resultsElement = document.getElementById('style-1');
                             resultsElement.innerHTML = '';
-                        
-                            // table
-                            const table = document.createElement('table');
-                            table.style.width = '100%'; // Set table width
-                            table.setAttribute('border', '1');
-                        
-                            const thead = document.createElement('thead');
-                            const headerRow = document.createElement('tr');
-                            const stationHeader = document.createElement('th');
-                            stationHeader.textContent = 'Station';
-                            stationHeader.colSpan = 2; // Make the header span two columns
-                            headerRow.appendChild(stationHeader);
-                            thead.appendChild(headerRow);
-                            table.appendChild(thead);
-                        
-                            const tbody = document.createElement('tbody');
-                            data.route.forEach(station => {
-                                const row = document.createElement('tr');
-                                const stationCell = document.createElement('td');
-                                stationCell.colSpan = 2; // Span across two columns if needed
-                            
-                                // Create a text node for the station name to add before the image
-                                const stationText = document.createTextNode(station + " "); // Adding a space for separation
-                                stationCell.appendChild(stationText);
-                            
-                                // Image element
+
+                            const resultStartLbl = document.createElement('p');
+                            resultStartLbl.textContent = "Start";
+
+                            const resultUL = document.createElement('ul');
+
+                            let currentStation = "";
+
+
+                            data.route.forEach((station, index) => {
+                                const nextStation = index < data.route.length - 1 ? data.route[index + 1] : null;
+                                const stationInfo = (searchRouteInfo(station, nextStation));
+                                console.log('station info: ', stationInfo);
+
+                                const resultLI = document.createElement('li');
+
+                                const resultTime = document.createElement('span');
+                                resultTime.textContent = stationInfo ? stationInfo.duration + ' min' : data.duration + ' min';
+                                resultLine = stationInfo ? stationInfo.line : 'test';
+
+                                const resultStationName = document.createElement('div');
+                                resultStationName.textContent = station;
+
+                                if (nextStation != null) {
+                                    currentStation = StationIcon(resultLine);
+                                }
                                 const stationImage = document.createElement('img');
-                                stationImage.src = 'path/to/your/image.png'; // Set the source of your image here
+                                stationImage.src = `static/assets/${currentStation}.png`; // Set the source of your image here
                                 stationImage.style.width = '50px'; // Adjust size as needed
                                 stationImage.style.height = 'auto';
                                 stationImage.style.marginLeft = '10px'; // Add some space between the text and the image
-                            
-                                // Append the image to the same cell as the station name
-                                stationCell.appendChild(stationImage);
-                            
-                                // Append the cell to the row
-                                row.appendChild(stationCell);
-                            
-                                // Append the row to the tbody
-                                tbody.appendChild(row);
+
+
+                                // if (nextStation) {
+                                //     resultStationName.textContent = `${station} -> ${nextStation}`;
+                                // } else {
+                                //     resultStationName.textContent = `${station} (End of Route)`;
+                                // }
+
+                                resultLI.appendChild(resultTime);
+                                resultLI.appendChild(resultStationName);
+                                resultLI.appendChild(stationImage);
+                                resultUL.appendChild(resultLI);
+
                             });
-                        
+
                             // appending
-                            const totalDurationRow = document.createElement('tr');
-                            const totalDurationCell = document.createElement('td');
-                            totalDurationCell.textContent = 'Total Duration';
-                            const durationCell = document.createElement('td');
-                            durationCell.textContent = data.duration + ' minutes';
-                            totalDurationRow.appendChild(totalDurationCell);
-                            totalDurationRow.appendChild(durationCell);
-                            tbody.appendChild(totalDurationRow);
-                        
-                            table.appendChild(tbody);
-                            resultsElement.appendChild(table);
+
+                            const resultEndLbl = document.createElement('p');
+                            resultEndLbl.textContent = "End";
+
+                            resultsElement.appendChild(resultStartLbl);
+                            resultsElement.appendChild(resultUL);
+                            resultsElement.appendChild(resultEndLbl);
+
+
                         } else {
-                            document.getElementById('results').innerHTML += '<div>No route found.</div>';
-                        }                            
+                            document.getElementById('style-1').innerHTML += '<div>No route found.</div>';
+                        }
                     })
                     .catch(error => {
-                        document.getElementById('results').innerHTML = '';
-                        document.getElementById('results').innerHTML = 'Error: ' + error.message;
+                        document.getElementById('style-1').innerHTML = '';
+                        document.getElementById('style-1').innerHTML = 'Error: ' + error.message;
                         console.error('Error:', error);
                     });
             } else {
@@ -220,9 +224,9 @@ document.addEventListener('DOMContentLoaded', function () {
         if (query.length === 0) {
             return;
         }
-    
+
         let endpoint = type === 'from' ? '/api/search' : '/api/binarysearch';
-    
+
         fetch(`${endpoint}?query=${encodeURIComponent(query)}`)
             .then(response => {
                 if (!response.ok) {
@@ -244,11 +248,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 console.error('Error:', error);
             });
     }
-    
+
     function updateDatalist(datalistId, items) {
         const datalist = document.getElementById(datalistId);
         datalist.innerHTML = ''; // Clear any existing options
-    
+
         items.forEach(item => {
             const option = document.createElement('option');
             option.value = item;
@@ -300,7 +304,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         console.log(combinedData); // Log the combined data to console
-        
+
     }
 
     function getCrowdDensityLevel(MRTcode) {
@@ -311,52 +315,88 @@ document.addEventListener('DOMContentLoaded', function () {
         return stationData ? stationData.CrowdLevel : 'station not found';
     }
 
+    function searchRouteInfo(stationA, stationB) {
+        console.log(routeData[0]);
+        const routeInfo = routeData[0].routes.find(content => (content.from.trim().toLowerCase() === stationA && content.to.trim().toLowerCase() === stationB) || (content.from.trim().toLowerCase() === stationB && content.to.trim().toLowerCase() === stationA));
+        console.log('route info: ', routeInfo);
+        return routeInfo;
+    }
+
     function filterCharacter(stationCode) {
         return stationCode.replace(/[^a-zA-Z]/g, '');
     }
 
     function stationLine(initial) {
-        if (initial == 'TE') 
-        {
+        if (initial == 'TE') {
             return "Thomson–East Coast Line";
         }
-        else if (initial == "NS") 
-        {
+        else if (initial == "NS") {
             return "North-South Line";
         }
-        else if (initial == "EW") 
-        {
+        else if (initial == "EW" || initial == "CG") {
             return "East-West Line";
         }
-        else if (initial == "CC") 
-        {
+        else if (initial == "CC") {
             return "Circle Line";
         }
-        else if (initial == "DT") 
-        {
+        else if (initial == "DT") {
             return "Downtown Line";
         }
-        else if (initial == "NE") 
-        {
+        else if (initial == "NE") {
             return "North-East line";
         }
-        else if (initial == "CG") 
-        {
-            return "Changi Airport Line";
-        }
-        else if (initial == "PE" || initial == "PW" || initial == "PTC" )
-        {
+        else if (initial == "PE" || initial == "PW" || initial == "PTC") {
             return "Punggol LRT";
         }
-        else if (initial == "SE" || initial == "SW" || initial == "STC" )
-        {
+        else if (initial == "SE" || initial == "SW" || initial == "STC") {
             return "Sengkang LRT";
         }
-        else if (initial == "BP")
-        {
+        else if (initial == "BP") {
             return "Bukit Panjang LRT";
         }
     }
+
+    function StationIcon(stationName) {
+        if (stationName == 'Thomson East Coast Line') {
+            return "TEL";
+        }
+        else if (stationName == "North South Line") {
+            return "NSL";
+        }
+        else if (stationName == "East West Line" || stationName == "Changi Airport Line") {
+            return "EWL";
+        }
+        else if (stationName == "Circle Line") {
+            return "CCL";
+        }
+        else if (stationName == "Downtown Line") {
+            return "DTL";
+        }
+        else if (stationName == "North East line") {
+            return "NEL";
+        }
+
+        else if (initial == "Punggol LRT") {
+            return "PLRT";
+        }
+        else if (initial == "Sengkang LRT") {
+            return "SLRT";
+        }
+        else if (initial == "Bukit Panjang LRT") {
+            return "BPLRT";
+        }
+    }
+
+    async function fetchRouteInfo() {
+        fetch('static/route.json')
+            .then(response => response.json())
+            .then(data => {
+                // Store each JSON object in the array
+                routeData.push(data);
+            })
+            .catch(error => console.error('Error fetching JSON:', error));
+    }
+
 
     setInterval(function () {
         location.reload();

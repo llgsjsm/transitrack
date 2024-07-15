@@ -3,6 +3,7 @@ from graph import load_graph, load_graph2, dfs, build_distance_map, a_star, dijk
 import requests
 from flask_cors import CORS
 import time
+import json
 
 app = Flask(__name__)
 CORS(app)
@@ -14,6 +15,17 @@ distance_map = build_distance_map(stations)  # Build distance map once
 @app.route('/')
 def index():
     return render_template('index.html')
+
+@app.route('/api/routeInfo/')
+def get_routes():
+    try:
+        with open('static/route.json', 'r') as f:
+            routes = json.load(f)
+        return jsonify(routes), 200
+    except FileNotFoundError:
+        return jsonify({'error': 'Routes data file not found.'}), 404
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 @app.route('/api/dfs/')
 def api_dfs():
