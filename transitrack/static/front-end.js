@@ -6,7 +6,6 @@ document.addEventListener('DOMContentLoaded', function () {
     let circles = [];
     const combinedData = [];
     const routeData = [];
-    console.log(routeData);
 
     const svgDoc = svgContainer ? svgContainer.querySelector('svg') : null;
 
@@ -30,7 +29,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
                     const crowdLevelValue = getCrowdDensityLevel(value);
                     stationlineCode = filterCharacter(value);
-                    console.log(stationlineCode);
                     if (crowdLevelValue == 'l') {
                         className = 'bg-success';
                         width = '33%';
@@ -50,7 +48,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
                     const stationLineLogo = document.createElement('img');
                     stationlineName = stationLine(stationlineCode);
-                    console.log('station line name:', stationlineName);
                     stationLineLogo.src = `static/assets/${stationlineName}.png`;
                     stationLineLogo.alt = stationlineName;
 
@@ -159,7 +156,6 @@ document.addEventListener('DOMContentLoaded', function () {
                             data.route.forEach((station, index) => {
                                 const nextStation = index < data.route.length - 1 ? data.route[index + 1] : null;
                                 const stationInfo = (searchRouteInfo(station, nextStation));
-                                console.log('station info: ', stationInfo);
 
                                 const resultLI = document.createElement('li');
 
@@ -303,22 +299,17 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
 
-        console.log(combinedData); // Log the combined data to console
+        
 
     }
 
     function getCrowdDensityLevel(MRTcode) {
         const stationData = combinedData.find(content => content.Station === MRTcode);
-        console.log('MRTcode:', MRTcode);
-        console.log('Station Data:', stationData);
-        console.log(stationData);
         return stationData ? stationData.CrowdLevel : 'station not found';
     }
 
     function searchRouteInfo(stationA, stationB) {
-        console.log(routeData[0]);
         const routeInfo = routeData[0].routes.find(content => (content.from.trim().toLowerCase() === stationA && content.to.trim().toLowerCase() === stationB) || (content.from.trim().toLowerCase() === stationB && content.to.trim().toLowerCase() === stationA));
-        console.log('route info: ', routeInfo);
         return routeInfo;
     }
 
@@ -372,19 +363,19 @@ document.addEventListener('DOMContentLoaded', function () {
         else if (stationName == "Downtown Line") {
             return "DTL";
         }
-        else if (stationName == "North East line") {
+        else if (stationName == "North East Line") {
             return "NEL";
         }
 
-        else if (initial == "Punggol LRT") {
-            return "PLRT";
-        }
-        else if (initial == "Sengkang LRT") {
-            return "SLRT";
-        }
-        else if (initial == "Bukit Panjang LRT") {
-            return "BPLRT";
-        }
+         else if (stationName == "Punggol LRT") {
+             return "PLRT";
+         }
+         else if (stationName == "Sengkang LRT") {
+             return "SLRT";
+         }
+         else if (stationName == "Bukit Panjang LRT") {
+             return "BPLRT";
+         }
     }
 
     async function fetchRouteInfo() {

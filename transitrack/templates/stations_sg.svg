@@ -88,7 +88,7 @@
 
     <a fill="#ffffff">
       <g id="node_ne" stroke="#9900aa">
-        <circle id="ne5" data-name="clark quay" data-value="NE5" cx="723.5" cy="724.5" r="4"/>
+        <circle id="ne5" data-name="clarke quay" data-value="NE5" cx="723.5" cy="724.5" r="4"/>
         <circle id="ne8" data-name="farrer park" data-value="NE8" cx="807.5" cy="578.4" r="4"/>
         <circle id="ne9" data-name="boon keng" data-value="NE9" cx="834" cy="552" r="4"/>
         <circle id="ne10" data-name="potong pasir" data-value="NE10" cx="861" cy="525" r="4"/>
