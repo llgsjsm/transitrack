@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const svgDoc = svgContainer ? svgContainer.querySelector('svg') : null;
 
+    //Mainly consist of the front end design
     if (svgDoc) {
         circles = svgDoc.querySelectorAll('circle');
         circles.forEach(function (circle) {
@@ -144,7 +145,6 @@ document.addEventListener('DOMContentLoaded', function () {
                             resetPath();
                             markPath(data.route);
 
-                            // clear
                             const resultsElement = document.getElementById('style-1');
                             resultsElement.innerHTML = '';
 
@@ -174,17 +174,10 @@ document.addEventListener('DOMContentLoaded', function () {
                                     currentStation = StationIcon(resultLine);
                                 }
                                 const stationImage = document.createElement('img');
-                                stationImage.src = `static/assets/${currentStation}.png`; // Set the source of your image here
-                                stationImage.style.width = '50px'; // Adjust size as needed
+                                stationImage.src = `static/assets/${currentStation}.png`;
+                                stationImage.style.width = '50px'; 
                                 stationImage.style.height = 'auto';
-                                stationImage.style.marginLeft = '10px'; // Add some space between the text and the image
-
-
-                                // if (nextStation) {
-                                //     resultStationName.textContent = `${station} -> ${nextStation}`;
-                                // } else {
-                                //     resultStationName.textContent = `${station} (End of Route)`;
-                                // }
+                                stationImage.style.marginLeft = '10px';
 
                                 resultLI.appendChild(resultTime);
                                 resultLI.appendChild(resultStationName);
@@ -192,8 +185,6 @@ document.addEventListener('DOMContentLoaded', function () {
                                 resultUL.appendChild(resultLI);
 
                             });
-
-                            // appending
 
                             const resultEndLbl = document.createElement('p');
                             resultEndLbl.textContent = "End";
@@ -251,7 +242,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function updateDatalist(datalistId, items) {
         const datalist = document.getElementById(datalistId);
-        datalist.innerHTML = ''; // Clear any existing options
+        datalist.innerHTML = ''; 
 
         items.forEach(item => {
             const option = document.createElement('option');
@@ -270,31 +261,32 @@ document.addEventListener('DOMContentLoaded', function () {
         circles.forEach(circle => {
             const stationName = circle.getAttribute('data-name');
             if (stationName && route.includes(stationName)) {
-                circle.setAttribute('fill', 'black'); // Example of highlighting the path by changing fill color
+                circle.setAttribute('fill', 'black'); 
             }
         });
     }
 
+    //Reset all circles to no fill
     function resetPath() {
-        // Reset all circles to no fill
         circles.forEach(circle => {
             circle.setAttribute('fill', '');
         });
     }
 
+    //get live crowd data from LTADataMall
     async function fetchLiveCrowdData() {
         const MRTLines = ['NSL', 'CCL', 'CEL', 'CGL', 'DTL', 'EWL', 'NEL', 'BPL', 'SLRT', 'PLRT'];
 
+        //for each line the data is collect, push it into the main array.
         for (const line of MRTLines) {
             try {
-                const response = await fetch(`/api/liveCrowdDensity?TrainLine=${line}`);
+                const response = await fetch(`/api/liveCrowdDensity?TrainLine=${line}`); 
                 if (!response.ok) {
                     throw new Error(`Failed to collect ${line}`);
                 }
                 const data = await response.json();
-                // Ensure data.value is an array before using the spread operator
                 if (data && Array.isArray(data.value)) {
-                    combinedData.push(...data.value); // Combine data into the main array
+                    combinedData.push(...data.value); 
                 } else {
                     console.error(`Data for ${line} is not in expected format`, data);
                 }
@@ -302,19 +294,15 @@ document.addEventListener('DOMContentLoaded', function () {
                 console.error('Error fetching live crowd data:', error);
             }
         }
-
-        console.log(combinedData); // Log the combined data to console
-
     }
 
+    //use .find javascript function to get the data
     function getCrowdDensityLevel(MRTcode) {
         const stationData = combinedData.find(content => content.Station === MRTcode);
-        console.log('MRTcode:', MRTcode);
-        console.log('Station Data:', stationData);
-        console.log(stationData);
         return stationData ? stationData.CrowdLevel : 'station not found';
     }
 
+    //use .find javascript function to get route info in json file.
     function searchRouteInfo(stationA, stationB) {
         console.log(routeData[0]);
         const routeInfo = routeData[0].routes.find(content => (content.from.trim().toLowerCase() === stationA && content.to.trim().toLowerCase() === stationB) || (content.from.trim().toLowerCase() === stationB && content.to.trim().toLowerCase() === stationA));
@@ -322,10 +310,12 @@ document.addEventListener('DOMContentLoaded', function () {
         return routeInfo;
     }
 
+    // function to filter string that remains alphabet
     function filterCharacter(stationCode) {
         return stationCode.replace(/[^a-zA-Z]/g, '');
     }
 
+    // function used to return string thats used to call "image name"
     function stationLine(initial) {
         if (initial == 'TE') {
             return "Thomson–East Coast Line";
@@ -356,6 +346,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+    //function used to return string thats used to call "icon name"
     function StationIcon(stationName) {
         if (stationName == 'Thomson East Coast Line') {
             return "TEL";
@@ -387,17 +378,17 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+    //function used for calling all data in route.json file and store in a global array.
     async function fetchRouteInfo() {
         fetch('static/route.json')
             .then(response => response.json())
             .then(data => {
-                // Store each JSON object in the array
                 routeData.push(data);
             })
             .catch(error => console.error('Error fetching JSON:', error));
     }
 
-
+    // auto reload webpage every 30min.
     setInterval(function () {
         location.reload();
     }, 1800000);
