@@ -140,7 +140,7 @@ def heuristic(current, goal, distance_map):
 
 # A* Algorithm: JAKE
 def a_star(graph, start, end, distance_map):
-    start_time = time.time()
+    start_time = time.perf_counter() # Start time
 
     open_list = []
     heapq.heappush(open_list, (0, start))
@@ -154,8 +154,8 @@ def a_star(graph, start, end, distance_map):
         current = heapq.heappop(open_list)[1]
 
         if current == end:
-            end_time = time.time()
-            print(f"A* execution time: {end_time - start_time} seconds")
+            end_time = time.perf_counter() # End time
+            print(f"A* execution time: {end_time - start_time:.6f} seconds")
             return reconstruct_path(came_from, current), g_score[end]
 
         for neighbor in graph[current]:
@@ -169,7 +169,7 @@ def a_star(graph, start, end, distance_map):
                 if neighbor_node not in [i[1] for i in open_list]:
                     heapq.heappush(open_list, (f_score[neighbor_node], neighbor_node))
     
-    end_time = time.time()
+    end_time = time.perf_counter() # End time
     print(f"A* execution time: {end_time - start_time:.6f} seconds")
     return [], float('inf')  # Return an empty array if there's no path
 
@@ -216,6 +216,8 @@ def bfs(graph, start, end):
 
 # Djikstras algorithm: HAZEL
 def dijkstras(graph, start, end):
+    start_time = time.perf_counter() # Start time
+
     open_list = []
     heapq.heappush(open_list, (0, start))  # Priority queue with (distance, node)
     came_from = {}  # To reconstruct the path
@@ -226,6 +228,8 @@ def dijkstras(graph, start, end):
         current_distance, current_node = heapq.heappop(open_list)
 
         if current_node == end:
+            end_time = time.perf_counter() # End time
+            print(f"Dijkstra's execution time: {end_time - start_time:.6f} seconds")
             return reconstruct_path(came_from, current_node), g_score[end]
 
         for neighbor in graph[current_node]:
@@ -239,6 +243,8 @@ def dijkstras(graph, start, end):
                 if neighbor_node not in [i[1] for i in open_list]:
                     heapq.heappush(open_list, (g_score[neighbor_node], neighbor_node))
 
+    end_time = time.perf_counter()  # End time
+    print(f"Dijkstra's execution time: {end_time - start_time:.6f} seconds")
     return [], float('inf')  # Return an empty path and infinite distance if no path is found
 
 # Bellman-Ford Algorithm: RAUL
@@ -329,6 +335,8 @@ def dfs(graph, start, end):
 
 # Floyd-Warshall Algorithm: JAKE 
 def floyd(duration_matrix, line_matrix):
+    start_time = time.perf_counter()  # Start time
+
     n = len(duration_matrix)
     dist = [row[:] for row in duration_matrix]
     next_node = [[None] * n for _ in range(n)]
@@ -344,6 +352,9 @@ def floyd(duration_matrix, line_matrix):
                 if dist[i][j] > dist[i][k] + dist[k][j]:
                     dist[i][j] = dist[i][k] + dist[k][j]
                     next_node[i][j] = next_node[i][k]
+
+    end_time = time.perf_counter()  # End time
+    print(f"Floyd-Warshall execution time: {end_time - start_time:.6f} seconds")
     
     return dist, next_node
 
@@ -366,6 +377,8 @@ def reconstruct_path2(start, end, next_node, line_matrix, station_index, station
 
 # Bidirectional A* Algorithm: JAKE
 def bidirectional_astar(graph, start, end, distance_map):
+    start_time = time.perf_counter()  # Start time
+
     forward_open_list = []
     backward_open_list = []
     heapq.heappush(forward_open_list, (0, start))
@@ -419,6 +432,9 @@ def bidirectional_astar(graph, start, end, distance_map):
                     backward_f_score[neighbor_node] = backward_g_score[neighbor_node] + heuristic(neighbor_node, start, distance_map)
                     if neighbor_node not in [i[1] for i in backward_open_list]:
                         heapq.heappush(backward_open_list, (backward_f_score[neighbor_node], neighbor_node))
+
+    end_time = time.perf_counter()  # End time
+    print(f"Bidirectional A* execution time: {end_time - start_time:.6f} seconds")
 
     if meeting_point is None:
         return [], float('inf')  # No path found
