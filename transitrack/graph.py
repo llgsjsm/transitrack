@@ -183,6 +183,8 @@ def reconstruct_path(came_from, current):
 
 # Breadth-First Search Algorithm: RAUL
 def bfs(graph, start, end):
+    start_time = time.perf_counter()  # Start time
+
     # initialise the queue with the starting point and a path containing only the start
     queue = deque([(start, [start], [], 0, 0)])  # (current_station, path, lines, total_distance, total_duration)
     visited = set()
@@ -193,6 +195,8 @@ def bfs(graph, start, end):
 
         # if the current station is the end station, return the path, lines, total distance, and total duration
         if current_station == end:
+            end_time = time.perf_counter()  # End time
+            print(f"BFS execution time: {end_time - start_time:.6f} seconds")
             return path, lines, total_distance, total_duration
 
         # mark the current station as visited
@@ -211,6 +215,8 @@ def bfs(graph, start, end):
                 new_total_duration = total_duration + duration
                 queue.append((neighbor, new_path, lines, new_total_distance, new_total_duration))
 
+    end_time = time.perf_counter()  # End time
+    print(f"BFS execution time: {end_time - start_time:.6f} seconds")
     # return empty lists and zeros if there is no path between the start and end
     return [], [], 0, 0
 
@@ -249,6 +255,8 @@ def dijkstras(graph, start, end):
 
 # Bellman-Ford Algorithm: RAUL
 def bellman_ford(graph, start, end):
+    start_time = time.perf_counter()  # Start time
+
     # step 1: initialise distances from start to all other stations as infinity and the predecessor of each station as None
     distance = {station: float('inf') for station in graph}
     predecessor = {station: None for station in graph}
@@ -274,6 +282,9 @@ def bellman_ford(graph, start, end):
             if distance[station] + weight < distance[neighbor]:
                 print("Graph contains a negative-weight cycle")
                 return None, None
+            
+    end_time = time.perf_counter()  # End time
+    print(f"Bellman-Ford execution time: {end_time - start_time:.6f} seconds")
 
     # if the end station is not reachable from the start station, return None
     if distance[end] == float('inf'):
@@ -304,6 +315,8 @@ def bellman_ford(graph, start, end):
 
 # Depth-First Search Algorithm: XEN
 def dfs(graph, start, end):
+    start_time = time.perf_counter()  # Start time
+
     path = []
     journey = set()
     found = False
@@ -328,6 +341,10 @@ def dfs(graph, start, end):
                 path.pop()
         journey.remove(node)
     dfs(start, 0)
+
+    end_time = time.perf_counter()  # End time
+    print(f"DFS execution time: {end_time - start_time:.6f} seconds")
+
     if found:
         return path, total_duration
     else:
@@ -479,6 +496,8 @@ def build_distance_matrix(routes):
 
 # Bidirectional Breadth-First Search Algorithm: RAUL
 def bidirectional_bfs(graph, start, end):
+    start_time = time.perf_counter()  # Start time
+
     if start == end:
         return [start], [], 0, 0
 
@@ -500,6 +519,8 @@ def bidirectional_bfs(graph, start, end):
                     forward_visited[neighbor] = (neighbor, new_path, new_lines, new_total_distance, new_total_duration)
                     forward_queue.append((neighbor, new_path, new_lines, new_total_distance, new_total_duration))
                     if neighbor in backward_visited:
+                        end_time = time.perf_counter()  # End time
+                        print(f"Bidirectional BFS execution time: {end_time - start_time:.6f} seconds")
                         return combine_paths(forward_visited[neighbor], backward_visited[neighbor])
 
         if backward_queue:
@@ -513,8 +534,12 @@ def bidirectional_bfs(graph, start, end):
                     backward_visited[neighbor] = (neighbor, new_path, new_lines, new_total_distance, new_total_duration)
                     backward_queue.append((neighbor, new_path, new_lines, new_total_distance, new_total_duration))
                     if neighbor in forward_visited:
+                        end_time = time.perf_counter()  # End time
+                        print(f"Bidirectional BFS execution time: {end_time - start_time:.6f} seconds")
                         return combine_paths(forward_visited[neighbor], backward_visited[neighbor])
 
+    end_time = time.perf_counter()  # End time
+    print(f"Bidirectional BFS execution time: {end_time - start_time:.6f} seconds")
     return [], [], 0, 0
 
 # Helper function to combine paths from bidirectional BFS: RAUL
