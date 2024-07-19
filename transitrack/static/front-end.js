@@ -141,6 +141,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         if (data.route !== 'null') {
                             resetPath();
                             markPath(data.route);
+                            fetchTimeComplexity(algorithm);
 
                             const resultsElement = document.getElementById('style-1');
                             resultsElement.innerHTML = '';
@@ -380,6 +381,26 @@ document.addEventListener('DOMContentLoaded', function () {
                 routeData.push(data);
             })
             .catch(error => console.error('Error fetching JSON:', error));
+    }
+
+    // function to fetch and display the time complexity of the selected algorithm
+    function fetchTimeComplexity(algorithm) {
+        // define the time complexities for each algorithm
+        const timeComplexities = {
+            'dfs': 'O(V + E)',
+            'astar': 'O(E)',
+            'bidirectional_astar': 'O(E)',
+            'djikstras': 'O(E + V log V)',
+            'bfs': 'O(V + E)',
+            'bidirectional_bfs': 'O(V + E)',
+            'bellmanford': 'O(VE)',
+            'floyd': 'O(V^3)'
+        };
+
+        // get the time complexity for the selected algorithm
+        const complexity = timeComplexities[algorithm] || 'Unknown';
+        const timeComplexityDiv = document.getElementById('time-complexity');
+        timeComplexityDiv.innerHTML = `<strong>${algorithm}:</strong> ${complexity}`;
     }
 
     // auto reload webpage every 30min.

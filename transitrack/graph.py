@@ -1,6 +1,7 @@
 import json
 import heapq
 from collections import deque
+import time
 
 # Helper function to load the graph from a JSON file
 def load_graph(file_name):
@@ -139,6 +140,8 @@ def heuristic(current, goal, distance_map):
 
 # A* Algorithm: JAKE
 def a_star(graph, start, end, distance_map):
+    start_time = time.time()
+
     open_list = []
     heapq.heappush(open_list, (0, start))
     came_from = {}
@@ -151,6 +154,8 @@ def a_star(graph, start, end, distance_map):
         current = heapq.heappop(open_list)[1]
 
         if current == end:
+            end_time = time.time()
+            print(f"A* execution time: {end_time - start_time} seconds")
             return reconstruct_path(came_from, current), g_score[end]
 
         for neighbor in graph[current]:
@@ -163,7 +168,9 @@ def a_star(graph, start, end, distance_map):
                 f_score[neighbor_node] = g_score[neighbor_node] + heuristic(neighbor_node, end, distance_map)
                 if neighbor_node not in [i[1] for i in open_list]:
                     heapq.heappush(open_list, (f_score[neighbor_node], neighbor_node))
-
+    
+    end_time = time.time()
+    print(f"A* execution time: {end_time - start_time:.6f} seconds")
     return [], float('inf')  # Return an empty array if there's no path
 
 # Helper function for A* Algorithm & Dijkstra's Algorithm: JAKE & HAZEL
