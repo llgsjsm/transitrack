@@ -134,7 +134,9 @@ document.addEventListener('DOMContentLoaded', function () {
                     .then(response => {
                         if (!response.ok) {
                             return response.json().then(data => { throw new Error(data.error); });
+
                         }
+                        console.log('hello' + getMostOptimalAlgorithm(fromBoxValue, toBoxValue));
                         return response.json();
                     })
                     .then(data => {
@@ -212,6 +214,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                             const analysisLbl = document.createElement('h1');
                             analysisLbl.textContent = 'Analysis';
+                            analysisLbl.style.textAlign = 'center';
 
                             const analysisTotalTime = document.createElement('h6');
                             analysisTotalTime.textContent = `Total journey duration: ${data.duration + ' min'}`;
@@ -223,7 +226,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             analysisExecutionTime.textContent = `Execution time: ${data.timeExecution.toFixed(6) + ' second'}`;
 
                             const analysisOptimalAlgo = document.createElement('h6');
-                            analysisOptimalAlgo.textContent = 'suggested algorithm: test';
+                            analysisOptimalAlgo.textContent = `suggested algorithm: ${getMostOptimalAlgorithm(fromBoxValue, toBoxValue)}`;
 
                             analysisElement.appendChild(analysisLbl);
                             analysisElement.appendChild(document.createElement('br'));
@@ -447,6 +450,62 @@ document.addEventListener('DOMContentLoaded', function () {
         // get the time complexity for the selected algorithm
         const complexity = timeComplexities[algorithm] || 'Unknown';
         return complexity;
+    }
+
+    function getMostOptimalAlgorithm(fromBoxValue, toBoxValue) {
+        const algoList = ['dfs', 'astar', 'bidirectional_astar', 'djikstras', 'bfs', 'bidirectional_bfs', 'bellmanford', 'floyd'];
+        let currentSmallestDuration = Infinity;
+        let currentSmallestTimeEx = Infinity;
+        let optimalAlgorithm = null;
+
+        algoList.forEach(algo => {
+            const request = new XMLHttpRequest();
+            request.open('GET', `/api/${algo}/?start=${fromBoxValue}&end=${toBoxValue}`, false); // `false` makes the request synchronous
+            request.send(null);
+
+            if (request.status === 200) {
+                const data = JSON.parse(request.responseText);
+                const duration = data.duration;
+                const timeExecution = data.timeExecution;
+
+                if (duration < currentSmallestDuration) {
+                    currentSmallestDuration = duration;
+                    optimalAlgorithm = algo;
+                    currentSmallestTimeEx = timeExecution;
+                } else if (duration === currentSmallestDuration && timeExecution < currentSmallestTimeEx) {
+                    currentSmallestDuration = duration;
+                    optimalAlgorithm = algo;
+                    currentSmallestTimeEx = timeExecution;
+                }
+            } else {
+                console.error('An error occurred:', request.statusText);
+            }
+        });
+
+        if (optimalAlgorithm === 'dfs') {
+            return 'DFS';
+        }
+        else if (optimalAlgorithm === 'astar') {
+            return 'A Star';
+        }
+        else if (optimalAlgorithm === 'bidirectional_astar') {
+            return 'Bidirectional A Star';
+        }
+        else if (optimalAlgorithm === 'djikstras') {
+            return 'Djikstras';
+        }
+        else if (optimalAlgorithm === 'bfs') {
+            return 'BFS';
+        }
+        else if (optimalAlgorithm === 'bidirectional_bfs') {
+            return 'Bidirectional BFS';
+        }
+        else if (optimalAlgorithm === 'bellmanford') {
+            return 'Bellman Ford';
+        }
+        else if (optimalAlgorithm === 'floyd') {
+            return 'Floyd Warshall';
+        }
     }
 
     // auto reload webpage every 30min.
