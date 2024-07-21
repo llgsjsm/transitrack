@@ -379,7 +379,7 @@ def floyd(duration_matrix, line_matrix):
     end_time = time.perf_counter()  # End time
     print(f"Floyd-Warshall execution time: {end_time - start_time:.6f} seconds")
     execution_time = end_time - start_time
-    return dist, next_node,execution_time
+    return dist, next_node, execution_time
 
 # Helper function for Floyd-Warshall Algorithm: JAKE
 def reconstruct_path2(start, end, next_node, line_matrix, station_index, stations):
@@ -506,7 +506,7 @@ def bidirectional_bfs(graph, start, end):
     start_time = time.perf_counter()  # Start time
 
     if start == end:
-        return [start], [], 0, 0, execution_time
+        return [start], [], 0, 0, 0.0
 
     forward_queue = deque([(start, [start], [], 0, 0)])
     backward_queue = deque([(end, [end], [], 0, 0)])
@@ -528,7 +528,8 @@ def bidirectional_bfs(graph, start, end):
                     if neighbor in backward_visited:
                         end_time = time.perf_counter()  # End time
                         print(f"Bidirectional BFS execution time 3: {end_time - start_time:.6f} seconds")
-                        return combine_paths(forward_visited[neighbor], backward_visited[neighbor])
+                        execution_time = end_time - start_time
+                        return combine_paths(forward_visited[neighbor], backward_visited[neighbor], execution_time)
 
         if backward_queue:
             current_station, path, lines, total_distance, total_duration = backward_queue.popleft()

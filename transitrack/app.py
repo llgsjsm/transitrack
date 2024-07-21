@@ -182,9 +182,9 @@ def api_floyd():
         duration_matrix, line_matrix, station_index, stations = build_distance_matrix(routes)
 
         # Measure the execution time of the Floyd-Warshall algorithm
-        start_time = time.time()
+        #start_time = time.time()
         shortest_paths, next_node, time_execution = floyd(duration_matrix, line_matrix)
-        end_time = time.time()
+        #end_time = time.time()
 
         # Reconstruct the path
         path, lines = reconstruct_path2(start, end, next_node, line_matrix, station_index, stations)
@@ -196,7 +196,7 @@ def api_floyd():
             response = {
                 'route': path,
                 'duration': total_duration,
-                'execution_time': time_execution
+                'timeExecution': time_execution
             }
             return jsonify(response), 200
 
