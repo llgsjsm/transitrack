@@ -99,7 +99,7 @@
       </g>
     </a>
 
-    <a xlink:href= "#cc" fill="#ffffff">
+    <a fill="#ffffff">
       <g id="node_cc" stroke="#fa9e0d">
         <circle id="cc2" data-name="bras basah" data-value="CC2" cx="824" cy="739" r="4"/>
         <circle id="cc3" data-name="esplanade" data-value="CC3" cx="880" cy="795" r="4"/>
