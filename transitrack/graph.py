@@ -156,7 +156,8 @@ def a_star(graph, start, end, distance_map):
         if current == end:
             end_time = time.perf_counter() # End time
             print(f"A* execution time: {end_time - start_time:.6f} seconds")
-            return reconstruct_path(came_from, current), g_score[end]
+            execution_time = end_time - start_time
+            return reconstruct_path(came_from, current), g_score[end], execution_time
 
         for neighbor in graph[current]:
             neighbor_node = neighbor["to"]
@@ -197,7 +198,8 @@ def bfs(graph, start, end):
         if current_station == end:
             end_time = time.perf_counter()  # End time
             print(f"BFS execution time: {end_time - start_time:.6f} seconds")
-            return path, lines, total_distance, total_duration
+            execution_time = end_time - start_time
+            return path, lines, total_distance, total_duration, execution_time
 
         # mark the current station as visited
         visited.add(current_station)
@@ -236,7 +238,8 @@ def dijkstras(graph, start, end):
         if current_node == end:
             end_time = time.perf_counter() # End time
             print(f"Dijkstra's execution time: {end_time - start_time:.6f} seconds")
-            return reconstruct_path(came_from, current_node), g_score[end]
+            execution_time = end_time - start_time
+            return reconstruct_path(came_from, current_node), g_score[end], execution_time
 
         for neighbor in graph[current_node]:
             neighbor_node = neighbor["to"]
@@ -285,6 +288,7 @@ def bellman_ford(graph, start, end):
             
     end_time = time.perf_counter()  # End time
     print(f"Bellman-Ford execution time: {end_time - start_time:.6f} seconds")
+    execution_time = end_time - start_time
 
     # if the end station is not reachable from the start station, return None
     if distance[end] == float('inf'):
@@ -311,7 +315,7 @@ def bellman_ford(graph, start, end):
     path.reverse()
 
     # return the final path, lines, total distance, and total duration
-    return path, total_distance, total_duration
+    return path, total_distance, total_duration, execution_time
 
 # Depth-First Search Algorithm: XEN
 def dfs(graph, start, end):
@@ -343,10 +347,12 @@ def dfs(graph, start, end):
     dfs(start, 0)
 
     end_time = time.perf_counter()  # End time
+    execution_time = end_time - start_time
     print(f"DFS execution time: {end_time - start_time:.6f} seconds")
+    
 
     if found:
-        return path, total_duration
+        return path, total_duration, execution_time
     else:
         return None, float('inf')
 
@@ -372,8 +378,8 @@ def floyd(duration_matrix, line_matrix):
 
     end_time = time.perf_counter()  # End time
     print(f"Floyd-Warshall execution time: {end_time - start_time:.6f} seconds")
-    
-    return dist, next_node
+    execution_time = end_time - start_time
+    return dist, next_node,execution_time
 
 # Helper function for Floyd-Warshall Algorithm: JAKE
 def reconstruct_path2(start, end, next_node, line_matrix, station_index, stations):
@@ -452,6 +458,7 @@ def bidirectional_astar(graph, start, end, distance_map):
 
     end_time = time.perf_counter()  # End time
     print(f"Bidirectional A* execution time: {end_time - start_time:.6f} seconds")
+    execution_time = end_time - start_time
 
     if meeting_point is None:
         return [], float('inf')  # No path found
@@ -461,7 +468,7 @@ def bidirectional_astar(graph, start, end, distance_map):
     total_path = forward_path + backward_path[::-1][1:]
     total_duration = forward_g_score[meeting_point] + backward_g_score[meeting_point]
 
-    return total_path, total_duration
+    return total_path, total_duration, execution_time
 
 # Helper function to build distance matrix for Floyd-Warshall Algorithm: JAKE 
 def build_distance_matrix(routes):
@@ -499,7 +506,7 @@ def bidirectional_bfs(graph, start, end):
     start_time = time.perf_counter()  # Start time
 
     if start == end:
-        return [start], [], 0, 0
+        return [start], [], 0, 0, execution_time
 
     forward_queue = deque([(start, [start], [], 0, 0)])
     backward_queue = deque([(end, [end], [], 0, 0)])
@@ -520,7 +527,7 @@ def bidirectional_bfs(graph, start, end):
                     forward_queue.append((neighbor, new_path, new_lines, new_total_distance, new_total_duration))
                     if neighbor in backward_visited:
                         end_time = time.perf_counter()  # End time
-                        print(f"Bidirectional BFS execution time: {end_time - start_time:.6f} seconds")
+                        print(f"Bidirectional BFS execution time 3: {end_time - start_time:.6f} seconds")
                         return combine_paths(forward_visited[neighbor], backward_visited[neighbor])
 
         if backward_queue:
@@ -535,15 +542,17 @@ def bidirectional_bfs(graph, start, end):
                     backward_queue.append((neighbor, new_path, new_lines, new_total_distance, new_total_duration))
                     if neighbor in forward_visited:
                         end_time = time.perf_counter()  # End time
-                        print(f"Bidirectional BFS execution time: {end_time - start_time:.6f} seconds")
-                        return combine_paths(forward_visited[neighbor], backward_visited[neighbor])
+                        print(f"Bidirectional BFS execution time 2: {end_time - start_time:.6f} seconds")
+                        execution_time = end_time - start_time
+                        return combine_paths(forward_visited[neighbor], backward_visited[neighbor], execution_time)
 
     end_time = time.perf_counter()  # End time
-    print(f"Bidirectional BFS execution time: {end_time - start_time:.6f} seconds")
-    return [], [], 0, 0
+    print(f"Bidirectional BFS execution time 1: {end_time - start_time:.6f} seconds")
+    execution_time = end_time - start_time
+    return [], [], 0, 0, execution_time
 
 # Helper function to combine paths from bidirectional BFS: RAUL
-def combine_paths(forward, backward):
+def combine_paths(forward, backward, execution_time):
     _, forward_path, forward_lines, forward_distance, forward_duration = forward
     _, backward_path, backward_lines, backward_distance, backward_duration = backward
     
@@ -552,4 +561,4 @@ def combine_paths(forward, backward):
     combined_distance = forward_distance + backward_distance
     combined_duration = forward_duration + backward_duration
     
-    return combined_path, combined_lines, combined_distance, combined_duration
+    return combined_path, combined_lines, combined_distance, combined_duration, execution_time

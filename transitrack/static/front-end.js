@@ -220,7 +220,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             analysisTimeComplex.textContent = `Time complexity: ${fetchTimeComplexity(algorithm)}`;
 
                             const analysisExecutionTime = document.createElement('h6');
-                            analysisExecutionTime.textContent = 'Execution time: test';
+                            analysisExecutionTime.textContent = `Execution time: ${data.timeExecution.toFixed(6) + ' second'}`;
 
                             const analysisOptimalAlgo = document.createElement('h6');
                             analysisOptimalAlgo.textContent = 'suggested algorithm: test';

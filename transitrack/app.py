@@ -40,11 +40,11 @@ def api_dfs():
         if end not in stations:
             return jsonify({'error': f'End station {end} not found in the graph.'}), 400
 
-        path, total_duration = dfs(stations, start, end)
+        path, total_duration, time_execution = dfs(stations, start, end)
         if path is None:
             return jsonify({'route': 'null'}), 400
         else:
-            return jsonify({'route': path, 'duration': total_duration}), 200
+            return jsonify({'route': path, 'duration': total_duration, 'timeExecution' : time_execution}), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
@@ -61,11 +61,11 @@ def api_astar():
         if end not in stations:
             return jsonify({'error': f'End station {end} not found in the graph.'}), 400
 
-        path, total_duration = a_star(stations, start, end, distance_map)
+        path, total_duration, time_execution = a_star(stations, start, end, distance_map)
         if not path:
             return jsonify({'route': 'null'}), 400
         else:
-            return jsonify({'route': path, 'duration': total_duration}), 200
+            return jsonify({'route': path, 'duration': total_duration, 'timeExecution' : time_execution} ), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
@@ -81,12 +81,12 @@ def api_bidirectional_a_star():
         if end not in stations:
             return jsonify({'error': f'End station {end} not found in the graph.'}), 400
 
-        path, total_duration = bidirectional_astar(stations, start, end, distance_map)
+        path, total_duration, time_execution = bidirectional_astar(stations, start, end, distance_map)
         
         if not path:
             return jsonify({'route': 'null'}), 400
         else:
-            return jsonify({'route': path, 'duration': total_duration}), 200
+            return jsonify({'route': path, 'duration': total_duration, 'timeExecution' : time_execution}), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
@@ -103,11 +103,11 @@ def api_djikstras():
         if end not in stations:
             return jsonify({'error': f'End station {end} not found in the graph.'}), 400
 
-        path, total_duration = dijkstras(stations, start, end)
+        path, total_duration, time_execution = dijkstras(stations, start, end)
         if not path:
             return jsonify({'route': 'null'}), 400
         else:
-            return jsonify({'route': path, 'duration': total_duration}), 200
+            return jsonify({'route': path, 'duration': total_duration, 'timeExecution' : time_execution}), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
@@ -124,12 +124,12 @@ def api_bfs():
         if end not in stations:
             return jsonify({'error': f'End station {end} not found in the graph.'}), 400
 
-        path, lines, total_distance, total_duration = bfs(stations, start, end)
+        path, lines, total_distance, total_duration, time_execution = bfs(stations, start, end)
         
         if not path:
             return jsonify({'route': 'null'}), 400
         else:
-            return jsonify({'route': path, 'duration': total_duration}), 200
+            return jsonify({'route': path, 'duration': total_duration, 'timeExecution' : time_execution}), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 500
     
@@ -146,12 +146,12 @@ def api_bidirectional_bfs():
         if end not in detailed_graph:
             return jsonify({'error': f'End station {end} not found in the graph.'}), 400
 
-        path, lines, total_distance, total_duration = bidirectional_bfs(detailed_graph, start, end)
+        path, lines, total_distance, total_duration, time_execution = bidirectional_bfs(detailed_graph, start, end)
 
         if not path:
             return jsonify({'route': 'null'}), 400
         else:
-            return jsonify({'route': path, 'lines': lines, 'distance': total_distance, 'duration': total_duration}), 200
+            return jsonify({'route': path, 'lines': lines, 'distance': total_distance, 'duration': total_duration, 'timeExecution' : time_execution}), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
@@ -183,7 +183,7 @@ def api_floyd():
 
         # Measure the execution time of the Floyd-Warshall algorithm
         start_time = time.time()
-        shortest_paths, next_node = floyd(duration_matrix, line_matrix)
+        shortest_paths, next_node, time_execution = floyd(duration_matrix, line_matrix)
         end_time = time.time()
 
         # Reconstruct the path
@@ -196,7 +196,7 @@ def api_floyd():
             response = {
                 'route': path,
                 'duration': total_duration,
-                'execution_time': end_time - start_time
+                'execution_time': time_execution
             }
             return jsonify(response), 200
 
@@ -216,12 +216,12 @@ def api_bellmanford():
         if end not in stations:
             return jsonify({'error': f'End station {end} not found in the graph.'}), 400
 
-        path, total_distance, total_duration = bellman_ford(stations, start, end)
+        path, total_distance, total_duration, time_execution = bellman_ford(stations, start, end)
         
         if not path:
             return jsonify({'route': 'null'}), 400
         else:
-            return jsonify({'route': path, 'duration': total_duration}), 200
+            return jsonify({'route': path, 'duration': total_duration, 'timeExecution' : time_execution}), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
