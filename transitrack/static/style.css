@@ -51,19 +51,20 @@
 }
 
 .results-container ul li{
-  padding: 20px 20px;
+  padding: 30px 20px;
 }
 
 .results-container ul li div {
   padding: 5px 10px;
   font-size:12px;
+  font-weight:bold;
 }
 
 .results-container ul li span {
   position: absolute;
-  left: -15px;
+  left: 1px;
   font-size:12px;
-  padding: 75px 0;
+  padding: 80px 10px;
 }
 
 .scrollbar {
@@ -92,4 +93,9 @@
 	border-radius: 10px;
 	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
 	background-color: #555;
+}
+
+.col
+{
+  display:grid;
 }

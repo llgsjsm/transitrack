@@ -141,8 +141,25 @@ document.addEventListener('DOMContentLoaded', function () {
                         if (data.route !== 'null') {
                             resetPath();
                             markPath(data.route);
-                            fetchTimeComplexity(algorithm);
 
+
+                            //create route and analysis section
+                            const resultInfoSection = document.getElementById('result');
+                            resultInfoSection.innerHTML = '';
+
+                            const resultContainer = document.createElement('div');
+                            resultContainer.className = 'col results-container scrollbar';
+                            resultContainer.id = 'style-1';
+
+                            const analysisContainer = document.createElement('div');
+                            analysisContainer.className = 'col';
+                            analysisContainer.id = 'analysis';
+
+                            resultInfoSection.appendChild(resultContainer);
+                            resultInfoSection.appendChild(analysisContainer);
+
+
+                            //display route section
                             const resultsElement = document.getElementById('style-1');
                             resultsElement.innerHTML = '';
 
@@ -153,7 +170,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
                             let currentStation = "";
 
-
                             data.route.forEach((station, index) => {
                                 const nextStation = index < data.route.length - 1 ? data.route[index + 1] : null;
                                 const stationInfo = (searchRouteInfo(station, nextStation));
@@ -161,7 +177,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                 const resultLI = document.createElement('li');
 
                                 const resultTime = document.createElement('span');
-                                resultTime.textContent = stationInfo ? stationInfo.duration + ' min' : data.duration + ' min';
+                                resultTime.textContent = stationInfo ? stationInfo.duration + ' min' : 'Total: ' + data.duration + ' min';
                                 resultLine = stationInfo ? stationInfo.line : 'test';
 
                                 const resultStationName = document.createElement('div');
@@ -172,7 +188,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                 }
                                 const stationImage = document.createElement('img');
                                 stationImage.src = `static/assets/${currentStation}.png`;
-                                stationImage.style.width = '50px'; 
+                                stationImage.style.width = '50px';
                                 stationImage.style.height = 'auto';
                                 stationImage.style.marginLeft = '10px';
 
@@ -190,14 +206,45 @@ document.addEventListener('DOMContentLoaded', function () {
                             resultsElement.appendChild(resultUL);
                             resultsElement.appendChild(resultEndLbl);
 
+                            //analysis section
+                            const analysisElement = document.getElementById('analysis');
+                            analysisElement.innerHTML = '';
+
+                            const analysisLbl = document.createElement('h1');
+                            analysisLbl.textContent = 'Analysis';
+
+                            const analysisTotalTime = document.createElement('h6');
+                            analysisTotalTime.textContent = `Total journey duration: ${data.duration + ' min'}`;
+
+                            const analysisTimeComplex = document.createElement('h6');
+                            analysisTimeComplex.textContent = `Time complexity: ${fetchTimeComplexity(algorithm)}`;
+
+                            const analysisExecutionTime = document.createElement('h6');
+                            analysisExecutionTime.textContent = 'Execution time: test';
+
+                            const analysisOptimalAlgo = document.createElement('h6');
+                            analysisOptimalAlgo.textContent = 'suggested algorithm: test';
+
+                            analysisElement.appendChild(analysisLbl);
+                            analysisElement.appendChild(document.createElement('br'));
+                            analysisElement.appendChild(analysisTotalTime);
+                            analysisElement.appendChild(document.createElement('br'));
+                            analysisElement.appendChild(analysisTimeComplex);
+                            analysisElement.appendChild(document.createElement('br'));
+                            analysisElement.appendChild(analysisExecutionTime);
+                            analysisElement.appendChild(document.createElement('br'));
+                            analysisElement.appendChild(analysisOptimalAlgo);
 
                         } else {
                             document.getElementById('style-1').innerHTML += '<div>No route found.</div>';
+                            document.getElementById('analysis').innerHTML += '<div>No route found.</div>';
                         }
                     })
                     .catch(error => {
                         document.getElementById('style-1').innerHTML = '';
                         document.getElementById('style-1').innerHTML = 'Error: ' + error.message;
+                        document.getElementById('analysis').innerHTML = '';
+                        document.getElementById('analysis').innerHTML = 'Error: ' + error.message;
                         console.error('Error:', error);
                     });
             } else {
@@ -239,7 +286,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function updateDatalist(datalistId, items) {
         const datalist = document.getElementById(datalistId);
-        datalist.innerHTML = ''; 
+        datalist.innerHTML = '';
 
         items.forEach(item => {
             const option = document.createElement('option');
@@ -258,7 +305,7 @@ document.addEventListener('DOMContentLoaded', function () {
         circles.forEach(circle => {
             const stationName = circle.getAttribute('data-name');
             if (stationName && route.includes(stationName)) {
-                circle.setAttribute('fill', 'black'); 
+                circle.setAttribute('fill', 'black');
             }
         });
     }
@@ -277,13 +324,13 @@ document.addEventListener('DOMContentLoaded', function () {
         //for each line the data is collect, push it into the main array.
         for (const line of MRTLines) {
             try {
-                const response = await fetch(`/api/liveCrowdDensity?TrainLine=${line}`); 
+                const response = await fetch(`/api/liveCrowdDensity?TrainLine=${line}`);
                 if (!response.ok) {
                     throw new Error(`Failed to collect ${line}`);
                 }
                 const data = await response.json();
                 if (data && Array.isArray(data.value)) {
-                    combinedData.push(...data.value); 
+                    combinedData.push(...data.value);
                 } else {
                     console.error(`Data for ${line} is not in expected format`, data);
                 }
@@ -362,15 +409,15 @@ document.addEventListener('DOMContentLoaded', function () {
             return "NEL";
         }
 
-         else if (stationName == "Punggol LRT") {
-             return "PLRT";
-         }
-         else if (stationName == "Sengkang LRT") {
-             return "SLRT";
-         }
-         else if (stationName == "Bukit Panjang LRT") {
-             return "BPLRT";
-         }
+        else if (stationName == "Punggol LRT") {
+            return "PLRT";
+        }
+        else if (stationName == "Sengkang LRT") {
+            return "SLRT";
+        }
+        else if (stationName == "Bukit Panjang LRT") {
+            return "BPLRT";
+        }
     }
 
     //function used for calling all data in route.json file and store in a global array.
@@ -385,7 +432,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // function to fetch and display the time complexity of the selected algorithm
     function fetchTimeComplexity(algorithm) {
-        // define the time complexities for each algorithm
+        //Time complexitiy is pre-determined
         const timeComplexities = {
             'dfs': 'O(V + E)',
             'astar': 'O(E)',
@@ -399,8 +446,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // get the time complexity for the selected algorithm
         const complexity = timeComplexities[algorithm] || 'Unknown';
-        const timeComplexityDiv = document.getElementById('time-complexity');
-        timeComplexityDiv.innerHTML = `<strong>${algorithm}:</strong> ${complexity}`;
+        return complexity;
     }
 
     // auto reload webpage every 30min.
