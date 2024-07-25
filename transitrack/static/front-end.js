@@ -226,8 +226,8 @@ document.addEventListener('DOMContentLoaded', function () {
                             analysisExecutionTime.textContent = `Execution time: ${data.timeExecution.toFixed(6) + ' second'}`;
 
                             const analysisOptimalAlgo = document.createElement('h6');
-                            analysisOptimalAlgo.textContent = `suggested algorithm: ${getMostOptimalAlgorithm(fromBoxValue, toBoxValue)}`;
-
+                            analysisOptimalAlgo.textContent = `Suggested algorithm: ${getMostOptimalAlgorithm(fromBoxValue, toBoxValue)}`;
+                            
                             analysisElement.appendChild(analysisLbl);
                             analysisElement.appendChild(document.createElement('br'));
                             analysisElement.appendChild(analysisTotalTime);
@@ -237,11 +237,14 @@ document.addEventListener('DOMContentLoaded', function () {
                             analysisElement.appendChild(analysisExecutionTime);
                             analysisElement.appendChild(document.createElement('br'));
                             analysisElement.appendChild(analysisOptimalAlgo);
+                            
+                            
 
                         } else {
                             document.getElementById('style-1').innerHTML += '<div>No route found.</div>';
                             document.getElementById('analysis').innerHTML += '<div>No route found.</div>';
                         }
+
                     })
                     .catch(error => {
                         document.getElementById('style-1').innerHTML = '';

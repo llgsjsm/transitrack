@@ -57,9 +57,8 @@
         <div class="col">
           <h6>Algorithm: </h6>
           <select name="algorithm_select" class="form-control" id="select_box" aria-label="Default select example">
-            <option selected>Select</option>
             <option value="dfs">DFS</option>
-            <option value="astar">A Star</option>
+            <option selected value="astar">A Star</option>
             <option value="bidirectional_astar">Bidirectional A Star</option>
             <option value="djikstras">Djikstras</option>
             <option value="bfs">BFS</option>
@@ -79,11 +78,24 @@
 
     <br>
     <div class="container">
+      <div class="row">
+        <div class="col">
+          <h6>Simulate! </h6>
+          <select name="breakdown_station_select" class="form-control" id="breakdown_select">
+            <option value="">None</option>
+            <option value="station1">Jurong East</option>
+            <option value="station2">Buona Vista</option>
+            <option value="station3">Serangoon</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    </br><hr>
+    <div class="container">
       <div class="row" id="result">
 
       </div>
     </div>
-
     <div id="tooltip-textbox" class="tooltip-textbox">
       <div style="border-radius: 25px; background-color: black;">
         <p class="h5" style="text-align: center; font-family: fantasy; color:white" id="textbox-station-name">station
