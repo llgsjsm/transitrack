@@ -4,8 +4,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const tooltip = document.getElementById('tooltip-textbox');
     const svgContainer = document.getElementById('svg-container');
     let circles = [];
-    const combinedData = [];
-    const routeData = [];
+    const combinedData = []; //store all the live crowd density data collected from LTA datamall
+    const routeData = []; //store all the route data from route.json
 
     const svgDoc = svgContainer ? svgContainer.querySelector('svg') : null;
 
@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
         circles = svgDoc.querySelectorAll('circle');
         circles.forEach(function (circle) {
 
+            //display textbox and crowd level of the individual station
             circle.addEventListener('mouseover', function (event) {
                 tooltip.querySelectorAll('.container-sm').forEach(function (node) {
                     node.remove();
@@ -120,6 +121,7 @@ document.addEventListener('DOMContentLoaded', function () {
         performSearch(toBox.value, 'to');
     });
 
+    //button submit to get path results
     const submitButton = document.getElementById('submitButton');
     if (submitButton) {
         submitButton.addEventListener('click', function (event) {
@@ -130,15 +132,17 @@ document.addEventListener('DOMContentLoaded', function () {
             const algorithm = document.getElementById('select_box').value.trim().toLowerCase();
 
             if (fromBoxValue && toBoxValue && algorithm) {
+
+                //link to app.py, fetch data according to algorithm
                 fetch(`/api/${algorithm}/?start=${fromBoxValue}&end=${toBoxValue}`)
                     .then(response => {
                         if (!response.ok) {
                             return response.json().then(data => { throw new Error(data.error); });
 
                         }
-                        console.log('hello' + getMostOptimalAlgorithm(fromBoxValue, toBoxValue));
                         return response.json();
                     })
+                    //the data fetched from API will then be displayed here.
                     .then(data => {
                         if (data.route !== 'null') {
                             resetPath();
@@ -227,7 +231,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                             const analysisOptimalAlgo = document.createElement('h6');
                             analysisOptimalAlgo.textContent = `Suggested algorithm: ${getMostOptimalAlgorithm(fromBoxValue, toBoxValue)}`;
-                            
+
                             analysisElement.appendChild(analysisLbl);
                             analysisElement.appendChild(document.createElement('br'));
                             analysisElement.appendChild(analysisTotalTime);
@@ -237,8 +241,8 @@ document.addEventListener('DOMContentLoaded', function () {
                             analysisElement.appendChild(analysisExecutionTime);
                             analysisElement.appendChild(document.createElement('br'));
                             analysisElement.appendChild(analysisOptimalAlgo);
-                            
-                            
+
+
 
                         } else {
                             document.getElementById('style-1').innerHTML += '<div>No route found.</div>';
@@ -261,6 +265,7 @@ document.addEventListener('DOMContentLoaded', function () {
         console.error("Submit button not found!");
     }
 
+    //for textbox, perform search algorithm 
     function performSearch(query, type) {
         if (query.length === 0) {
             return;
@@ -276,7 +281,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 return response.json();
             })
             .then(data => {
-                console.log(`Received ${type} search results:`, data.results);
                 if (type === 'from') {
                     fromBox.setAttribute('list', 'from-datalist');
                     updateDatalist('from-datalist', data.results);
@@ -301,13 +305,12 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+    // Highlight the path
     function markPath(route) {
         if (!circles.length) {
             console.error("No circles found!");
             return;
         }
-
-        // Highlight the path
         circles.forEach(circle => {
             const stationName = circle.getAttribute('data-name');
             if (stationName && route.includes(stationName)) {
@@ -327,7 +330,7 @@ document.addEventListener('DOMContentLoaded', function () {
     async function fetchLiveCrowdData() {
         const MRTLines = ['NSL', 'CCL', 'CEL', 'CGL', 'DTL', 'EWL', 'NEL', 'BPL', 'SLRT', 'PLRT'];
 
-        //for each line the data is collect, push it into the main array.
+        //for each line the data is collect, push it into the main array (combinedData) to be displayed in front-end.
         for (const line of MRTLines) {
             try {
                 const response = await fetch(`/api/liveCrowdDensity?TrainLine=${line}`);
@@ -455,6 +458,7 @@ document.addEventListener('DOMContentLoaded', function () {
         return complexity;
     }
 
+    //do a API request on all the alogrithm, then get the most optimal algorithm to be displayed in the analysis section
     function getMostOptimalAlgorithm(fromBoxValue, toBoxValue) {
         const algoList = ['dfs', 'astar', 'bidirectional_astar', 'djikstras', 'bfs', 'bidirectional_bfs', 'bellmanford', 'floyd'];
         let currentSmallestDuration = Infinity;
@@ -463,7 +467,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
         algoList.forEach(algo => {
             const request = new XMLHttpRequest();
-            request.open('GET', `/api/${algo}/?start=${fromBoxValue}&end=${toBoxValue}`, false); // `false` makes the request synchronous
+            // false to makes the request synchronous
+            request.open('GET', `/api/${algo}/?start=${fromBoxValue}&end=${toBoxValue}`, false);
             request.send(null);
 
             if (request.status === 200) {
@@ -471,6 +476,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 const duration = data.duration;
                 const timeExecution = data.timeExecution;
 
+                //so compare the duration of the journey first, then if same, compare the time execution the algorithm took
                 if (duration < currentSmallestDuration) {
                     currentSmallestDuration = duration;
                     optimalAlgorithm = algo;
