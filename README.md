@@ -8,4 +8,4 @@ This project is built using [python 3.11](https://www.python.org/downloads/) and
 python version is installed before running this program.
 
 To install required assets, please execute the commands below: 
-- 'pip install -r requirements.txt'
+- 'python -m pip install -r requirements.txt'
