@@ -11,7 +11,7 @@ CORS(app)
 breakdown=""
 bus = 'static/bus.json'
 stations = load_graph('static/route.json', breakdown)
-stations2, detailed_graph = load_graph2('static/route.json')
+stations2, detailed_graph = load_graph2('static/route.json', breakdown)
 distance_map = build_distance_map(stations)  # Build distance map once
 
 #POC: breakdown
@@ -22,20 +22,21 @@ results=""
 def index():
     return render_template('index.html')
 
-
 @app.route('/api/breakdown/')
 def reload_graph():
-    global stations
-    global breakdown
+    global stations, station2, detailed_graph, breakdown
+
     breakdown = request.args.get('station')
+    stations2, detailed_graph = load_graph2('static/route.json', breakdown)
     stations = load_graph('static/route.json', breakdown)
-    return jsonify(stations)
+    
+    return jsonify(stations2)
 
 @app.route('/api/routeInfo/')
 def get_routes():
     try:
         with open('static/route.json', 'r') as f:
-            routes = json.load(f)
+            routes = json.load(f) 
         return jsonify(routes), 200
     except FileNotFoundError:
         return jsonify({'error': 'Routes data file not found.'}), 404
@@ -78,7 +79,6 @@ def api_astar():
         start = req.get('start').strip().lower()
         end = req.get('end').strip().lower()
         
-
         # Check if the start and end stations exist in the graph
         if start not in stations:
             return jsonify({'error': f'Start station {start} not found in the graph.'}), 400
@@ -101,7 +101,6 @@ def api_astar():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
         
-
 @app.route('/api/bidirectional_astar/')
 def api_bidirectional_a_star():
     try:
@@ -114,7 +113,6 @@ def api_bidirectional_a_star():
         if end not in stations:
             return jsonify({'error': f'End station {end} not found in the graph.'}), 400
 
-    
         path, total_duration, time_execution = bidirectional_astar(stations, start, end, distance_map)
         global bd_index, results
         if (breakdown) != "":
@@ -136,7 +134,6 @@ def api_djikstras():
         req = request.args
         start = req.get('start').strip().lower()
         end = req.get('end').strip().lower()
-
         
         # Check if the start and end stations exist in the graph
         if start not in stations:
@@ -229,7 +226,7 @@ def api_floyd():
             return jsonify({'error': f'Start station {start} not found in the graph.'}), 400
         if end not in detailed_graph:
             return jsonify({'error': f'End station {end} not found in the graph.'}), 400
-        
+
         routes = []
         for from_station, connections in detailed_graph.items():
             for to_station, (distance, duration, line) in connections.items():
@@ -253,13 +250,19 @@ def api_floyd():
         path, lines = reconstruct_path2(start, end, next_node, line_matrix, station_index, stations)
         total_duration = shortest_paths[station_index[start]][station_index[end]]
 
+        global bd_index, results
+        if (breakdown) != "":
+            results = graph_update(bus, bd_index, path, breakdown)
+
         if not path:
             return jsonify({'route': 'null'}), 400
         else:
             response = {
                 'route': path,
                 'duration': total_duration,
-                'timeExecution': time_execution
+                'timeExecution': time_execution,
+                'results' : results
+
             }
             return jsonify(response), 200
 

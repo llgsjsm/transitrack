@@ -40,7 +40,7 @@ def load_graph(file_name, breakdown):
     with open(file_name) as f:
         data = json.load(f)
     graph = {}
-
+    print("breakdown: ", breakdown)
     if breakdown == "none":
         breakdown = ""
     else:
@@ -65,9 +65,15 @@ def load_graph(file_name, breakdown):
     return graph
 
 # Helper function for load_graph2
-def load_graph2(file_name):
+def load_graph2(file_name, breakdown):
     with open(file_name) as f:
         data = json.load(f)
+
+    print("breakdown: ", breakdown)
+    if breakdown == "none":
+        breakdown = ""
+    else:
+        breakdown = breakdown.strip().lower()
     
     graph = {}
     detailed_graph = {}
@@ -75,8 +81,13 @@ def load_graph2(file_name):
         from_station = edge["from"].strip().lower()
         to_station = edge["to"].strip().lower()
         distance = edge["distance"]
-        duration = edge["duration"]
         line = edge["line"]
+
+        if from_station == breakdown or to_station == breakdown:
+            duration = 999  # Adjust the distance weight to 99
+        else:
+            duration = edge["duration"]
+
         
         if from_station not in graph:
             graph[from_station] = []
@@ -88,12 +99,16 @@ def load_graph2(file_name):
         if to_station not in detailed_graph:
             detailed_graph[to_station] = {}
         
+        
+
         graph[from_station].append({"to": to_station, "distance": distance, "duration": duration})
         graph[to_station].append({"to": from_station, "distance": distance, "duration": duration})
         
         detailed_graph[from_station][to_station] = (distance, duration, line)
         detailed_graph[to_station][from_station] = (distance, duration, line)
     
+    print(graph)
+    print(detailed_graph)
     return graph, detailed_graph
 
 #Sequential Search Algorithm: AARON
@@ -434,7 +449,7 @@ def reconstruct_path2(start, end, next_node, line_matrix, station_index, station
         current = next_station
     
     path.append(end)
-    return path, lines
+    return path, lines 
 
 # Bidirectional A* Algorithm: JAKE
 def bidirectional_astar(graph, start, end, distance_map):
