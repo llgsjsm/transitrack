@@ -6,7 +6,6 @@ document.addEventListener('DOMContentLoaded', function () {
     let circles = [];
     const combinedData = []; //store all the live crowd density data collected from LTA datamall
     const routeData = []; //store all the route data from route.json
-
     const svgDoc = svgContainer ? svgContainer.querySelector('svg') : null;
 
     //Mainly consist of the front end design
@@ -44,7 +43,6 @@ document.addEventListener('DOMContentLoaded', function () {
                         width = '100%';
                     }
 
-
                     const LiveCrowdDiv = document.createElement('div');
                     LiveCrowdDiv.classList.add('container-sm');
 
@@ -77,7 +75,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
                     tooltip.appendChild(LiveCrowdDiv);
                 })
-
             });
 
             circle.addEventListener('mousemove', function (event) {
@@ -132,7 +129,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     .then(response => {
                         if (!response.ok) {
                             return response.json().then(data => { throw new Error(data.error); });
-
                         }
                         return response.json();
                     })
@@ -146,7 +142,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
         submitButton.addEventListener('click', function (event) {
             event.preventDefault();
-
             const fromBoxValue = document.getElementById('fromBox').value.trim().toLowerCase();
             const toBoxValue = document.getElementById('toBox').value.trim().toLowerCase();
             const algorithm = document.getElementById('select_box').value.trim().toLowerCase();
@@ -162,17 +157,16 @@ document.addEventListener('DOMContentLoaded', function () {
                     .then(response => {
                         if (!response.ok) {
                             return response.json().then(data => { throw new Error(data.error); });
-
                         }
                         console.log('hello' + getMostOptimalAlgorithm(fromBoxValue, toBoxValue));
                         return response.json();
                     })
+
                     //the data fetched from API will then be displayed here.
                     .then(data => {
                         if (data.route !== 'null') {
                             resetPath();
                             markPath(data.route, breakdown);
-
 
                             //create route and analysis section
                             const resultInfoSection = document.getElementById('result');
@@ -188,7 +182,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
                             resultInfoSection.appendChild(resultContainer);
                             resultInfoSection.appendChild(analysisContainer);
-
 
                             //display route section
                             const resultsElement = document.getElementById('style-1');
@@ -260,7 +253,6 @@ document.addEventListener('DOMContentLoaded', function () {
                                     analysisTotalTime.textContent += `Alternative shuttle buses available at ${(data.results[0])} and ${(data.results[1])}.`;
                                 }
                             }
-
                             else {
                                 analysisTotalTime.textContent = `Total journey duration: ${data.duration + ' min'}`;
                             }
@@ -280,12 +272,10 @@ document.addEventListener('DOMContentLoaded', function () {
                             analysisElement.appendChild(analysisExecutionTime);
                             analysisElement.appendChild(analysisOptimalAlgo);
 
-
                         } else {
                             document.getElementById('style-1').innerHTML += '<div>No route found.</div>';
                             document.getElementById('analysis').innerHTML += '<div>No route found.</div>';
                         }
-
                     })
                     .catch(error => {
                         document.getElementById('style-1').innerHTML = '';
@@ -461,7 +451,6 @@ document.addEventListener('DOMContentLoaded', function () {
         else if (stationName == "North East Line") {
             return "NEL";
         }
-
         else if (stationName == "Punggol LRT") {
             return "PLRT";
         }
