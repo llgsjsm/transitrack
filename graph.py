@@ -17,14 +17,12 @@ def graph_update(file_name, bd_index, path, breakdown):
     if bd_index != -1:
         #IF breakdown is destination, return buses from breakdown-1
         if bd_index == (len(path) - 1):
-            print("Breakdown station is the destination station")
             for edge in bus_data["bus"]:
                 if (edge["from"].lower() == path[bd_index - 1] ):
                     return edge["from"]
                 
         #IF breakdown is starting, return buses from breakdown
         elif bd_index == 0:
-            print("Breakdown station is the starting station")
             for edge in bus_data["bus"]:
                 if (edge["from"].lower() == path[bd_index] and edge["to"].lower() == path[bd_index + 1]):
                     return edge["from"]
@@ -40,7 +38,6 @@ def load_graph(file_name, breakdown):
     with open(file_name) as f:
         data = json.load(f)
     graph = {}
-    print("breakdown: ", breakdown)
     if breakdown == "none":
         breakdown = ""
     else:
@@ -68,8 +65,6 @@ def load_graph(file_name, breakdown):
 def load_graph2(file_name, breakdown):
     with open(file_name) as f:
         data = json.load(f)
-
-    print("breakdown: ", breakdown)
     if breakdown == "none":
         breakdown = ""
     else:
@@ -85,30 +80,27 @@ def load_graph2(file_name, breakdown):
 
         if from_station == breakdown or to_station == breakdown:
             duration = 999  # Adjust the distance weight to 99
+
         else:
             duration = edge["duration"]
-
         
         if from_station not in graph:
             graph[from_station] = []
+
         if to_station not in graph:
             graph[to_station] = []
         
         if from_station not in detailed_graph:
             detailed_graph[from_station] = {}
+
         if to_station not in detailed_graph:
             detailed_graph[to_station] = {}
-        
-        
 
         graph[from_station].append({"to": to_station, "distance": distance, "duration": duration})
         graph[to_station].append({"to": from_station, "distance": distance, "duration": duration})
         
         detailed_graph[from_station][to_station] = (distance, duration, line)
         detailed_graph[to_station][from_station] = (distance, duration, line)
-    
-    print(graph)
-    print(detailed_graph)
     return graph, detailed_graph
 
 #Sequential Search Algorithm: AARON
@@ -135,7 +127,6 @@ def binary_search(stations, query):
     results = []
 
     #logging.debug(f"Starting binary search for '{query}'")
-
     while low <= high:
         mid = (low + high) // 2
         current_station = sorted_stations[mid]
@@ -191,6 +182,7 @@ def build_distance_map(graph):
 def heuristic(current, goal, distance_map):
     if current == goal:
         return 0
+
     if current not in distance_map or goal not in distance_map:
         return float('inf')
     
@@ -213,7 +205,6 @@ def a_star(graph, start, end, distance_map):
 
         if current == end:
             end_time = time.perf_counter() # End time
-            print(f"A* execution time: {end_time - start_time:.6f} seconds")
             execution_time = end_time - start_time
             return reconstruct_path(came_from, current), g_score[end], execution_time
 
@@ -229,7 +220,7 @@ def a_star(graph, start, end, distance_map):
                     heapq.heappush(open_list, (f_score[neighbor_node], neighbor_node))
     
     end_time = time.perf_counter() # End time
-    print(f"A* execution time: {end_time - start_time:.6f} seconds")
+    # print(f"A* execution time: {end_time - start_time:.6f} seconds")
     execution_time = end_time - start_time
     return [], float('inf'), execution_time  # Return an empty array if there's no path
 
@@ -256,7 +247,7 @@ def bfs(graph, start, end):
         # if the current station is the end station, return the path, lines, total distance, and total duration
         if current_station == end:
             end_time = time.perf_counter()  # End time
-            print(f"BFS execution time: {end_time - start_time:.6f} seconds")
+            # print(f"BFS execution time: {end_time - start_time:.6f} seconds")
             execution_time = end_time - start_time
             return path, lines, total_distance, total_duration, execution_time
 
@@ -277,7 +268,7 @@ def bfs(graph, start, end):
                 queue.append((neighbor, new_path, lines, new_total_distance, new_total_duration))
 
     end_time = time.perf_counter()  # End time
-    print(f"BFS execution time: {end_time - start_time:.6f} seconds")
+    # print(f"BFS execution time: {end_time - start_time:.6f} seconds")
     # return empty lists and zeros if there is no path between the start and end
     return [], [], 0, 0
 
@@ -296,7 +287,7 @@ def dijkstras(graph, start, end):
 
         if current_node == end:
             end_time = time.perf_counter() # End time
-            print(f"Dijkstra's execution time: {end_time - start_time:.6f} seconds")
+            # print(f"Dijkstra's execution time: {end_time - start_time:.6f} seconds")
             execution_time = end_time - start_time
             return reconstruct_path(came_from, current_node), g_score[end], execution_time
 
@@ -312,19 +303,19 @@ def dijkstras(graph, start, end):
                     heapq.heappush(open_list, (g_score[neighbor_node], neighbor_node))
 
     end_time = time.perf_counter()  # End time
-    print(f"Dijkstra's execution time: {end_time - start_time:.6f} seconds")
+    # print(f"Dijkstra's execution time: {end_time - start_time:.6f} seconds")
     return [], float('inf')  # Return an empty path and infinite distance if no path is found
 
 # Bellman-Ford Algorithm: RAUL
 def bellman_ford(graph, start, end):
     start_time = time.perf_counter()  # Start time
 
-    # step 1: initialise distances from start to all other stations as infinity and the predecessor of each station as None
+    # initialise distances from start to all other stations as infinity and the predecessor of each station as None
     distance = {station: float('inf') for station in graph}
     predecessor = {station: None for station in graph}
     distance[start] = 0
 
-    # step 2: relax all edges n - 1 times (n = number of vertices)
+    # relax all edges n - 1 times (n = number of vertices)
     for _ in range(len(graph) - 1):
         for station in graph:
             for edge in graph[station]:  # Iterate through the list of edges
@@ -335,18 +326,18 @@ def bellman_ford(graph, start, end):
                     distance[neighbor] = distance[station] + weight
                     predecessor[neighbor] = (station, weight, duration)
 
-    # step 3: check for negative-weight cycles
+    # check for negative-weight cycles
     for station in graph:
         for edge in graph[station]:  # Iterate through the list of edges
             neighbor = edge["to"]
             weight = edge["distance"]
             duration = edge["duration"]
             if distance[station] + weight < distance[neighbor]:
-                print("Graph contains a negative-weight cycle")
+                # print("Graph contains a negative-weight cycle")
                 return None, None
             
     end_time = time.perf_counter()  # End time
-    print(f"Bellman-Ford execution time: {end_time - start_time:.6f} seconds")
+    # print(f"Bellman-Ford execution time: {end_time - start_time:.6f} seconds")
     execution_time = end_time - start_time
 
     # if the end station is not reachable from the start station, return None
@@ -396,7 +387,7 @@ def dfs(graph, start, end):
         if node == end:
             end_time = time.perf_counter()  # End time
             execution_time = end_time - start_time
-            print(f"DFS execution time: {execution_time:.6f} seconds")
+            # print(f"DFS execution time: {execution_time:.6f} seconds")
             return current_path, current_duration, execution_time
 
         #iterate over the graph nodes and if the next station not visited, then append into the stack
@@ -406,7 +397,7 @@ def dfs(graph, start, end):
 
     end_time = time.perf_counter()  # End time
     execution_time = end_time - start_time
-    print(f"DFS execution time: {execution_time:.6f} seconds")
+    # print(f"DFS execution time: {execution_time:.6f} seconds")
     return None, float('inf'), execution_time
 
 # Floyd-Warshall Algorithm: JAKE 
@@ -430,7 +421,7 @@ def floyd(duration_matrix, line_matrix):
                     next_node[i][j] = next_node[i][k]
 
     end_time = time.perf_counter()  # End time
-    print(f"Floyd-Warshall execution time: {end_time - start_time:.6f} seconds")
+    # print(f"Floyd-Warshall execution time: {end_time - start_time:.6f} seconds")
     execution_time = end_time - start_time
     return dist, next_node, execution_time
 
@@ -510,7 +501,7 @@ def bidirectional_astar(graph, start, end, distance_map):
                         heapq.heappush(backward_open_list, (backward_f_score[neighbor_node], neighbor_node))
 
     end_time = time.perf_counter()  # End time
-    print(f"Bidirectional A* execution time: {end_time - start_time:.6f} seconds")
+    # print(f"Bidirectional A* execution time: {end_time - start_time:.6f} seconds")
     execution_time = end_time - start_time
 
     if meeting_point is None:
@@ -580,7 +571,7 @@ def bidirectional_bfs(graph, start, end):
                     forward_queue.append((neighbor, new_path, new_lines, new_total_distance, new_total_duration))
                     if neighbor in backward_visited:
                         end_time = time.perf_counter()  # End time
-                        print(f"Bidirectional BFS execution time 3: {end_time - start_time:.6f} seconds")
+                        # print(f"Bidirectional BFS execution time 3: {end_time - start_time:.6f} seconds")
                         execution_time = end_time - start_time
                         return combine_paths(forward_visited[neighbor], backward_visited[neighbor], execution_time)
 
@@ -596,12 +587,12 @@ def bidirectional_bfs(graph, start, end):
                     backward_queue.append((neighbor, new_path, new_lines, new_total_distance, new_total_duration))
                     if neighbor in forward_visited:
                         end_time = time.perf_counter()  # End time
-                        print(f"Bidirectional BFS execution time 2: {end_time - start_time:.6f} seconds")
+                        # print(f"Bidirectional BFS execution time 2: {end_time - start_time:.6f} seconds")
                         execution_time = end_time - start_time
                         return combine_paths(forward_visited[neighbor], backward_visited[neighbor], execution_time)
 
     end_time = time.perf_counter()  # End time
-    print(f"Bidirectional BFS execution time 1: {end_time - start_time:.6f} seconds")
+    # print(f"Bidirectional BFS execution time 1: {end_time - start_time:.6f} seconds")
     execution_time = end_time - start_time
     return [], [], 0, 0, execution_time
 
