@@ -1,0 +1,139 @@
+{
+    "bus": [
+        {
+          "from": "Chinese Garden",
+          "to": "Bukit Batok",
+          "service": 2
+        },
+        {
+          "from": "Chinese Garden",
+          "to": "Clementi",
+          "service": 2
+        },
+        {
+          "from": "Clementi",
+          "to": "Bukit Batok",
+          "service": 2
+        },
+        {
+          "from": "Dover",
+          "to": "Commonwealth",
+          "service": 2
+        },
+        {
+          "from": "Dover",
+          "to": "Holland Village",
+          "service": 2
+        },
+        {
+          "from": "Dover",
+          "to": "one-north",
+          "service": 2
+        },
+        {
+          "from": "one-north",
+          "to": "Commonwealth",
+          "service": 2
+        },
+        {
+          "from": "one-north",
+          "to": "Holland Village",
+          "service": 2
+        },
+        {
+          "from": "Commonwealth",
+          "to": "Holland Village",
+          "service": 2
+        },
+        {
+          "from": "Lorong Chuan",
+          "to": "Kovan",
+          "service": 2
+        },
+        {
+          "from": "Lorong Chuan",
+          "to": "Bartley",
+          "service": 2
+        },
+        {
+          "from": "Lorong Chuan",
+          "to": "Woodleigh",
+          "service": 2
+        },
+        {
+          "from": "Woodleigh",
+          "to": "Bartley",
+          "service": 2
+        },
+        {
+          "from": "Woodleigh",
+          "to": "Kovan",
+          "service": 2
+        },
+        {
+          "from": "Bartley",
+          "to": "Kovan",
+          "service": 2
+        },
+
+        {
+          "from": "Jurong East",
+          "to": "Chinese Garden",
+          "service": 2
+        },
+        {
+          "from": "Jurong East",
+          "to": "Bukit Batok",
+          "service": 2
+        },
+        {
+          "from": "Jurong East",
+          "to": "Clementi",
+          "service": 2
+        },
+
+        {
+          "from": "Buona Vista",
+          "to": "Dover",
+          "service": 2
+        },
+        {
+          "from": "Buona Vista",
+          "to": "Commonwealth",
+          "service": 2
+        },
+        {
+          "from": "Buona Vista",
+          "to": "Holland Village",
+          "service": 2
+        },
+        {
+          "from": "Buona Vista",
+          "to": "one-north",
+          "service": 2
+        },
+
+        {
+          "from": "Serangoon",
+          "to": "Lorong Chuan",
+          "service": 2
+        },
+        {
+          "from": "Serangoon",
+          "to": "Kovan",
+          "service": 2
+        },
+        {
+          "from": "Serangoon",
+          "to": "Woodleigh",
+          "service": 2
+        },
+        {
+          "from": "Serangoon",
+          "to": "Bartley",
+          "service": 2
+        }
+
+
+    ]
+}

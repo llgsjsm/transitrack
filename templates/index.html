@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SMRT Interactive Map (unofficial)</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+  <header>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+      <a class="navbar-brand" href="{{ url_for('index') }}">TransiTrack</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+        aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </nav>
+  </header>
+  <div class="container">
+    <div class="py-5 text-center">
+      </br>
+      <h2>TransiTrack</h2>
+    </div>
+    <form class="container form">
+      <div class="row">
+        <div class="col">
+          <h6>From: </h6>
+          <input class="form-control" type="text" placeholder="Station name" aria-label="Search" id="fromBox"
+            autocomplete="off">
+          <datalist id="from-datalist"></datalist>
+        </div>
+        <div class="col">
+          <h6>To: </h6>
+          <input class="form-control" type="text" placeholder="Station name" aria-label="Search" id="toBox"
+            autocomplete="off">
+          <datalist id="to-datalist"></datalist>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col">
+          <h6>Algorithm: </h6>
+          <select name="algorithm_select" class="form-control" id="select_box" aria-label="Default select example">
+            <option value="dfs">DFS</option>
+            <option selected value="astar">A Star</option>
+            <option value="bidirectional_astar">Bidirectional A Star</option>
+            <option value="djikstras">Djikstras</option>
+            <option value="bfs">BFS</option>
+            <option value="bidirectional_bfs">Bidirectional BFS</option>
+            <option value="bellmanford">Bellman Ford</option>
+            <option value="floyd">Floyd Warshall</option>
+          </select>
+        </div>
+
+        <div class="col">
+          <h6 style="color:transparent">Submit: </h6>
+          <button class="btn btn-outline-success" type="submit" id="submitButton">Find Route!</button>
+        </div>
+      </div>
+    </form>
+
+    <br>
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <h6>Simulate! </h6>
+          <select name="breakdown_station_select" class="form-control" id="breakdown_select">
+            <option value="none">None</option>
+            <option value="jurong east">Jurong East</option>
+            <option value="buona vista">Buona Vista</option>
+            <option value="serangoon">Serangoon</option>
+          </select>
+        </div>
+        <div class="col col-lg-2">
+          <button class="btn btn-outline-danger" type="submit" id="submitButton2">Break</button>
+        </div>
+      </div>
+    </div>
+    </br>
+    <hr>
+    <div class="container">
+      <div class="row" id="result">
+      </div>
+    </div>
+    <div id="tooltip-textbox" class="tooltip-textbox">
+      <div style="border-radius: 25px; background-color: black;">
+        <p class="h5" style="text-align: center; font-family: fantasy; color:white" id="textbox-station-name">station
+          name</p>
+      </div>
+    </div>
+    <div id="svg-container">
+      {% include 'stations_sg.svg' %}
+    </div>
+  </div>
+  <script src="{{ url_for('static', filename='front-end.js') }}"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  
+</body>
+</html>
