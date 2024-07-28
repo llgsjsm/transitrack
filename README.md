@@ -9,3 +9,7 @@ python version is installed before running this program.
 
 To install required assets, please execute the commands below: 
 - 'python -m pip install -r requirements.txt'
+
+To run this project, please execute the commands/file below: 
+
+- 'python -m app' or run app.py file
